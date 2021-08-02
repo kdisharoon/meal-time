@@ -1,7 +1,9 @@
 BEGIN TRANSACTION;
 
+DROP TABLE IF EXISTS ingredients;
 DROP TABLE IF EXISTS users;
 DROP SEQUENCE IF EXISTS seq_user_id;
+
 
 CREATE SEQUENCE seq_user_id
   INCREMENT BY 1
@@ -16,6 +18,11 @@ CREATE TABLE users (
 	password_hash varchar(200) NOT NULL,
 	role varchar(50) NOT NULL,
 	CONSTRAINT PK_user PRIMARY KEY (user_id)
+);
+
+CREATE TABLE ingredients (
+ingredient_id SERIAL PRIMARY KEY,
+ingredient_name varchar(50) NOT NULL
 );
 
 INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
