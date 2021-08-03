@@ -15,7 +15,7 @@ CREATE SEQUENCE seq_user_id
   NO MINVALUE
   CACHE 1;
   
-  CREATE SEQUENCE seq_inredient_id
+  CREATE SEQUENCE seq_ingredient_id
   INCREMENT BY 1
   NO MAXVALUE
   NO MINVALUE

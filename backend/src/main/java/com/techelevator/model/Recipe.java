@@ -18,7 +18,7 @@ public class Recipe {
    private int prepTime;
    private int cookTime;
    private String recipeImg;
-   private String type;
+   private String recipeType;
    private Ingredient[] ingredients;
 
     public Ingredient[] getIngredients() {
@@ -33,14 +33,14 @@ public class Recipe {
 
    }
 
-   public Recipe(long recipeId, String preparation, String recipeName, int prepTime, int cookTime, String recipeImg, String type){
+   public Recipe(long recipeId, String preparation, String recipeName, int prepTime, int cookTime, String recipeImg, String recipeType){
        this.recipeId=recipeId;
        this.preparation=preparation;
        this.recipeName=recipeName;
        this.prepTime=prepTime;
        this.cookTime=cookTime;
        this.recipeImg=recipeImg;
-       this.type=type;
+       this.recipeType=recipeType;
    }
 
     public String getRecipeImg() {
@@ -87,12 +87,12 @@ public class Recipe {
         return recipeId;
     }
 
-    public String getType() {
-        return type;
+    public String getRecipeType() {
+        return recipeType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setRecipeType(String type) {
+        this.recipeType = recipeType;
     }
 
     public void setRecipeId(long recipeId) {
