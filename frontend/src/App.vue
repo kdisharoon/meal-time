@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1>mealTimE</h1>
+    <h1>meal TimE</h1>
     <div id="nav">
       <router-link id="home" v-bind:to="{ name: 'home' }">HOME </router-link >
       <a href="#" id="recipe"> RECIPES </a> 
@@ -18,7 +18,8 @@
 <style>
 #app{
   background-color: #2fcee1;
-  background-size: 100%;
+  min-height: 100vh;
+  background-size: cover !important;
   font-family: Arial, Helvetica, sans-serif;
 }
 h1{
