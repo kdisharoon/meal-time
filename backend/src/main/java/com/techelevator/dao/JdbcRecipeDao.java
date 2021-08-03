@@ -21,13 +21,13 @@ public class JdbcRecipeDao implements RecipeDao{
     @Override
     public Recipe[] getAllRecipesByUser(long userId){
         List<Recipe> recipes = new ArrayList<>();
-        String sql = "select * from recipe " +
+        String sql = "select * from recipes " +
                      "join user_recipe using (recipe_id) " +
                      "join user using (user_id) " +
                      "where user_id=?";
-        String sql2 = "select ingredient_id, measurement_amount, measurement_unit, ingredient_name " +
+        String sql2 = "select ingredient_id, measurement_amount, measurement_unit, ingredients.ingredient_name " +
                       "from recipe_ingredient " +
-                      "join ingredient using (ingredient_id) " +
+                      "join ingredients using (ingredient_id) " +
                       "where recipe_id=?";
         SqlRowSet recipeResults = jdbcTemplate.queryForRowSet(sql, userId);
         while (recipeResults.next()){
@@ -43,10 +43,10 @@ public class JdbcRecipeDao implements RecipeDao{
     public Recipe[] getAllRecipes(){
         List<Recipe> recipes = new ArrayList<>();
 
-        String sql = "select * from recipe";
-        String sql2 = "select ingredient_id, measurement_amount, measurement_unit, ingredient_name " +
+        String sql = "select * from recipes ";
+        String sql2 = "select ingredient_id, measurement_amount, measurement_unit, ingredients.ingredient_name " +
                 "from recipe_ingredient " +
-                "join ingredient using (ingredient_id) " +
+                "join ingredients using (ingredient_id) " +
                 "where recipe_id=?";
         SqlRowSet recipeResults = jdbcTemplate.queryForRowSet(sql);
         while (recipeResults.next()){
@@ -61,11 +61,11 @@ public class JdbcRecipeDao implements RecipeDao{
     public Recipe getRecipeByRecipeId(long recipeId){
         Recipe recipe = new Recipe();
 
-        String sql = "select * from recipe " +
+        String sql = "select * from recipes " +
                      "where recipe_id=?";
-        String sql2 = "select ingredient_id, measurement_amount, measurement_unit, ingredient_name " +
+        String sql2 = "select ingredient_id, measurement_amount, measurement_unit, ingredients.ingredient_name " +
                 "from recipe_ingredient " +
-                "join ingredient using (ingredient_id) " +
+                "join ingredients using (ingredient_id) " +
                 "where recipe_id=?";
         SqlRowSet recipeResults = jdbcTemplate.queryForRowSet(sql, recipeId);
         if (recipeResults.next()){
@@ -87,7 +87,7 @@ public class JdbcRecipeDao implements RecipeDao{
         recipe.setPrepTime(result.getInt("prep_time"));
         recipe.setCookTime(result.getInt("cook_time"));
         recipe.setRecipeImg(result.getString("recipe_img"));
-        recipe.setType(result.getString("type"));
+        recipe.setRecipeType(result.getString("recipe_type"));
         return recipe;
 
     }
