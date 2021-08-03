@@ -27,7 +27,7 @@ CREATE SEQUENCE seq_user_id
   NO MINVALUE
   CACHE 1;
   
-  CREATE SEQUENCE (seq_user_meal_plan_id)
+  CREATE SEQUENCE seq_user_meal_plan_id
   INCREMENT BY 1
   NO MAXVALUE
   NO MINVALUE
@@ -42,6 +42,29 @@ CREATE TABLE users (
 	CONSTRAINT PK_user PRIMARY KEY (user_id)
 );
 
+CREATE TABLE recipes (
+        recipe_id int PRIMARY KEY DEFAULT NEXTVAL('seq_recipe_id'),
+        preparation varchar(500) NOT NULL,
+        recipe_name varchar(100) NULL,
+        prep_time int NULL,
+        cook_time int NULL,
+        recipe_type varchar(100),
+        recipe_img varchar(500) NULL
+        );
+
+CREATE TABLE ingredients (
+        ingredient_id int PRIMARY KEY DEFAULT NEXTVAL('seq_ingredient_id'),
+        ingredient_name varchar(50) NOT NULL
+);
+
+CREATE TABLE user_meal_plan (
+        meal_plan_id int PRIMARY KEY DEFAULT NEXTVAL('seq_user_meal_plan_id'),
+        user_id serial NOT NULL,
+        meal_plan_name varchar(100) NOT NULL,
+        CONSTRAINT FK_user_meal_plan_users FOREIGN KEY (user_id) REFERENCES users(user_id)
+        
+);
+
 CREATE TABLE recipe_ingredients (
         ingredient_id serial NOT NULL,
         recipe_id serial NOT NULL,
@@ -52,23 +75,6 @@ CREATE TABLE recipe_ingredients (
         CONSTRAINT FK_recipe_ingredients_ingredients FOREIGN KEY (ingredient_id) REFERENCES ingredients(ingredient_id),
         CONSTRAINT pk_recipe_ingredients PRIMARY KEY (ingredient_id, recipe_id, measurement_amount)
 );
-
-CREATE TABLE ingredients (
-        ingredient_id int PRIMARY KEY DEFAULT NEXTVAL('seq_inredient_id'),
-        ingredient_name varchar(50) NOT NULL
-        
-
-);
-
-CREATE TABLE recipes (
-        recipe_id int PRIMARY KEY DEFAULT NEXTVAL(seq_recipe_id),
-        preparation varchar(500) NOT NULL,
-        recipe_name varchar(100) NULL,
-        prep_time TIME NULL,
-        cook_time TIME NULL,
-        recipe_type varchar(100),
-        recipe_img varchar(500) NULL
-        );
         
 CREATE TABLE user_recipes (
         recipe_id serial NOT NULL,
@@ -80,7 +86,7 @@ CREATE TABLE user_recipes (
         
 );
 
-CREATE TABLE meal_plan_user_recipe (
+CREATE TABLE meal_plan_user_recipes (
         meal_plan_id serial NOT NULL,
         recipe_id serial NOT NULL,
         
@@ -89,21 +95,15 @@ CREATE TABLE meal_plan_user_recipe (
         CONSTRAINT pk_meal_plan_user_recipe PRIMARY KEY (meal_plan_id, recipe_id)
 );
 
-CREATE TABLE user_meal_plan (
-        meal_plan_id int PRIMARY KEY DEFAULT NEXTVAL(seq_user_meal_plan_id),
-        user_id serial NOT NULL,
-        meal_plan_name varchar(100) NOT NULL,
-        CONSTRAINT FK_user_meal_plan_users FOREIGN KEY (user_id) REFERENCES users(user_id),
-        
-);
+
 
 
 INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
 INSERT INTO users (username,password_hash,role) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN');
 
-INSERT INTO recipes (preparation, recipe_name, prep_time, cook_time, recipe_type) VALUES ('You will need fresh basil, fresh mozz, and fresh tomato on a plate. Layer the cheese, basil, and tomato. Drizzle balsamic vinegar and Enjoy!', 'Caprese Salad', 00:10:00, null, 'Salad');
-INSERT INTO recipes (preparation, recipe_name, prep_time, cook_time, recipe_type) VALUES ('Prepare the tortilini, drain. Cook the meat, then add the sauce and cream cheese. Put the tortellini into the backing dish and pour the meat/cheese/sauce mixture on top. Sprinkle the parmesan cheese over top. Bake for 20 min.', 'Cheesey Tortellini Pasta Bake', 00:15:00, 00:20:00, 'Entree');
-INSERT INTO recipes (preparation, recipe_name, prep_time, cook_time, recipe_type) VALUES('Thaw tater tots, add them to greased muffin pan, dividing evenly. Smash them, fill each cup with cooked meat and chopped veggies(you can use onions, mushrooms, and/or peppers, to name a few). Scramble eggs, add seasoning of your choosing, then pour eggs into each cup, evenly. Top with cheese. Bake at 350 degrees for 18-20 minutes.', 'Mini Omelets', 00:10:00, 00:20:00, 'Breakfast');
+INSERT INTO recipes (preparation, recipe_name, prep_time, cook_time, recipe_type) VALUES ('You will need fresh basil, fresh mozz, and fresh tomato on a plate. Layer the cheese, basil, and tomato. Drizzle balsamic vinegar and Enjoy!', 'Caprese Salad', 10, null, 'Salad');
+INSERT INTO recipes (preparation, recipe_name, prep_time, cook_time, recipe_type) VALUES ('Prepare the tortilini, drain. Cook the meat, then add the sauce and cream cheese. Put the tortellini into the backing dish and pour the meat/cheese/sauce mixture on top. Sprinkle the parmesan cheese over top. Bake for 20 min.', 'Cheesey Tortellini Pasta Bake', 15, 20, 'Entree');
+INSERT INTO recipes (preparation, recipe_name, prep_time, cook_time, recipe_type) VALUES('Thaw tater tots, add them to greased muffin pan, dividing evenly. Smash them, fill each cup with cooked meat and chopped veggies(you can use onions, mushrooms, and/or peppers, to name a few). Scramble eggs, add seasoning of your choosing, then pour eggs into each cup, evenly. Top with cheese. Bake at 350 degrees for 18-20 minutes.', 'Mini Omelets', 10, 20, 'Breakfast');
 
 
 INSERT INTO recipe_ingredients (ingredient_id, recipe_id, measurement_unit, measurement_amount) VALUES (1, 1, 'cup', 1);
