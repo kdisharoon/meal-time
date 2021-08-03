@@ -6,8 +6,8 @@ import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
 import SavedRecipes from '../views/SavedRecipes.vue'
-import Recipe from '..views/Recipe.vue'
-import AllRecipes from '..views/AllRecipes.vue'
+import Recipe from '../views/Recipe.vue'
+import AllRecipes from '../views/AllRecipes.vue'
 
 Vue.use(Router)
 
