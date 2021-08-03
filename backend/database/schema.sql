@@ -105,6 +105,22 @@ INSERT INTO recipes (preparation, recipe_name, prep_time, cook_time, recipe_type
 INSERT INTO recipes (preparation, recipe_name, prep_time, cook_time, recipe_type) VALUES ('Prepare the tortilini, drain. Cook the meat, then add the sauce and cream cheese. Put the tortellini into the backing dish and pour the meat/cheese/sauce mixture on top. Sprinkle the parmesan cheese over top. Bake for 20 min.', 'Cheesey Tortellini Pasta Bake', 15, 20, 'Entree');
 INSERT INTO recipes (preparation, recipe_name, prep_time, cook_time, recipe_type) VALUES('Thaw tater tots, add them to greased muffin pan, dividing evenly. Smash them, fill each cup with cooked meat and chopped veggies(you can use onions, mushrooms, and/or peppers, to name a few). Scramble eggs, add seasoning of your choosing, then pour eggs into each cup, evenly. Top with cheese. Bake at 350 degrees for 18-20 minutes.', 'Mini Omelets', 10, 20, 'Breakfast');
 
+INSERT INTO ingredients (ingredient_name) VALUES ('Mozzerella Cheese');
+INSERT INTO ingredients (ingredient_name) VALUES ('Basil');
+INSERT INTO ingredients (ingredient_name) VALUES ('Tomato');
+INSERT INTO ingredients (ingredient_name) VALUES ('Balsamic Vinegar');
+
+INSERT INTO ingredients (ingredient_name) VALUES ('Ground Beef');
+INSERT INTO ingredients (ingredient_name) VALUES ('Pasta Sauce');
+INSERT INTO ingredients (ingredient_name) VALUES ('Cheese Tortellini');
+INSERT INTO ingredients (ingredient_name) VALUES ('Cream Cheese');
+INSERT INTO ingredients (ingredient_name) VALUES ('Parmesean Cheese');
+
+INSERT INTO ingredients (ingredient_name) VALUES ('Chopped Vegetables');
+INSERT INTO ingredients (ingredient_name) VALUES ('Cooked Sausage');
+INSERT INTO ingredients (ingredient_name) VALUES ('Frozen Tater Tots');
+INSERT INTO ingredients (ingredient_name) VALUES ('Eggs');
+INSERT INTO ingredients (ingredient_name) VALUES ('Shredded Cheese');
 
 INSERT INTO recipe_ingredients (ingredient_id, recipe_id, measurement_unit, measurement_amount) VALUES (1, 1, 'cup', 1);
 INSERT INTO recipe_ingredients (ingredient_id, recipe_id, measurement_unit, measurement_amount) VALUES (2,  1, 'tablespoon', 3);
@@ -124,28 +140,13 @@ INSERT INTO recipe_ingredients (ingredient_id, recipe_id, measurement_unit, meas
 INSERT INTO recipe_ingredients (ingredient_id, recipe_id, measurement_unit, measurement_amount) VALUES(13, 3, 'egg', 10);
 INSERT INTO recipe_ingredients (ingredient_id, recipe_id, measurement_unit, measurement_amount) VALUES(14, 3, 'cup', 2);
 
-INSERT INTO ingredients (ingredient_name) VALUES ('Mozzerella Cheese');
-INSERT INTO ingredients (ingredient_name) VALUES ('Basil');
-INSERT INTO ingredients (ingredient_name) VALUES ('Tomato');
-INSERT INTO ingredients (ingredient_name) VALUES ('Balsamic Vinegar');
 
-INSERT INTO ingredients (ingredient_name) VALUES ('Ground Beef');
-INSERT INTO ingredients (ingredient_name) VALUES ('Pasta Sauce');
-INSERT INTO ingredients (ingredient_name) VALUES ('Cheese Tortellini');
-INSERT INTO ingredients (ingredient_name) VALUES ('Cream Cheese');
-INSERT INTO ingredients (ingredient_name) VALUES ('Parmesean Cheese');
-
-INSERT INTO ingredients (ingredient_name) VALUES ('Chopped Vegetables');
-INSERT INTO ingredients (ingredient_name) VALUES ('Cooked Sausage');
-INSERT INTO ingredients (ingredient_name) VALUES ('Frozen Tater Tots');
-INSERT INTO ingredients (ingredient_name) VALUES ('Eggs');
-INSERT INTO ingredients (ingredient_name) VALUES ('Shredded Cheese');
 
 
 
 INSERT INTO user_meal_plan (meal_plan_name) VALUES ('Healthy');
 INSERT INTO user_meal_plan (meal_plan_name) VALUES ('Dinner');
-INSERT INTO user_meal_plan (meal_plan_name) VALUES ('Breakfast');
+--INSERT INTO user_meal_plan (meal_plan_name) VALUES ('Morning Entree');
 
 
 COMMIT TRANSACTION;
