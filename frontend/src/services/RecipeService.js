@@ -6,11 +6,15 @@ const http = axios.create( {
 
 export default {
 
-    getAllUserRecipes() {
+    getAllRecipes() {
         return http.get('/recipes');
     },
 
-    getRecipe(recipeID) {
+    getAllUserRecipes(userID) {
+        return http.get(`/users/${userID}/recipes`);
+    },
+
+    getRecipeById(recipeID) {
         return http.get(`/recipes/${recipeID}`);
     }
 
