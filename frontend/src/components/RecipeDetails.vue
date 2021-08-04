@@ -12,6 +12,7 @@
         {{ step }}
       </li>
     </ol>
+    <button class="btn btn-add-recipe-to-user-library" v-on:click.prevent="saveRecipe">Save Recipe To My Library</button>
   </div>
 </template>
 
@@ -35,6 +36,19 @@ export default {
       },
     }
   },
+  methods: {
+    saveRecipe() {
+      recipeService.addRecipeToUserLibrary(this.$store.state.user.id, this.recipe.id).then(response => {
+        if (response.status === 201) {
+          this.$router.push('/recipes');
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    }
+  },
+
   created() {
     recipeService.getRecipeById(this.$route.params.recipeID).then(response => {
       this.recipe.id = response.data.recipeId;
