@@ -63,9 +63,12 @@ export default {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    
+    border-radius: 10px;
   }
-  button:hover {background-color:orange}
+  button:hover {
+    background-color:orange;
+    border-radius: 10px;
+  }
   
   button:active {
     background-color:orange;

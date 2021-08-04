@@ -13,9 +13,9 @@
     <div id="recipe">
       <h3>Popular Recipes</h3>
       <div class="card">
-          <img src="">
+          <img src="https://emilybites.com/wp-content/uploads/2020/08/Caprese-Salad-1b.jpg">
             <div class="info">
-                <a href= "#">Caprese Salad</a>
+                <a href= "/recipes/1">Caprese Salad</a>
             </div>
       </div>
     </div>
@@ -64,25 +64,28 @@ export default {
   grid-area: day;
   border-right: 1px solid rgb(34, 88, 133);
   text-align: center;
+  background-color: antiquewhite;
+  border-radius: 3px;
 }
 #recipe {
   grid-area: recipe;
   text-align: center;
+}
+h5,p{
+    text-align: left;
+}
 
-}
-h5{
-    text-align: left;
-}
-li {
-    text-align: left;
-}
 #recipe .card{
-  border-radius: 3px;
-  max-width: 300px;
-  padding: 15px 35px 45px;
-  margin: 0 auto;
-  background-color: #fff;
-  border: 1px solid rgba(0,0,0,0.1);  
+   background:antiquewhite;
+    max-width: 300px;
+    margin: 30px auto;
+    padding: 0px;
+    border: 2px solid black;
+    border-radius: 5px;  
+}
+
+.card a{
+  text-align: center;
 }
 
 .image{
