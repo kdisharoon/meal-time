@@ -1,7 +1,8 @@
 <template>
   <div id="app">
+    <header class="header">
     <h1>meal TimE</h1>
-    <div id="nav">
+    <div id="nav" class="fake-btn">
       <router-link id="home" v-bind:to="{ name: 'home' }">HOME </router-link >
       <router-link id="all-recipes" v-bind:to="{ name: 'all-recipes' }"> RECIPES </router-link>
       <router-link id="saved-recipes" v-bind:to="{ name: 'saved-recipes', params: { userID: this.$store.state.user.id } }"> MY RECIPES </router-link>
@@ -9,7 +10,9 @@
       <a href="#" id="recipe"> GROCERY LIST </a> 
       <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''"> LOGOUT</router-link>
     </div>
+     </header>
     <router-view />
+   
   </div>
 </template>
 <script>
@@ -40,5 +43,13 @@ a{
   text-decoration: none;
   color: darkblue;
   text-align: right;
+  padding: 5px 10px;
+  background-color: aliceblue;
+  border-radius: 10px;
 }
+a:hover{
+  background-color: orange;
+}
+
+
 </style>
