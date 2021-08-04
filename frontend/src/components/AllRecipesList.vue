@@ -1,7 +1,8 @@
 <template>
 <div>
   <h2>All Recipes</h2>
-  <div class="all-recipes-list d-flex justify-content-around">
+  <div class="card-deck">
+  <div class="all-recipes-list d-flex justify-content-around flex-wrap">
     <div v-for="recipe in recipes" v-bind:key="recipe.recipeId" class="recipe">
       <div class="card">
         <img v-bind:src="recipe.recipeImg" class="recipe-image" style="width:100%">
@@ -15,7 +16,7 @@
       </div>
       </div>
     </div>
-
+    </div>
 </template>
 
 <script>
@@ -60,7 +61,7 @@ export default {
 
   button {
     cursor: pointer;
-    background-color:#2fcee1;
+    background-color: orange;
     border: none;
     color:black;
     padding: 15px 32px;
@@ -71,7 +72,7 @@ export default {
     border-radius: 10px;
   }
   button:hover {
-    background-color:orange;
+    background-color:white;
     border-radius: 10px;
   }
   
@@ -79,6 +80,10 @@ export default {
     background-color:orange;
     box-shadow: 0 5px #666;
     transform: translateY(4px);
+  }
+
+  .recipe-image {
+    object-fit: contain;
   }
 
 </style>
