@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 public class JdbcRecipeDao implements RecipeDao{
 
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     public JdbcRecipeDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -75,6 +75,25 @@ public class JdbcRecipeDao implements RecipeDao{
 
         }
         return recipe;
+
+
+    }
+
+    public void addRecipeToUserRecipe(long userId, long recipeId){
+
+        String sql2 = "select user_id, recipe_id " +
+                      "from user_recipes " +
+                      "where user_id=? and recipe_id=?";
+        SqlRowSet  containsRecipe = jdbcTemplate.queryForRowSet(sql2, userId, recipeId);
+        if (containsRecipe.next()){
+            throw new RuntimeException();
+        }
+
+
+        String sql = "insert into user_recipes (user_id, recipe_id) " +
+                     "values (?,?) ";
+
+        jdbcTemplate.update(sql, userId, recipeId);
 
 
     }
