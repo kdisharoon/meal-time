@@ -13,6 +13,10 @@ export default {
 
     getRecipeById(recipeID) {
         return axios.get(`/recipes/${recipeID}`);
+    },
+
+    addRecipeToUserLibrary(userID, recipeID) {
+        return axios.post(`/users/${userID}/recipes/${recipeID}`);
     }
 
 }
