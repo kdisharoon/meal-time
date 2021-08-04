@@ -6,7 +6,11 @@
     <div class="recipe-ingredients" v-for="ingredient in recipe.ingredients" v-bind:key="ingredient.ingredientId">
       <h4>{{ ingredient.measurementAmount }} {{ ingredient.measurementUnit }} {{ ingredient.ingredientName}}</h4>
     </div>
-    <p class="recipe-preparation">{{ recipe.preparation }}</p>
+    <ol>
+      <li v-for="step in recipe.preparation" v-bind:key="step" class="recipe-step">
+        {{ step }}
+      </li>
+    </ol>
   </div>
 </template>
 
