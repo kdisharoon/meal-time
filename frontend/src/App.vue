@@ -3,7 +3,7 @@
     <h1>meal TimE</h1>
     <div id="nav">
       <router-link id="home" v-bind:to="{ name: 'home' }">HOME </router-link >
-      <a href="#" id="recipe"> RECIPES </a> 
+      <a href="/recipes" id="recipe"> RECIPES </a> 
       <a href="#" id="recipe"> MY RECIPES </a>
       <a href="#" id="recipe"> MY MEAL PLAN </a> 
       <a href="#" id="recipe"> GROCERY LIST </a> 

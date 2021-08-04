@@ -26,7 +26,7 @@ public class JdbcRecipeDao implements RecipeDao{
                      "join user using (user_id) " +
                      "where user_id=?";
         String sql2 = "select ingredient_id, measurement_amount, measurement_unit, ingredients.ingredient_name " +
-                      "from recipe_ingredient " +
+                      "from recipe_ingredients " +
                       "join ingredients using (ingredient_id) " +
                       "where recipe_id=?";
         SqlRowSet recipeResults = jdbcTemplate.queryForRowSet(sql, userId);
@@ -45,7 +45,7 @@ public class JdbcRecipeDao implements RecipeDao{
 
         String sql = "select * from recipes ";
         String sql2 = "select ingredient_id, measurement_amount, measurement_unit, ingredients.ingredient_name " +
-                "from recipe_ingredient " +
+                "from recipe_ingredients " +
                 "join ingredients using (ingredient_id) " +
                 "where recipe_id=?";
         SqlRowSet recipeResults = jdbcTemplate.queryForRowSet(sql);
@@ -64,7 +64,7 @@ public class JdbcRecipeDao implements RecipeDao{
         String sql = "select * from recipes " +
                      "where recipe_id=?";
         String sql2 = "select ingredient_id, measurement_amount, measurement_unit, ingredients.ingredient_name " +
-                "from recipe_ingredient " +
+                "from recipe_ingredients " +
                 "join ingredients using (ingredient_id) " +
                 "where recipe_id=?";
         SqlRowSet recipeResults = jdbcTemplate.queryForRowSet(sql, recipeId);
