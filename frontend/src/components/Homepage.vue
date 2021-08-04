@@ -1,23 +1,19 @@
 <template>
   <div id="popular">
-    <div id="day">
-      <h3>Recipe of the Day</h3>
-      <h4>Jambalaya</h4>
-      <img src="https://cafedelites.com/wp-content/uploads/2018/05/Jambalaya-IMAGE-3.jpg">
+    <div id="day" class="random-recipe">
+      <h3>Random Recipe Generator</h3>
+      <h4>{{chosenRecipe.recipeName}}</h4>
+      <img :src="chosenRecipe.recipeImg" class="image">
     <h5>Ingredients</h5>
-    <ul>
-        <li>Chicken</li>
-         <li>Shrimp</li>
-          <li>Andouille Sausage</li>
-           <li>Jasmine Rice</li>
-    </ul>
+      <p>{{chosenRecipe.ingredients}}</p>
     <h5>Preparations</h5>
-    <p><i>Placeholder</i></p>
+    <p>{{chosenRecipe.preparation}}</p>
+    <button @click="randomizer">Get Random Recipe</button>
     </div>
     <div id="recipe">
       <h3>Popular Recipes</h3>
       <div class="card">
-          <img src="https://www.tasteofhome.com/wp-content/uploads/2018/01/Caprese-Salad_EXPS_FT20_50347_F_0610_1_home.jpg?fit=700,1024">
+          <img src="">
             <div class="info">
                 <a href= "#">Caprese Salad</a>
             </div>
@@ -27,7 +23,29 @@
 </template>
 
 <script>
-export default {};
+import recipeService from '../services/RecipeService';
+
+export default {
+ 
+  name: "random-recipe",
+  data() {
+    return {
+      recipes: [],
+      chosenRecipe: {}
+    }
+  },
+  created() {
+      recipeService.getAllRecipes().then(response => {
+      this.recipes = response.data;
+    });
+  },
+  methods:{
+   randomizer: function(){
+      let randomRecipe = Math.floor(Math.random() * this.recipes.length);
+    this.chosenRecipe = this.recipes[randomRecipe];
+    }
+  }
+};
 </script>
 
 <style>
@@ -35,6 +53,7 @@ export default {};
   display: grid;
   grid-template-columns: 350px 1fr;
   grid-template-areas:
+    "day recipe"
     "day recipe"
     "day recipe";
     
@@ -49,6 +68,7 @@ export default {};
 #recipe {
   grid-area: recipe;
   text-align: center;
+
 }
 h5{
     text-align: left;
@@ -56,12 +76,17 @@ h5{
 li {
     text-align: left;
 }
-img {
-    width:200px;
-    height:200px;
-    
+#recipe .card{
+  border-radius: 3px;
+  max-width: 300px;
+  padding: 15px 35px 45px;
+  margin: 0 auto;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,0.1);  
 }
-.class {
-    background-color: white;
+
+.image{
+  max-width: 180px;
+  max-height: 180px;
 }
 </style>
