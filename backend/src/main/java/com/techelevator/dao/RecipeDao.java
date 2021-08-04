@@ -11,4 +11,6 @@ public interface RecipeDao {
     Recipe[] getAllRecipes();
 
     Recipe getRecipeByRecipeId(long recipeId);
+
+    void addRecipeToUserRecipe(long userId, long recipeId);
 }
