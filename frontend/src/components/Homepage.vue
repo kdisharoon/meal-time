@@ -3,9 +3,9 @@
     <div id="day" class="random-recipe">
       <h3>Random Recipe Generator</h3>
       <h4>{{chosenRecipe.recipeName}}</h4>
-      <img :src="chosenRecipe.recipeImg" class="image">
-    <h5>Ingredients</h5>
-      <p>{{chosenRecipe.ingredients}}</p>
+      <img :src="chosenRecipe.recipeImg" class="image" id="randomImg">
+    <h5 >Ingredients</h5>
+      <p v-for="ingredient in chosenRecipe.ingredients" v-bind:key="ingredient.ingredientId">{{ingredient.measurementAmount}} {{ingredient.measurementUnit}} {{ingredient.ingredientName}}</p>
     <h5>Preparations</h5>
     <p>{{chosenRecipe.preparation}}</p>
     <button @click="randomizer">Get Random Recipe</button>
@@ -57,6 +57,9 @@ export default {
     "day recipe"
     "day recipe";
     
+}
+#randomImg {
+  display: inline;
 }
 #day {
     padding-left: 10px;

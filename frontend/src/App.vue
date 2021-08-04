@@ -17,7 +17,7 @@
 
 <style>
 #app{
-  background-color: #2fcee1;
+  background-image: linear-gradient(to bottom right, antiquewhite, #2fcee1, #A56EFA);
   min-height: 100vh;
   background-size: cover !important;
   font-family: Arial, Helvetica, sans-serif;
