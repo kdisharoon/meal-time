@@ -22,8 +22,8 @@ public class JdbcRecipeDao implements RecipeDao{
     public Recipe[] getAllRecipesByUser(long userId){
         List<Recipe> recipes = new ArrayList<>();
         String sql = "select * from recipes " +
-                     "join user_recipe using (recipe_id) " +
-                     "join user using (user_id) " +
+                     "join user_recipes using (recipe_id) " +
+                     "join users using (user_id) " +
                      "where user_id=?";
         String sql2 = "select ingredient_id, measurement_amount, measurement_unit, ingredients.ingredient_name " +
                       "from recipe_ingredients " +
