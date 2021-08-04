@@ -2,7 +2,7 @@
   <div id="popular">
     <div id="day">
       <h3>Recipe of the Day</h3>
-      <h4>Jumbalaya</h4>
+      <h4>Jambalaya</h4>
       <img src="https://cafedelites.com/wp-content/uploads/2018/05/Jambalaya-IMAGE-3.jpg">
     <h5>Ingredients</h5>
     <ul>

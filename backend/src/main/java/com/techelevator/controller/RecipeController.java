@@ -33,11 +33,11 @@ public class RecipeController {
         return recipeDao.getAllRecipes();
     }
 
-   /* @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(path = "/users/{userId}/recipes/{recipeId}", method = RequestMethod.GET)
-    public Recipe getRecipeByRecipeId(@PathVariable long recipeId, @PathVariable (required = false) long userId){
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(path = "/recipes/{recipeId}", method = RequestMethod.GET)
+    public Recipe getRecipeByRecipeId(@PathVariable long recipeId){
         return recipeDao.getRecipeByRecipeId(recipeId);
-    }*/
+    }
 
 
 

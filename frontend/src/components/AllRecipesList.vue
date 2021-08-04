@@ -1,9 +1,9 @@
 <template>
   <div class="all-recipes-list">
-    <h1>AllRecipesList.vue</h1>
-    <div v-for="recipe in recipes" v-bind:key="recipe.id" class="recipe">
-      <router-link v-bind:to="{ name: 'Recipe', params: { recipeID: recipe.id } }">
-        {{ recipe.name }}
+    <h2>All Recipes</h2>
+    <div v-for="recipe in recipes" v-bind:key="recipe.recipeId" class="recipe">
+      <router-link v-bind:to="{ name: 'recipe', params: { recipeID: recipe.recipeId } }">
+        {{ recipe.recipeName }}
       </router-link>
     </div>
   </div>
