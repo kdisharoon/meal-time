@@ -1,11 +1,17 @@
 BEGIN TRANSACTION;
 
-DROP TABLE IF EXISTS user_meal_plan;
+
 DROP TABLE IF EXISTS meal_plan_user_recipes;
 DROP TABLE IF EXISTS user_recipes;
-DROP TABLE IF EXISTS recipes;
 DROP TABLE IF EXISTS recipe_ingredients;
+DROP TABLE IF EXISTS user_meal_plan;
+DROP TABLE IF EXISTS ingredients;
+DROP TABLE IF EXISTS recipes;
 DROP TABLE IF EXISTS users;
+
+DROP SEQUENCE IF EXISTS seq_user_meal_plan_id;
+DROP SEQUENCE IF EXISTS seq_recipe_id;
+DROP SEQUENCE IF EXISTS seq_ingredient_id;
 DROP SEQUENCE IF EXISTS seq_user_id;
 
 
