@@ -3,6 +3,7 @@
     <h1 class="recipe-name">{{ recipe.name }}</h1>
     <img v-bind:src="recipe.imageURL" class="recipe-image" />
     <h3>{{ recipe.prepTime }} minutes prep time || {{ recipe.cookTime }} minutes cook time</h3>
+    <h5>Ingredients</h5>
     <div class="recipe-ingredients" v-for="ingredient in recipe.ingredients" v-bind:key="ingredient.ingredientId">
       <h4>{{ ingredient.measurementAmount }} {{ ingredient.measurementUnit }} {{ ingredient.ingredientName}}</h4>
     </div>
@@ -48,3 +49,45 @@ export default {
   }
 }
 </script>
+
+<style>
+
+.recipe-name {
+  border: solid orange 5px;
+  border-style: outset;
+}
+
+h4 {
+  text-indent: 10px;
+}
+
+.recipe-details {
+  padding: 50px;
+}
+
+h1 {
+  display: inline;
+}
+
+li {
+  font-size: 20px;
+  border-style: outset;
+}
+
+img {
+  object-fit: contain;
+  display: block;
+  padding: 5px;
+}
+
+h3{
+  border: solid orange  5px;
+  border-style: outset;
+  display: inline-block;
+}
+
+h5 {
+  font-size: 35px;
+  text-decoration: underline;
+}
+</style>

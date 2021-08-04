@@ -1,7 +1,7 @@
 <template>
 <div>
   <h2>All Recipes</h2>
-  <div class="all-recipes-list">
+  <div class="all-recipes-list d-flex justify-content-around">
     <div v-for="recipe in recipes" v-bind:key="recipe.recipeId" class="recipe">
       <div class="card">
         <img v-bind:src="recipe.recipeImg" class="recipe-image" style="width:100%">
@@ -11,11 +11,11 @@
             <button>
         {{ recipe.recipeName }} Recipe Details</button>
         </router-link>
-      
+      </div>
       </div>
       </div>
     </div>
-  </div>
+
 </template>
 
 <script>
@@ -38,20 +38,25 @@ export default {
 
 <style>
 
-.all-recipes-list {
+/* .all-recipes-list {
     background:white;
     max-width: 300px;
     margin: 30px auto;
-    padding: 0px;
+    padding: 10px;
     border: 2px solid black;
-    border-radius: 5px;
-  
-  }
-.card {
+    border-radius: 5px; 
+  } */
+ .card {
+      padding: 5px;
+      background:white;
+      max-width: 300px;
+      margin: 40px auto;
       padding: 10px;
-      border-width: 2px;
-      justify-content: center;
-  }
+      border: 2px solid black;
+      border-radius: 5px;
+      /* border-width: 2px;
+      justify-content: center; */
+  } 
 
   button {
     cursor: pointer;
@@ -75,5 +80,6 @@ export default {
     box-shadow: 0 5px #666;
     transform: translateY(4px);
   }
+
 </style>
 
