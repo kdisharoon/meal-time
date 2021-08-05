@@ -12,6 +12,8 @@
         {{ step }}
       </li>
     </ol>
+
+   <!-- <button class="add-to-my-recipes" v-on:click="recipe.ingredients">Click To Add to My Recipes</button> -->
   </div>
 </template>
 
