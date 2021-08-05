@@ -91,7 +91,7 @@ const router = new Router({
       }
     },
     {
-      path: "/users/:userID/mealplans/:mealPlanID",
+      path: "/mealplans/:mealPlanID",
       name: "meal-plan",
       component: MealPlan,
       meta: {

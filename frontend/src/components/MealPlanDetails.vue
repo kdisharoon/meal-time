@@ -65,7 +65,7 @@ export default {
   },
 
   created() {
-    mealPlanService.getUserMealPlanById(this.$route.params.userID, this.$route.params.mealPlanID).then(response => {
+    mealPlanService.getUserMealPlanById(this.$route.params.mealPlanID).then(response => {
       this.mealPlan = response.data;
     })
   
