@@ -10,7 +10,7 @@
     <p>{{chosenRecipe.preparation}}</p>
     
     <button @click="randomizer" class="buttons">Get Random Recipe</button>
-    <button class="buttons" v-on:click.prevent="saveRecipe">Add to My Recipes </button>
+    <button class="buttons" @click.prevent="saveRecipe">Add to My Recipes </button>
     
     </div>
     <div id="recipe">
@@ -20,6 +20,7 @@
           <img src="https://emilybites.com/wp-content/uploads/2020/08/Caprese-Salad-1b.jpg">
             
       </div>
+      
     </div>
   </div>
 </template>
@@ -43,7 +44,7 @@ export default {
   },
   methods:{
     saveRecipe() {
-      recipeService.addRecipeToUserLibrary(this.$store.state.user.id, this.recipes.id).then(response => {
+      recipeService.addRecipeToUserLibrary(this.$store.state.user.id, this.recipe.id).then(response => {
         if (response.status === 201) {
           this.$router.push('/recipes');
         }

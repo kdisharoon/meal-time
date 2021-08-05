@@ -91,7 +91,7 @@ public class Recipe {
         return recipeType;
     }
 
-    public void setRecipeType(String type) {
+    public void setRecipeType(String recipeType) {
         this.recipeType = recipeType;
     }
 
