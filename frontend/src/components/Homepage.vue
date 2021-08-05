@@ -3,20 +3,22 @@
     <div id="day" class="random-recipe">
       <h3>Random Recipe Generator</h3>
       <h4>{{chosenRecipe.recipeName}}</h4>
-      <img :src="chosenRecipe.recipeImg" class="image">
-    <h5>Ingredients</h5>
-      <p>{{chosenRecipe.ingredients}}</p>
+      <img :src="chosenRecipe.recipeImg" class="image" id="randomImg">
+    <h5 >Ingredients</h5>
+      <p v-for="ingredient in chosenRecipe.ingredients" v-bind:key="ingredient.ingredientId">{{ingredient.measurementAmount}} {{ingredient.measurementUnit}} {{ingredient.ingredientName}}</p>
     <h5>Preparations</h5>
     <p>{{chosenRecipe.preparation}}</p>
-    <button @click="randomizer">Get Random Recipe</button>
+    
+    <button @click="randomizer" class="buttons">Get Random Recipe</button>
+    <button class="buttons" v-on:click.prevent="saveRecipe">Add to My Recipes </button>
+    
     </div>
     <div id="recipe">
       <h3>Popular Recipes</h3>
       <div class="card">
+        <a href= "/recipes/1">Caprese Salad</a>
           <img src="https://emilybites.com/wp-content/uploads/2020/08/Caprese-Salad-1b.jpg">
-            <div class="info">
-                <a href= "/recipes/1">Caprese Salad</a>
-            </div>
+            
       </div>
     </div>
   </div>
@@ -40,12 +42,26 @@ export default {
     });
   },
   methods:{
+    saveRecipe() {
+      recipeService.addRecipeToUserLibrary(this.$store.state.user.id, this.recipes.id).then(response => {
+        if (response.status === 201) {
+          this.$router.push('/recipes');
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    },
+    
    randomizer: function(){
       let randomRecipe = Math.floor(Math.random() * this.recipes.length);
     this.chosenRecipe = this.recipes[randomRecipe];
     }
+  },
+
+    
   }
-};
+
 </script>
 
 <style>
@@ -57,6 +73,9 @@ export default {
     "day recipe"
     "day recipe";
     
+}
+#randomImg {
+  display: inline;
 }
 #day {
     padding-left: 10px;
@@ -78,18 +97,21 @@ h5,p{
 #recipe .card{
    background:antiquewhite;
     max-width: 300px;
-    margin: 30px auto;
-    padding: 0px;
+    margin: 30px ;
+    padding: 10px;
     border: 2px solid black;
-    border-radius: 5px;  
+    border-radius: 5px  
+  
 }
 
 .card a{
-  text-align: center;
+  text-align: center !important;
 }
 
 .image{
   max-width: 180px;
   max-height: 180px;
+
 }
+
 </style>
