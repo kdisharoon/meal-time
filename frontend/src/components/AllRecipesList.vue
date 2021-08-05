@@ -32,7 +32,7 @@ export default {
   },
   created() {
     //let recipesList;
-    recipeService.getAllRandomRecipesFromSpoonacular().then(response => {
+    recipeService.getAllRecipesFromSpoonacular().then(response => {
       let recipeArr = []
       response.data.results.map(recipe => {
         console.log(recipe);
