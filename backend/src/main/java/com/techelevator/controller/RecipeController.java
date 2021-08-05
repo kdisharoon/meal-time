@@ -53,7 +53,9 @@ public class RecipeController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(path= "/users/{userId}/recipes/{recipeId}", method = RequestMethod.DELETE)
     public void deleteRecipeFromLibrary(@PathVariable long userId,@PathVariable long recipeId){
+        recipeDao.deleteRecipeFromUserLibrary(userId, recipeId);
 
+        //when delete recipe from meal plan is added, call it here as well
     }
 
 
