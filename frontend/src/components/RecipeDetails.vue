@@ -77,6 +77,7 @@ export default {
 
 .rpDetails {
   border: solid black 5px;
+  background: white;
 }
 
 .recipe-name {
