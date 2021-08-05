@@ -7,6 +7,11 @@ export default {
         return axios.get('/recipes');
     },
 
+
+  getAllRandomRecipesFromSpoonacular() {
+        return axios.get('https://api.spoonacular.com/recipes/complexSearch?query=chicken&addRecipeInformation=true&apiKey=941ba16793664284808b0c07b47ed70f');
+    },
+
     getAllUserRecipes(userID) {
         return axios.get(`/users/${userID}/recipes`);
     },

@@ -12,12 +12,7 @@
         {{ step }}
       </li>
     </ol>
-<<<<<<< HEAD
-
-   <!-- <button class="add-to-my-recipes" v-on:click="recipe.ingredients">Click To Add to My Recipes</button> -->
-=======
     <button class="btn btn-add-recipe-to-user-library" v-on:click.prevent="saveRecipe">Save Recipe To My Library</button>
->>>>>>> 1f9966156f93430af9c6a396ac4e8d11942b5034
   </div>
 </template>
 
@@ -65,7 +60,9 @@ export default {
       this.recipe.mealType = response.data.type;
       this.recipe.ingredients = response.data.ingredients;
     })
+    
   }
+
 }
 </script>
 

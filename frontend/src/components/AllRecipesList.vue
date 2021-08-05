@@ -29,9 +29,23 @@ export default {
     }
   },
   created() {
-    recipeService.getAllRecipes().then(response => {
-      this.recipes = response.data;
+    //let recipesList;
+    recipeService.getAllRandomRecipesFromSpoonacular().then(response => {
+      let recipeArr = []
+      response.data.results.map(recipe => {
+        console.log(recipe);
+        let recipeObject = {
+          recipeId: recipe.id,
+          recipeImg: recipe.image,
+          recipeName: recipe.title
+        }
+        recipeArr.push(recipeObject);
+
+      });
+      this.recipes = recipeArr;
+      console.log(recipeArr);
     });
+    //this.recipes = recipesList;
   }
 }
 </script>
