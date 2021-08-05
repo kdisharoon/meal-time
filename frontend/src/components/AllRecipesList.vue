@@ -72,6 +72,7 @@ export default {
     font-size: 16px;
     border-radius: 10px;
   }
+  
   button:hover {
     background-color:grey;
     border-radius: 10px;

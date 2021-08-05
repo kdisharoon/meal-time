@@ -1,7 +1,9 @@
 <template>
+<div class="container rpDetails">
+<div class="row">
   <div class="recipe-details">
     <h1 class="recipe-name">{{ recipe.name }}</h1>
-    <img v-bind:src="recipe.imageURL" class="recipe-image" />
+    <img v-bind:src="recipe.imageURL" class="recipe-detail-image" />
     <h3>{{ recipe.prepTime }} minutes prep time || {{ recipe.cookTime }} minutes cook time</h3>
     <h5>Ingredients</h5>
     <div class="recipe-ingredients" v-for="ingredient in recipe.ingredients" v-bind:key="ingredient.ingredientId">
@@ -13,6 +15,8 @@
       </li>
     </ol>
     <button class="btn btn-add-recipe-to-user-library" v-on:click.prevent="saveRecipe">Save Recipe To My Library</button>
+  </div>
+  </div>
   </div>
 </template>
 
@@ -66,9 +70,14 @@ export default {
 
 <style>
 
+.rpDetails {
+  border: solid black 5px;
+}
+
 .recipe-name {
-  border: solid orange 5px;
+  border: solid orange 10px;
   border-style: outset;
+  padding: 5px;
 }
 
 h4 {
@@ -81,6 +90,8 @@ h4 {
 
 h1 {
   display: inline;
+  font-size: 50px;
+  margin: 10px;
 }
 
 li {
@@ -88,20 +99,53 @@ li {
   border-style: outset;
 }
 
-img {
-  object-fit: contain;
-  display: block;
+.recipe-detail-image {
+  /* object-fit: contain; */
+  /* display: block;
   padding: 5px;
+  min-height: 500px;
+  width: auto;
+  max-width: 500px; */
+  float: left;
+  width:  400px;
+  height: 300px;
+  object-fit: cover;
 }
 
 h3{
   border: solid orange  5px;
   border-style: outset;
   display: inline-block;
+  margin-left: 10px;
+  margin-top: 25px;
 }
 
 h5 {
   font-size: 35px;
   text-decoration: underline;
 }
+
+.btn {
+    cursor: pointer;
+    background-color: orange;
+    border: none;
+    color:black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 10px;
+  }
+  
+  .btn:hover {
+    background-color:grey;
+    border-radius: 10px;
+  }
+  
+  .btn:active {
+    background-color:orange;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
 </style>
