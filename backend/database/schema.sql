@@ -112,7 +112,7 @@ INSERT INTO recipes (preparation, recipe_name, prep_time, cook_time, recipe_type
 INSERT INTO recipes (preparation, recipe_name, prep_time, cook_time, recipe_type, recipe_img) VALUES('Thaw tater tots, add them to greased muffin pan, dividing evenly. Smash them, fill each cup with cooked meat and chopped veggies(you can use onions, mushrooms, and/or peppers, to name a few). Scramble eggs, add seasoning of your choosing, then pour eggs into each cup, evenly. Top with cheese. Bake at 350 degrees for 18-20 minutes.', 'Mini Omelets', 10, 20, 'Breakfast', 'https://www.skinnytaste.com/wp-content/uploads/2016/02/loadedbakedeggomeletmuffins-7-550x825.jpg');
 INSERT INTO recipes (preparation, recipe_name, prep_time, cook_time, recipe_type, recipe_img) VALUES('Place raw chicken in the slow cooker.  Layer raw potatoes and carrots on top. In a small sauce pan, melt butter.  Add garlic, salt, pepper, dried thyme, and dried parsley. Pour mixture over the chicken and potato/veggies. Cook on high for 4 hours.', 'Slow Cooker Garlic Butter Chicken', 5, 240, 'Entree', 'https://www.themagicalslowcooker.com/wp-content/uploads/2017/02/garlic-butter-chicken-and-veggies-2-2.jpg.webp');
 INSERT INTO recipes (preparation, recipe_name, prep_time, cook_time, recipe_type, recipe_img) VALUES('Add ingredients to the blender. Blend for 45 seconds and Enjoy!', 'Skinny Wendys Frosty', 4, null, 'Dessert', 'http://4.bp.blogspot.com/-rnSN27O0AEg/UcjFUQjzZUI/AAAAAAAAAdA/IapK8R-AYtk/s640/IMG_2084_edited-1.jpg');
-INSERT INTO recipes (preparation, recipe_name, prep_time, cook_time, recipe_type, recipe_img) VALUES('Cut the cinnamon rolls into quarters, and toss them with the apple pie filling. Spread the mixture onto the bottom of a small greased baking dish and bake for 25 minutes in a 375 degree oven.', 'Easy Cinnamon Rolle Apple Cobbler', 3, 25, 'Dessert', 'https://www.thelazydish.com/wp-content/uploads/2020/09/easy-apple-cobbler-recipe.jpg');
+INSERT INTO recipes (preparation, recipe_name, prep_time, cook_time, recipe_type, recipe_img) VALUES('Cut the cinnamon rolls into quarters, and toss them with the apple pie filling. Spread the mixture onto the bottom of a small greased baking dish and bake for 25 minutes in a 375 degree oven.', 'Easy Cinnamon Roll Apple Cobbler', 3, 25, 'Dessert', 'https://www.thelazydish.com/wp-content/uploads/2020/09/easy-apple-cobbler-recipe.jpg');
 
 INSERT INTO ingredients (ingredient_name) VALUES ('Mozzerella Cheese');
 INSERT INTO ingredients (ingredient_name) VALUES ('Basil');
@@ -163,7 +163,7 @@ INSERT INTO recipe_ingredients (ingredient_id, recipe_id, measurement_unit, meas
 INSERT INTO recipe_ingredients (ingredient_id, recipe_id, measurement_unit, measurement_amount) VALUES(10, 3, 'cup', 2);
 INSERT INTO recipe_ingredients (ingredient_id, recipe_id, measurement_unit, measurement_amount) VALUES(11, 3, 'oz', 3);
 INSERT INTO recipe_ingredients (ingredient_id, recipe_id, measurement_unit, measurement_amount) VALUES(12, 3, 'bag', 1);
-INSERT INTO recipe_ingredients (ingredient_id, recipe_id, measurement_unit, measurement_amount) VALUES(13, 3, 'egg', 10);
+INSERT INTO recipe_ingredients (ingredient_id, recipe_id, measurement_unit, measurement_amount) VALUES(13, 3, '', 10);
 INSERT INTO recipe_ingredients (ingredient_id, recipe_id, measurement_unit, measurement_amount) VALUES(14, 3, 'cup', 2);
 
 INSERT INTO recipe_ingredients (ingredient_id, recipe_id, measurement_unit, measurement_amount) VALUES(15, 4, 'lb', 1);

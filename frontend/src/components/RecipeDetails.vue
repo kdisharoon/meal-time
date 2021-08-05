@@ -60,7 +60,9 @@ export default {
       this.recipe.mealType = response.data.type;
       this.recipe.ingredients = response.data.ingredients;
     })
+    
   }
+
 }
 </script>
 
