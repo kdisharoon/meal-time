@@ -1,21 +1,23 @@
 <template>
 <div>
   <h2>All Recipes</h2>
-  <div class="all-recipes-list d-flex justify-content-around">
-    <div v-for="recipe in recipes" v-bind:key="recipe.recipeId" class="recipe">
-      <div class="card">
+  <div class="container card-deck">
+    <div class="row">
+  <div class="all-recipes-list d-flex justify-content-around flex-wrap">
+    <div v-for="recipe in recipes" v-bind:key="recipe.recipeId" class="recipe thumbnail">
+      <div class="card" style="width: 18rem">
         <img v-bind:src="recipe.recipeImg" class="recipe-image" style="width:100%">
           <h4><b>{{recipe.recipeName}}</b></h4>
           <p class="card-text">{{ recipe.prepTime }} minutes prep time || {{ recipe.cookTime }} minutes cook time</p>
           <router-link v-bind:to="{ name: 'recipe', params: { recipeID: recipe.recipeId } }">
-            <button>
-        {{ recipe.recipeName }} Recipe Details</button>
+            <button> Recipe Details</button>
         </router-link>
       </div>
       </div>
       </div>
     </div>
-
+    </div>
+</div>
 </template>
 
 <script>
@@ -74,7 +76,7 @@ export default {
 
   button {
     cursor: pointer;
-    background-color:#2fcee1;
+    background-color: orange;
     border: none;
     color:black;
     padding: 15px 32px;
@@ -84,8 +86,9 @@ export default {
     font-size: 16px;
     border-radius: 10px;
   }
+  
   button:hover {
-    background-color:orange;
+    background-color:grey;
     border-radius: 10px;
   }
   
@@ -94,6 +97,17 @@ export default {
     box-shadow: 0 5px #666;
     transform: translateY(4px);
   }
+
+  img {
+    float: left;
+    width:  100px;
+    height: 200px;
+    object-fit: cover;
+
+  }
+
+
+  
 
 </style>
 

@@ -8,8 +8,7 @@
           <h4><b>{{recipe.recipeName}}</b></h4>
           <p class="card-text">{{ recipe.prepTime }} minutes prep time || {{ recipe.cookTime }} minutes cook time</p>
           <router-link v-bind:to="{ name: 'recipe', params: { recipeID: recipe.recipeId } }">
-            <button>
-        {{ recipe.recipeName }} Recipe Details</button>
+            <button> Recipe Details</button>
         </router-link>
       </div>
       </div>
