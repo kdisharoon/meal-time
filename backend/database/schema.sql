@@ -95,10 +95,12 @@ CREATE TABLE user_recipes (
 CREATE TABLE meal_plan_user_recipes (
         meal_plan_id serial NOT NULL,
         recipe_id serial NOT NULL,
+        day varchar(20) NULL,
+        meal varchar(100) Null,
         
         CONSTRAINT fk_meal_plan_user_recipe_user_meal_plan FOREIGN KEY (meal_plan_id) REFERENCES user_meal_plan(meal_plan_id),
         CONSTRAINT fk_meal_plan_user_recipe_recipes FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id),
-        CONSTRAINT pk_meal_plan_user_recipe PRIMARY KEY (meal_plan_id, recipe_id)
+        CONSTRAINT pk_meal_plan_user_recipe PRIMARY KEY (day)
 );
 
 

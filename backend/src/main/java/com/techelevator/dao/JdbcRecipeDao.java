@@ -88,14 +88,16 @@ public class JdbcRecipeDao implements RecipeDao{
         if (containsRecipe.next()){
             throw new RuntimeException();
         }
-
-
         String sql = "insert into user_recipes (user_id, recipe_id) " +
                      "values (?,?) ";
 
         jdbcTemplate.update(sql, userId, recipeId);
+    }
 
-
+    public void deleteRecipeFromUserLibrary(long userId, long recipeId){
+        String sql = "delete from user_recipes " +
+                     "where user_id=? and recipe_id=? ";
+        jdbcTemplate.update(sql, userId, recipeId);
     }
 
     public Recipe mapRowToRecipe(SqlRowSet result){
