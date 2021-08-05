@@ -35,7 +35,7 @@ public class JdbcMealPlanDao implements MealPlanDao{
     }
 
     public void addRecipeToUserMealPlan(long mealPlanId, long recipeId, OrganizedRecipe organizedRecipe){
-        String sql = "insert into meal_plan_user_recipes (meal_plan_id, recipe_id, Day, meal) " +
+        String sql = "insert into meal_plan_user_recipes (meal_plan_id, recipe_id, day, meal) " +
                      "values (?,?,?,?)";
         jdbcTemplate.update(sql, mealPlanId,recipeId,organizedRecipe.getDay().toLowerCase(),organizedRecipe.getMeal().toLowerCase());
 
@@ -73,12 +73,12 @@ public class JdbcMealPlanDao implements MealPlanDao{
             mealPlan.setMealPlanName(mealPlanNameResult.getString("meal_plan_name"));
         }
 
-        String sql2 = "select recipe_id, Day, meal " +
+        String sql2 = "select recipe_id, day, meal " +
                       "from meal_plan_user_recipes " +
                       "where meal_plan_id=?";
         SqlRowSet recipeIdResults = jdbcTemplate.queryForRowSet(sql2, mealPlanId);
         while(recipeIdResults.next()){
-            String day = recipeIdResults.getString("Day");
+            String day = recipeIdResults.getString("day");
             String meal = recipeIdResults.getString("meal");
             int index = mealPlan.findIndex(day, meal);
             recipeLists[index].addToList(recipeIdResults.getLong("recipe_id"));
