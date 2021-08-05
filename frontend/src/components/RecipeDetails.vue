@@ -6,10 +6,13 @@
     <img v-bind:src="recipe.imageURL" class="recipe-detail-image" />
     <h3>{{ recipe.prepTime }} minutes prep time || {{ recipe.cookTime }} minutes cook time</h3>
     <h5>Ingredients</h5>
+    <div class="grouped-ingredients">
     <div class="recipe-ingredients" v-for="ingredient in recipe.ingredients" v-bind:key="ingredient.ingredientId">
       <h4>{{ ingredient.measurementAmount }} {{ ingredient.measurementUnit }} {{ ingredient.ingredientName}}</h4>
     </div>
+    </div>
     <ol>
+      <h2>Instructions</h2>
       <li v-for="step in recipe.preparation" v-bind:key="step" class="recipe-step">
         {{ step }}
       </li>
@@ -78,7 +81,20 @@ export default {
   border: solid orange 10px;
   border-style: outset;
   padding: 5px;
+  display: block;
+  text-align: center;
 }
+
+.grouped-ingredients {
+  padding-left: 25px;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+/* .recipe-ingredients {
+  display:list-item;
+} */
 
 h4 {
   text-indent: 10px;
@@ -92,6 +108,10 @@ h1 {
   display: inline;
   font-size: 50px;
   margin: 10px;
+}
+ol {
+  display:flex;
+  flex-flow: column;
 }
 
 li {
@@ -118,6 +138,11 @@ h3{
   display: inline-block;
   margin-left: 10px;
   margin-top: 25px;
+}
+
+h2 {
+  font-size: 35px;
+  text-decoration: underline;
 }
 
 h5 {
