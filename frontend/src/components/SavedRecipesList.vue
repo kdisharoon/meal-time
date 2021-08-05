@@ -1,12 +1,21 @@
 <template>
-  <div class="saved-recipes-list">
-    <div v-for="recipe in recipes" v-bind:key="recipe.id" class="recipe">
-      <img v-bind:src="recipe.imageURL" class="recipe-image" />
-      <router-link v-bind:to="{ name: 'Recipe', params: { id: recipe.id } }">
-        {{ recipe.name }}
-      </router-link>
+<div>
+  <h2>My Recipes</h2>
+  <div class="saved-recipes-list d-flex justify-content-around">
+    <div v-for="recipe in recipes" v-bind:key="recipe.recipeId" class="recipe">
+      <div class="card">
+        <img v-bind:src="recipe.recipeImg" class="recipe-image" style="width:100%">
+          <h4><b>{{recipe.recipeName}}</b></h4>
+          <p class="card-text">{{ recipe.prepTime }} minutes prep time || {{ recipe.cookTime }} minutes cook time</p>
+          <router-link v-bind:to="{ name: 'recipe', params: { recipeID: recipe.recipeId } }">
+            <button>
+        {{ recipe.recipeName }} Recipe Details</button>
+        </router-link>
+      </div>
+      </div>
+      </div>
     </div>
-  </div>
+
 </template>
 
 <script>
