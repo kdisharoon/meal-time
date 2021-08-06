@@ -60,8 +60,8 @@ public class RecipeController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/recipes", method = RequestMethod.POST)
-    public void addRecipeToRecipeLibrary(@RequestBody Recipe recipe){
-        recipeDao.addRecipeToRecipeLibrary(recipe);
+    public void addRecipeToRecipeLibrary(@RequestBody Recipe[] recipes){
+        recipeDao.addRecipeToRecipeLibrary(recipes);
     }
 
 
