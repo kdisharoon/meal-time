@@ -12,7 +12,7 @@ export default {
     },
 
     getRandomRecipesFromSpoonacular() {
-        return axios.get('https://api.spoonacular.com/recipes/random?number=10&apiKey=941ba16793664284808b0c07b47ed70f');
+        return axios.get('https://api.spoonacular.com/recipes/random?number=10&apiKey=d391dd6b7d7c47358081f54cbadbfec0');
     },
     
     getAllRecipesFromSpoonacular() {

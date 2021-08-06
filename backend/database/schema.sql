@@ -73,13 +73,13 @@ CREATE TABLE user_meal_plan (
 
 CREATE TABLE recipe_ingredients (
         ingredient_id int NOT NULL,
-        recipe_id serial NOT NULL,
+        recipe_id int NOT NULL,
         measurement_unit varchar(50),
         measurement_amount int NOT NULL,
         
         CONSTRAINT FK_recipe_ingredients_recipes FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id),
-        CONSTRAINT FK_recipe_ingredients_ingredients FOREIGN KEY (ingredient_id) REFERENCES ingredients(ingredient_id),
-        CONSTRAINT pk_recipe_ingredients PRIMARY KEY (ingredient_id, recipe_id, measurement_amount)
+        CONSTRAINT FK_recipe_ingredients_ingredients FOREIGN KEY (ingredient_id) REFERENCES ingredients(ingredient_id)
+--        CONSTRAINT pk_recipe_ingredients PRIMARY KEY (ingredient_id, recipe_id, measurement_amount)
 );
         
 CREATE TABLE user_recipes (
