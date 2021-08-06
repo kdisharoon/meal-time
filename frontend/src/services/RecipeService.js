@@ -3,6 +3,10 @@ import axios from 'axios';
 
 export default {
 
+    addRecipeFromAPI(newRecipe) {
+        return axios.post('/recipes', newRecipe);
+    },
+
     getAllRecipes() {
         return axios.get('/recipes');
     },

@@ -8,10 +8,14 @@
       <div class="card" style="width: 18rem">
         <img v-bind:src="recipe.recipeImg" class="recipe-image" style="width:100%">
           <h4><b>{{recipe.recipeName}}</b></h4>
-          <p class="card-text">{{ recipe.prepTime }} minutes prep time || {{ recipe.cookTime }} minutes cook time</p>
+          <p class="card-text">{{ recipe.cookTime }} minutes total time</p>
           <router-link v-bind:to="{ name: 'recipe', params: { recipeID: recipe.recipeId } }">
             <button> Recipe Details</button>
-        </router-link>
+          </router-link>
+         
+            <button v-on:click.prevent="saveToDatabase(recipe)">Add Recipe to Database</button>
+
+
       </div>
       </div>
       </div>
@@ -31,33 +35,41 @@ export default {
     }
   },
 
+  methods: {
+    saveToDatabase(recipeToAdd) {
+      recipeService.addRecipeFromAPI(recipeToAdd).then(response => {
+        if (response.status === 201) {
+          console.log("Successfully added recipe to database!");
+          }
+        })
+      .catch((error) => {
+        console.log(error);
+      });
+    }
+  },
+
   created() {
     recipeService.getRandomRecipesFromSpoonacular().then(response => {
       for (let i = 0; i < response.data.recipes.length; i++) {
-        let tempArr = [];
+        let tempArr = {
+          ingredients: []
+        };
         tempArr.recipeId = response.data.recipes[i].id;
         tempArr.recipeName = response.data.recipes[i].title;
         tempArr.recipeImg = response.data.recipes[i].image;
+        tempArr.preparation = response.data.recipes[i].instructions;
+        tempArr.cookTime = response.data.recipes[i].readyInMinutes;
+        for (let j = 0; j < response.data.recipes[i].extendedIngredients.length; j++) {
+          let tempIngredientsArr = {};
+          tempIngredientsArr.ingredientId = response.data.recipes[i].extendedIngredients[j].id;
+          tempIngredientsArr.ingredientName = response.data.recipes[i].extendedIngredients[j].name;
+          tempIngredientsArr.measurementAmount = response.data.recipes[i].extendedIngredients[j].amount;
+          tempIngredientsArr.measurementUnit = response.data.recipes[i].extendedIngredients[j].unit;
+          tempArr.ingredients.push(tempIngredientsArr);
+        }
         this.recipes.push(tempArr);
       }
     });
-      
-      
-
-//      let recipeArr = []
-//      response.data.results.map(recipe => {
-//        console.log(recipe);
-//        let recipeObject = {
-//          recipeId: recipe.id,
-//          recipeImg: recipe.image,
-//          recipeName: recipe.title
-//        }
-//        recipeArr.push(recipeObject);
-//
-//      });
-//      this.recipes = recipeArr;
-  
-
   }
 }
 </script>
