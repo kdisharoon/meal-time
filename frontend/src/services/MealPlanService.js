@@ -3,8 +3,8 @@ import axios from 'axios';
 
 export default {
 
-    addUserMealPlan(userID) {
-        return axios.post(`/users/${userID}/mealplans`)
+    addUserMealPlan(userID, newMealPlan) {
+        return axios.post(`/users/${userID}/mealplans`, newMealPlan)
     },
 
     getAllUserMealPlans(userID) {
