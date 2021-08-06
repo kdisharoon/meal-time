@@ -33,8 +33,7 @@ export default {
     addMealPlan() {
       let newMealPlan = {
         userId: this.$route.params.userID,
-        mealPlanName: "test meal plan name",
-        organizedRecipes: []
+        mealPlanName: "test meal plan name"
       };
       console.log(newMealPlan);
       mealPlanService.addUserMealPlan(this.$route.params.userID, newMealPlan).then(response => {
