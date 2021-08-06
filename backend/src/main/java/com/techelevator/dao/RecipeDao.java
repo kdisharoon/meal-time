@@ -15,4 +15,6 @@ public interface RecipeDao {
     void addRecipeToUserRecipe(long userId, long recipeId);
 
     void deleteRecipeFromUserLibrary(long userId, long recipeId);
+
+    void addRecipeToRecipeLibrary(Recipe recipe);
 }
