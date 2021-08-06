@@ -12,8 +12,8 @@ public class JdbcRecipeDaoTests extends FinalCapstoneDaoTests{
     private JdbcRecipeDao sut;
     private Recipe recipe;
     private Recipe testRecipe;
-    private static final Recipe RECIPE_1 = new Recipe(1L, "You will need fresh basil, fresh mozz, and fresh tomato on a plate. Layer the cheese, basil, and tomato. Drizzle balsamic vinegar and Enjoy!", "Caprese Salad", 10, 0, "https://i2.wp.com/www.downshiftology.com/wp-content/uploads/2019/07/Caprese-Salad-4.jpg", "Salad");
-    private static final Recipe RECIPE_2 = new Recipe(2L, "Prepare the tortilini, drain. Cook the meat, then add the sauce and cream cheese. Put the tortellini into the backing dish and pour the meat/cheese/sauce mixture on top. Sprinkle the parmesan cheese over top. Bake for 20 min.", "Cheesey Tortellini Pasta Bake", 15, 20, "https://images-gmi-pmc.edge-generalmills.com/de2a3f47-4a5a-4254-baa2-4e1e8cbc3ada.jpg", "Entree" );
+    private static final Recipe RECIPE_1 = new Recipe(1L, "You will need fresh basil, fresh mozz, and fresh tomato on a plate. Layer the cheese, basil, and tomato. Drizzle balsamic vinegar and Enjoy!", "Caprese Salad", 10, "https://i2.wp.com/www.downshiftology.com/wp-content/uploads/2019/07/Caprese-Salad-4.jpg", "Salad");
+    private static final Recipe RECIPE_2 = new Recipe(2L, "Prepare the tortilini, drain. Cook the meat, then add the sauce and cream cheese. Put the tortellini into the backing dish and pour the meat/cheese/sauce mixture on top. Sprinkle the parmesan cheese over top. Bake for 20 min.", "Cheesey Tortellini Pasta Bake", 15, "https://images-gmi-pmc.edge-generalmills.com/de2a3f47-4a5a-4254-baa2-4e1e8cbc3ada.jpg", "Entree" );
 
     @Before
     public void setup(){
@@ -21,7 +21,7 @@ public class JdbcRecipeDaoTests extends FinalCapstoneDaoTests{
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         sut = new JdbcRecipeDao(jdbcTemplate);
 
-        testRecipe = new Recipe(99L, "Boil Eggs for 10 mins", "Hard-Boiled Eggs", 0, 10, "egg.png", "snack");
+        testRecipe = new Recipe(99L, "Boil Eggs for 10 mins", "Hard-Boiled Eggs", 0, "egg.png", "snack");
     }
 
     @Test
@@ -72,7 +72,7 @@ public class JdbcRecipeDaoTests extends FinalCapstoneDaoTests{
         Assert.assertEquals(expected.getRecipeId(), actual.getRecipeId());
         Assert.assertEquals(expected.getPreparation(), actual.getPreparation());
         Assert.assertEquals(expected.getRecipeName(), actual.getRecipeName());
-        Assert.assertEquals(expected.getPrepTime(), actual.getPrepTime());
+//        Assert.assertEquals(expected.getPrepTime(), actual.getPrepTime());
         Assert.assertEquals(expected.getCookTime(), actual.getCookTime());
         Assert.assertEquals(expected.getRecipeImg(), actual.getRecipeImg());
         Assert.assertEquals(expected.getRecipeType(), actual.getRecipeType());

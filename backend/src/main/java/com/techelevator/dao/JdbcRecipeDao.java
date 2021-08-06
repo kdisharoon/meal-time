@@ -127,7 +127,7 @@ public class JdbcRecipeDao implements RecipeDao{
     }
 
     public void addRecipeToRecipeLibrary(Recipe recipe){
-        String sql = "insert into recipes (recipe_id,preparation,recipe_name,prep_time,cook_time,recipe_type,recipe_img) " +
+        String sql = "insert into recipes (recipe_id,preparation,recipe_name,prep_time,cook_time,recipe_img,recipe_type) " +
                      "values (?,?,?,?,?,?,?)";
         long recipeId = recipe.getRecipeId();
         String preparation= recipe.getPreparation();
@@ -146,7 +146,7 @@ public class JdbcRecipeDao implements RecipeDao{
             ingredientId = ingredients[i].getIngredientId();
             if (!ingredientResult.next()){
                 String sql3 = "insert into ingredients (ingredient_id, ingredient_name) " +
-                              "values (?,?) returning ingredient_id";
+                              "values (?,?)";
                 jdbcTemplate.update(sql3,ingredientId,ingredients[i].getIngredientName());
             }
             String sql4="insert into recipe_ingredients (ingredient_id, recipe_id, measurement_unit, measurement_amount) " +

@@ -11,7 +11,11 @@
           <p class="card-text">{{ recipe.cookTime }} minutes total time</p>
           <router-link v-bind:to="{ name: 'recipe', params: { recipeID: recipe.recipeId } }">
             <button> Recipe Details</button>
-        </router-link>
+          </router-link>
+         
+            <button v-on:click.prevent="saveToDatabase(recipe)">Add Recipe to Database</button>
+
+
       </div>
       </div>
       </div>
@@ -28,6 +32,19 @@ export default {
   data() {
     return {
       recipes: []
+    }
+  },
+
+  methods: {
+    saveToDatabase(recipeToAdd) {
+      recipeService.addRecipeFromAPI(recipeToAdd).then(response => {
+        if (response.status === 201) {
+          console.log("Successfully added recipe to database!");
+          }
+        })
+      .catch((error) => {
+        console.log(error);
+      });
     }
   },
 

@@ -50,7 +50,7 @@ CREATE TABLE users (
 
 CREATE TABLE recipes (
         recipe_id int PRIMARY KEY DEFAULT NEXTVAL('seq_recipe_id'),
-        preparation varchar(500) NOT NULL,
+        preparation varchar(5000) NOT NULL,
         recipe_name varchar(100) NULL,
         prep_time int NULL,
         cook_time int NULL,
