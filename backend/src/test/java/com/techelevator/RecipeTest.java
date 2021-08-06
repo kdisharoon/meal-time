@@ -10,8 +10,8 @@ public class RecipeTest {
 
     @Test
     public void recipe_id_is_3(){
-        recipe.setRecipeId(3);
-        Assert.assertEquals(3, recipe.getRecipeId());
+        recipe.setRecipeId(3L);
+        Assert.assertEquals(3L, recipe.getRecipeId());
     }
 
     @Test

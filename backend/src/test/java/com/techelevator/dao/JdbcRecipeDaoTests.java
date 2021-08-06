@@ -11,6 +11,7 @@ import javax.sql.DataSource;
 public class JdbcRecipeDaoTests extends FinalCapstoneDaoTests{
     private JdbcRecipeDao sut;
     private Recipe recipe;
+    private Recipe testRecipe;
     private static final Recipe RECIPE_1 = new Recipe(1L, "You will need fresh basil, fresh mozz, and fresh tomato on a plate. Layer the cheese, basil, and tomato. Drizzle balsamic vinegar and Enjoy!", "Caprese Salad", 10, 0, "https://i2.wp.com/www.downshiftology.com/wp-content/uploads/2019/07/Caprese-Salad-4.jpg", "Salad");
     private static final Recipe RECIPE_2 = new Recipe(2L, "Prepare the tortilini, drain. Cook the meat, then add the sauce and cream cheese. Put the tortellini into the backing dish and pour the meat/cheese/sauce mixture on top. Sprinkle the parmesan cheese over top. Bake for 20 min.", "Cheesey Tortellini Pasta Bake", 15, 20, "https://images-gmi-pmc.edge-generalmills.com/de2a3f47-4a5a-4254-baa2-4e1e8cbc3ada.jpg", "Entree" );
 
@@ -19,6 +20,8 @@ public class JdbcRecipeDaoTests extends FinalCapstoneDaoTests{
         DataSource dataSource = this.getDataSource();
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         sut = new JdbcRecipeDao(jdbcTemplate);
+
+        testRecipe = new Recipe(99L, "Boil Eggs for 10 mins", "Hard-Boiled Eggs", 0, 10, "egg.png", "snack");
     }
 
     @Test
@@ -36,7 +39,32 @@ public class JdbcRecipeDaoTests extends FinalCapstoneDaoTests{
     }
 
     @Test
-    public void get_recipe_by_user_id(){
+    public void get_recipe_id_returns_null_if_it_does_not_exist(){
+        Recipe recipe = sut.getRecipeByRecipeId(28L);
+        Assert.assertNotNull(recipe);
+    }
+
+    //I think this test is not working because the current user may not have the permission to delete
+    @Test
+    public void deleted_recipe_from_user_library_can_not_be_retrieved(){
+        sut.deleteRecipeFromUserLibrary(1L, 1L);
+
+        Recipe recipe = sut.getRecipeByRecipeId(1L);
+        Assert.assertNull(recipe);
+    }
+
+    @Test
+    public void get_all_recipes_by_user_id(){
+        Recipe[] recipe = sut.getAllRecipesByUser(1L);
+
+        Assert.assertEquals(4, recipe.length);
+    }
+
+    @Test
+    public void add_recipe_to_users_library() {
+        sut.addRecipeToUserRecipe(1L, 5L);
+        Recipe[] userRecipes = sut.getAllRecipesByUser(1L);
+        Assert.assertEquals(5, userRecipes.length);
 
     }
 

@@ -15,12 +15,29 @@
     </div>
     <div id="recipe">
       <h3>Popular Recipes</h3>
+     <div id="cards">
       <div class="card">
         <a href= "/recipes/1">Caprese Salad</a>
           <img src="https://emilybites.com/wp-content/uploads/2020/08/Caprese-Salad-1b.jpg">
             
       </div>
       
+      <div class="card">
+        <a href= "/recipes/1">Caprese Salad</a>
+          <img src="https://emilybites.com/wp-content/uploads/2020/08/Caprese-Salad-1b.jpg">
+            
+      </div>
+      <div class="card">
+        <a href= "/recipes/1">Caprese Salad</a>
+          <img src="https://emilybites.com/wp-content/uploads/2020/08/Caprese-Salad-1b.jpg">
+            
+      </div>
+      <div class="card">
+        <a href= "/recipes/1">Caprese Salad</a>
+          <img src="https://emilybites.com/wp-content/uploads/2020/08/Caprese-Salad-1b.jpg">
+            
+      </div>
+      </div>
     </div>
   </div>
 </template>
@@ -71,20 +88,25 @@ export default {
   grid-template-columns: 350px 1fr;
   grid-template-areas:
     "day recipe"
-    "day recipe"
-    "day recipe";
+    "day cards"
+    "day cards";
     
 }
-#randomImg {
-  display: inline;
+#popular #cards{
+  display:grid;
+  grid-area: cards;
+  grid-template: 1fr 1fr;
+  grid-template-areas: "card card"
+                       "card card";
 }
 #day {
     padding-left: 10px;
     padding-right: 10px;
   grid-area: day;
-  border-right: 1px solid rgb(34, 88, 133);
+  border-right: 2px solid black;
+  border-bottom: 2px solid black;
   text-align: center;
-  background-color: antiquewhite;
+  background-color:aliceblue;
   border-radius: 3px;
 }
 #recipe {
@@ -96,13 +118,17 @@ h5,p{
 }
 
 #recipe .card{
-   background:antiquewhite;
+  display: flex;
+   background:aliceblue;
     max-width: 300px;
     margin: 30px ;
     padding: 10px;
     border: 2px solid black;
     border-radius: 5px  
   
+}
+.card{
+  grid-area: card;
 }
 
 .card a{
@@ -112,7 +138,9 @@ h5,p{
 .image{
   max-width: 180px;
   max-height: 180px;
-
+  object-fit: contain;
+ 
 }
+
 
 </style>
