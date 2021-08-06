@@ -16,27 +16,14 @@
     <div id="recipe">
       <h3>Popular Recipes</h3>
      <div id="cards">
-      <div class="card">
-        <a href= "/recipes/1">Caprese Salad</a>
-          <img src="https://emilybites.com/wp-content/uploads/2020/08/Caprese-Salad-1b.jpg">
-            
-      </div>
       
-      <div class="card">
-        <a href= "/recipes/1">Caprese Salad</a>
-          <img src="https://emilybites.com/wp-content/uploads/2020/08/Caprese-Salad-1b.jpg">
+        <a href= "/recipes/1">
+        <h5>Caprese Salad</h5>
+        <div class="card">
+          <img :src="recipes.recipeImg">
             
       </div>
-      <div class="card">
-        <a href= "/recipes/1">Caprese Salad</a>
-          <img src="https://emilybites.com/wp-content/uploads/2020/08/Caprese-Salad-1b.jpg">
-            
-      </div>
-      <div class="card">
-        <a href= "/recipes/1">Caprese Salad</a>
-          <img src="https://emilybites.com/wp-content/uploads/2020/08/Caprese-Salad-1b.jpg">
-            
-      </div>
+      </a>
       </div>
     </div>
   </div>
@@ -61,7 +48,7 @@ export default {
   },
   methods:{
     saveRecipe() {
-      recipeService.addRecipeToUserLibrary(this.$store.state.user.id, this.chosenRecipe.recipeId).then(response => {
+      recipeService.addRecipeToUserLibrary(this.$store.state.user.id, this.recipe.id).then(response => {
         if (response.status === 201) {
           this.$router.push('/recipes');
         }
@@ -95,7 +82,9 @@ export default {
 #popular #cards{
   display:grid;
   grid-area: cards;
-  grid-template: 1fr 1fr;
+  gap: 30px;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
   grid-template-areas: "card card"
                        "card card";
 }
@@ -118,21 +107,22 @@ h5,p{
 }
 
 #recipe .card{
-  display: flex;
+  display: inline-flex;
+  align-items: center;
    background:aliceblue;
     max-width: 300px;
     margin: 30px ;
     padding: 10px;
     border: 2px solid black;
     border-radius: 5px  
-  
+
+}
+.card img{
+  align-self: start;
 }
 .card{
   grid-area: card;
-}
-
-.card a{
-  text-align: center !important;
+  align-items: center;
 }
 
 .image{

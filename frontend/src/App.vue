@@ -40,7 +40,7 @@ h1{
 }
 a{
   position:relative;
-  margin-left: 2.5em;
+  
   text-decoration: none;
   color: darkblue;
   text-align: right;
