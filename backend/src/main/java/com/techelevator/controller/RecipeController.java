@@ -45,7 +45,7 @@ public class RecipeController {
     public void AddRecipeToUserLibrary(@PathVariable long userId,@PathVariable long recipeId){
         try {
             recipeDao.addRecipeToUserRecipe(userId, recipeId);
-        } catch (RuntimeException e) {
+        } catch (IllegalArgumentException e) {
             throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY);
         }
     }
@@ -56,6 +56,12 @@ public class RecipeController {
         recipeDao.deleteRecipeFromUserLibrary(userId, recipeId);
 
         //when delete recipe from meal plan is added, call it here as well
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(path = "/recipes", method = RequestMethod.POST)
+    public void addRecipeToRecipeLibrary(@RequestBody Recipe recipe){
+        recipeDao.addRecipeToRecipeLibrary(recipe);
     }
 
 

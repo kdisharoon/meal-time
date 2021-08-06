@@ -86,7 +86,7 @@ public class JdbcRecipeDao implements RecipeDao{
                       "where user_id=? and recipe_id=?";
         SqlRowSet  containsRecipe = jdbcTemplate.queryForRowSet(sql2, userId, recipeId);
         if (containsRecipe.next()){
-            throw new RuntimeException();
+            throw new IllegalArgumentException();
         }
         String sql = "insert into user_recipes (user_id, recipe_id) " +
                      "values (?,?) ";
@@ -105,7 +105,7 @@ public class JdbcRecipeDao implements RecipeDao{
         recipe.setRecipeId(result.getLong("recipe_id"));
         recipe.setPreparation(result.getString("preparation"));
         recipe.setRecipeName(result.getString("recipe_name"));
-        recipe.setPrepTime(result.getInt("prep_time"));
+//        recipe.setPrepTime(result.getInt("prep_time"));
         recipe.setCookTime(result.getInt("cook_time"));
         recipe.setRecipeImg(result.getString("recipe_img"));
         recipe.setRecipeType(result.getString("recipe_type"));
@@ -124,5 +124,35 @@ public class JdbcRecipeDao implements RecipeDao{
             ingredients.add(ingredient);
         }
         return ingredients.toArray(new Ingredient[0]);
+    }
+
+    public void addRecipeToRecipeLibrary(Recipe recipe){
+        String sql = "insert into recipes (recipe_id,preparation,recipe_name,prep_time,cook_time,recipe_type,recipe_img) " +
+                     "values (?,?,?,?,?,?,?)";
+        long recipeId = recipe.getRecipeId();
+        String preparation= recipe.getPreparation();
+        String recipeName=recipe.getRecipeName();
+        int cookTime=recipe.getCookTime();
+        String recipeImg=recipe.getRecipeImg();
+        String recipeType=recipe.getRecipeType();
+        Ingredient[] ingredients=recipe.getIngredients();
+        jdbcTemplate.update(sql,recipeId,preparation,recipeName,0,cookTime,recipeImg,recipeType);
+
+        long ingredientId;
+
+        for (int i = 0; i<ingredients.length; i++){
+            String sql2 = "select ingredient_name from ingredients where ingredient_name =?";
+            SqlRowSet ingredientResult= jdbcTemplate.queryForRowSet(sql2,ingredients[i].getIngredientName());
+            ingredientId = ingredients[i].getIngredientId();
+            if (!ingredientResult.next()){
+                String sql3 = "insert into ingredients (ingredient_id, ingredient_name) " +
+                              "values (?,?) returning ingredient_id";
+                jdbcTemplate.update(sql3,ingredientId,ingredients[i].getIngredientName());
+            }
+            String sql4="insert into recipe_ingredients (ingredient_id, recipe_id, measurement_unit, measurement_amount) " +
+                        "values (?,?,?,?)";
+            jdbcTemplate.update(sql4,ingredientId,recipeId,ingredients[i].getMeasurementUnit(),ingredients[i].getMeasurementAmount());
+
+        }
     }
 }

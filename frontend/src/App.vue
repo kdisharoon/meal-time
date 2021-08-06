@@ -34,11 +34,12 @@ h1{
   font-size: 18px;
   height: 100%;
   text-align: right;
-  border-bottom: 1px solid rgb(34, 88, 133);
+  border-bottom: 2px solid black;
   padding-right: 10px;
   padding-bottom:10px;
 }
 a{
+  position:relative;
   margin-left: 2.5em;
   text-decoration: none;
   color: darkblue;
