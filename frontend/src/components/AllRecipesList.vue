@@ -1,9 +1,13 @@
 <template>
 <div>
   <h2>All Recipes</h2>
+  <button v-on:click.prevent="getNewRecipesFromAPI">Add 10 Recipes to Database from API</button>
   <div class="container card-deck">
     <div class="row">
   <div class="all-recipes-list d-flex justify-content-around flex-wrap">
+    
+
+
     <div v-for="recipe in recipes" v-bind:key="recipe.recipeId" class="recipe thumbnail">
       <div class="card" style="width: 18rem">
         <img v-bind:src="recipe.recipeImg" class="recipe-image" style="width:100%">
@@ -13,7 +17,7 @@
             <button> Recipe Details</button>
           </router-link>
          
-            <button v-on:click.prevent="saveToDatabase(recipe)">Add Recipe to Database</button>
+            
 
 
       </div>
@@ -36,40 +40,50 @@ export default {
   },
 
   methods: {
-    saveToDatabase(recipeToAdd) {
-      recipeService.addRecipeFromAPI(recipeToAdd).then(response => {
+    saveToDatabase(recipesToAdd) {
+      recipeService.addRecipesFromAPIToDatabase(recipesToAdd).then(response => {
         if (response.status === 201) {
-          console.log("Successfully added recipe to database!");
+          console.log("Successfully added 10 recipes to database from API!");
           }
         })
       .catch((error) => {
         console.log(error);
       });
-    }
+    },
+
+    getNewRecipesFromAPI() {
+      recipeService.getRandomRecipesFromSpoonacular().then(response => {
+        let newRecipes = [];
+        for (let i = 0; i < response.data.recipes.length; i++) {
+          let tempArr = {
+            ingredients: []
+          };
+          tempArr.recipeId = response.data.recipes[i].id;
+          tempArr.recipeName = response.data.recipes[i].title;
+          tempArr.recipeImg = response.data.recipes[i].image;
+          tempArr.preparation = response.data.recipes[i].instructions;
+          tempArr.cookTime = response.data.recipes[i].readyInMinutes;
+          for (let j = 0; j < response.data.recipes[i].extendedIngredients.length; j++) {
+            let tempIngredientsArr = {};
+            tempIngredientsArr.ingredientId = response.data.recipes[i].extendedIngredients[j].id;
+            tempIngredientsArr.ingredientName = response.data.recipes[i].extendedIngredients[j].name;
+            tempIngredientsArr.measurementAmount = response.data.recipes[i].extendedIngredients[j].amount;
+            tempIngredientsArr.measurementUnit = response.data.recipes[i].extendedIngredients[j].unit;
+            tempArr.ingredients.push(tempIngredientsArr);
+          }
+          newRecipes.push(tempArr);
+        }
+        this.saveToDatabase(newRecipes);
+      });
+    },
+
   },
 
   created() {
-    recipeService.getRandomRecipesFromSpoonacular().then(response => {
-      for (let i = 0; i < response.data.recipes.length; i++) {
-        let tempArr = {
-          ingredients: []
-        };
-        tempArr.recipeId = response.data.recipes[i].id;
-        tempArr.recipeName = response.data.recipes[i].title;
-        tempArr.recipeImg = response.data.recipes[i].image;
-        tempArr.preparation = response.data.recipes[i].instructions;
-        tempArr.cookTime = response.data.recipes[i].readyInMinutes;
-        for (let j = 0; j < response.data.recipes[i].extendedIngredients.length; j++) {
-          let tempIngredientsArr = {};
-          tempIngredientsArr.ingredientId = response.data.recipes[i].extendedIngredients[j].id;
-          tempIngredientsArr.ingredientName = response.data.recipes[i].extendedIngredients[j].name;
-          tempIngredientsArr.measurementAmount = response.data.recipes[i].extendedIngredients[j].amount;
-          tempIngredientsArr.measurementUnit = response.data.recipes[i].extendedIngredients[j].unit;
-          tempArr.ingredients.push(tempIngredientsArr);
-        }
-        this.recipes.push(tempArr);
-      }
-    });
+    recipeService.getAllRecipes().then(response => {
+      this.recipes = response.data;
+    })
+    
   }
 }
 </script>

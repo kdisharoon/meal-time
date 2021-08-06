@@ -65,21 +65,21 @@ CREATE TABLE ingredients (
 
 CREATE TABLE user_meal_plan (
         meal_plan_id int PRIMARY KEY DEFAULT NEXTVAL('seq_user_meal_plan_id'),
-        user_id serial NOT NULL,
+        user_id int NOT NULL,
         meal_plan_name varchar(100) NOT NULL,
         CONSTRAINT FK_user_meal_plan_users FOREIGN KEY (user_id) REFERENCES users(user_id)
         
 );
 
 CREATE TABLE recipe_ingredients (
-        ingredient_id serial NOT NULL,
-        recipe_id serial NOT NULL,
+        ingredient_id int NOT NULL,
+        recipe_id int NOT NULL,
         measurement_unit varchar(50),
         measurement_amount int NOT NULL,
         
         CONSTRAINT FK_recipe_ingredients_recipes FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id),
-        CONSTRAINT FK_recipe_ingredients_ingredients FOREIGN KEY (ingredient_id) REFERENCES ingredients(ingredient_id),
-        CONSTRAINT pk_recipe_ingredients PRIMARY KEY (ingredient_id, recipe_id, measurement_amount)
+        CONSTRAINT FK_recipe_ingredients_ingredients FOREIGN KEY (ingredient_id) REFERENCES ingredients(ingredient_id)
+--        CONSTRAINT pk_recipe_ingredients PRIMARY KEY (ingredient_id, recipe_id, measurement_amount)
 );
         
 CREATE TABLE user_recipes (
@@ -108,6 +108,7 @@ CREATE TABLE meal_plan_user_recipes (
 
 INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
 INSERT INTO users (username,password_hash,role) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN');
+INSERT INTO users (username,password_hash,role) VALUES ('kd','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
 
 INSERT INTO recipes (preparation, recipe_name, prep_time, cook_time, recipe_type, recipe_img) VALUES ('You will need fresh basil, fresh mozz, and fresh tomato on a plate. Layer the cheese, basil, and tomato. Drizzle balsamic vinegar and Enjoy!', 'Caprese Salad', 10, null, 'Salad', 'https://i2.wp.com/www.downshiftology.com/wp-content/uploads/2019/07/Caprese-Salad-4.jpg');
 INSERT INTO recipes (preparation, recipe_name, prep_time, cook_time, recipe_type, recipe_img) VALUES ('Prepare the tortilini, drain. Cook the meat, then add the sauce and cream cheese. Put the tortellini into the backing dish and pour the meat/cheese/sauce mixture on top. Sprinkle the parmesan cheese over top. Bake for 20 min.', 'Cheesey Tortellini Pasta Bake', 15, 20, 'Entree', 'https://images-gmi-pmc.edge-generalmills.com/de2a3f47-4a5a-4254-baa2-4e1e8cbc3ada.jpg');
@@ -186,9 +187,9 @@ INSERT INTO recipe_ingredients (ingredient_id, recipe_id, measurement_unit, meas
 INSERT INTO recipe_ingredients (ingredient_id, recipe_id, measurement_unit, measurement_amount) VALUES(28, 6, 'tube', 1);
 
 
-INSERT INTO user_meal_plan (meal_plan_name) VALUES ('Healthy');
-INSERT INTO user_meal_plan (meal_plan_name) VALUES ('Dinner');
---INSERT INTO user_meal_plan (meal_plan_name) VALUES ('Morning Entree');
+--INSERT INTO user_meal_plan (meal_plan_name, user_id) VALUES ('Healthy', 3);
+--INSERT INTO user_meal_plan (meal_plan_name, user_id) VALUES ('Pizza All the Time!', 3);
+--INSERT INTO user_meal_plan (meal_plan_name, user_id) VALUES ('Stay Up All Night Coding', 3);
 
 
 COMMIT TRANSACTION;

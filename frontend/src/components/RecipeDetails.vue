@@ -52,6 +52,7 @@ export default {
       })
       .catch((error) => {
         console.log(error);
+        console.log("This recipe is already saved to your recipes!");
       });
     }
   },
