@@ -109,7 +109,7 @@ export default {
   }
 
   img {
-    float: left;
+ 
     width:  100px;
     height: 200px;
     object-fit: cover;
