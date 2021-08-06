@@ -146,12 +146,12 @@ public class JdbcRecipeDao implements RecipeDao{
                 long ingredientId;
 
                 for (int i = 0; i<ingredients.length; i++) {
-                    String sql2 = "select ingredient_name from ingredients where ingredient_name =?";
-                    SqlRowSet ingredientResult = jdbcTemplate.queryForRowSet(sql2, ingredients[i].getIngredientName());
+                    String sql2 = "select ingredient_name from ingredients where ingredient_id =?";
+                    SqlRowSet ingredientResult = jdbcTemplate.queryForRowSet(sql2, ingredients[i].getIngredientId());
                     ingredientId = ingredients[i].getIngredientId();
                     if (!ingredientResult.next()) {
                         String sql3 = "insert into ingredients (ingredient_id, ingredient_name) " +
-                                "values (?,?) returning ingredient_id";
+                                "values (?,?)";
                         jdbcTemplate.update(sql3, ingredientId, ingredients[i].getIngredientName());
                     }
                     String sql4 = "insert into recipe_ingredients (ingredient_id, recipe_id, measurement_unit, measurement_amount) " +
