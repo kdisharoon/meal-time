@@ -53,6 +53,7 @@ public class JdbcMealPlanDao implements MealPlanDao{
 
         while (mealPlanResults.next()) {
             MealPlan mealPlan = new MealPlan();
+            mealPlan.setUserId(userId);
             mealPlan.setMealPlanId(mealPlanResults.getLong("meal_plan_id"));
             mealPlan.setMealPlanName(mealPlanResults.getString("meal_plan_name"));
             mealPlans.add(mealPlan);
