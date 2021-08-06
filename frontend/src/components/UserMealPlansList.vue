@@ -11,8 +11,8 @@
           </router-link>
         </div>
       </div>
-      <button class="add-a-class-here-to-style-this-button-please-and-thank-you">
-          {{ addMealPlan }}
+      <button class="add-a-class-here-to-style-this-button-please-and-thank-you" v-on:click.prevent="addMealPlan">
+          Add a Meal Plan
       </button>
 
     </div>

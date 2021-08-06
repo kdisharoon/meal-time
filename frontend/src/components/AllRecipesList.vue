@@ -30,24 +30,34 @@ export default {
       recipes: []
     }
   },
-  created() {
-    //let recipesList;
-    recipeService.getAllRecipesFromSpoonacular().then(response => {
-      let recipeArr = []
-      response.data.results.map(recipe => {
-        console.log(recipe);
-        let recipeObject = {
-          recipeId: recipe.id,
-          recipeImg: recipe.image,
-          recipeName: recipe.title
-        }
-        recipeArr.push(recipeObject);
 
-      });
-      this.recipes = recipeArr;
-      console.log(recipeArr);
+  created() {
+    recipeService.getRandomRecipesFromSpoonacular().then(response => {
+      for (let i = 0; i < response.data.recipes.length; i++) {
+        let tempArr = [];
+        tempArr.recipeId = response.data.recipes[i].id;
+        tempArr.recipeName = response.data.recipes[i].title;
+        tempArr.recipeImg = response.data.recipes[i].image;
+        this.recipes.push(tempArr);
+      }
     });
-    //this.recipes = recipesList;
+      
+      
+
+//      let recipeArr = []
+//      response.data.results.map(recipe => {
+//        console.log(recipe);
+//        let recipeObject = {
+//          recipeId: recipe.id,
+//          recipeImg: recipe.image,
+//          recipeName: recipe.title
+//        }
+//        recipeArr.push(recipeObject);
+//
+//      });
+//      this.recipes = recipeArr;
+  
+
   }
 }
 </script>

@@ -7,8 +7,11 @@ export default {
         return axios.get('/recipes');
     },
 
-
-  getAllRecipesFromSpoonacular() {
+    getRandomRecipesFromSpoonacular() {
+        return axios.get('https://api.spoonacular.com/recipes/random?number=3&apiKey=941ba16793664284808b0c07b47ed70f');
+    },
+    
+    getAllRecipesFromSpoonacular() {
         return axios.get('https://api.spoonacular.com/recipes/complexSearch?query=dinner&addRecipeInformation=true&apiKey=941ba16793664284808b0c07b47ed70f');
     },
 
