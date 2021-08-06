@@ -3,8 +3,8 @@ import axios from 'axios';
 
 export default {
 
-    addRecipeFromAPI(newRecipe) {
-        return axios.post('/recipes', newRecipe);
+    addRecipesFromAPIToDatabase(newRecipes) {
+        return axios.post('/recipes', newRecipes);
     },
 
     getAllRecipes() {
@@ -12,7 +12,7 @@ export default {
     },
 
     getRandomRecipesFromSpoonacular() {
-        return axios.get('https://api.spoonacular.com/recipes/random?number=3&apiKey=941ba16793664284808b0c07b47ed70f');
+        return axios.get('https://api.spoonacular.com/recipes/random?number=10&apiKey=941ba16793664284808b0c07b47ed70f');
     },
     
     getAllRecipesFromSpoonacular() {
