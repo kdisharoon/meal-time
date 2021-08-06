@@ -126,33 +126,39 @@ public class JdbcRecipeDao implements RecipeDao{
         return ingredients.toArray(new Ingredient[0]);
     }
 
-    public void addRecipeToRecipeLibrary(Recipe recipe){
-        String sql = "insert into recipes (recipe_id,preparation,recipe_name,prep_time,cook_time,recipe_type,recipe_img) " +
-                     "values (?,?,?,?,?,?,?)";
-        long recipeId = recipe.getRecipeId();
-        String preparation= recipe.getPreparation();
-        String recipeName=recipe.getRecipeName();
-        int cookTime=recipe.getCookTime();
-        String recipeImg=recipe.getRecipeImg();
-        String recipeType=recipe.getRecipeType();
-        Ingredient[] ingredients=recipe.getIngredients();
-        jdbcTemplate.update(sql,recipeId,preparation,recipeName,0,cookTime,recipeImg,recipeType);
+    public void addRecipeToRecipeLibrary(Recipe[] recipe){
+        for (int a = 0; a<recipe.length; a++ ){
 
-        long ingredientId;
+            String sql5 = "select recipe_id from recipes where recipe_id =?";
+            SqlRowSet recipeResult = jdbcTemplate.queryForRowSet(sql5,recipe[a].getRecipeId());
+            if (!recipeResult.next()){
+                String sql = "insert into recipes (recipe_id,preparation,recipe_name,prep_time,cook_time,recipe_type,recipe_img) " +
+                         "values (?,?,?,?,?,?,?)";
+                long recipeId = recipe[a].getRecipeId();
+                String preparation= recipe[a].getPreparation();
+                String recipeName=recipe[a].getRecipeName();
+                int cookTime=recipe[a].getCookTime();
+                String recipeImg=recipe[a].getRecipeImg();
+                String recipeType=recipe[a].getRecipeType();
+                Ingredient[] ingredients=recipe[a].getIngredients();
+                jdbcTemplate.update(sql,recipeId,preparation,recipeName,0,cookTime,recipeImg,recipeType);
 
-        for (int i = 0; i<ingredients.length; i++){
-            String sql2 = "select ingredient_name from ingredients where ingredient_name =?";
-            SqlRowSet ingredientResult= jdbcTemplate.queryForRowSet(sql2,ingredients[i].getIngredientName());
-            ingredientId = ingredients[i].getIngredientId();
-            if (!ingredientResult.next()){
-                String sql3 = "insert into ingredients (ingredient_id, ingredient_name) " +
-                              "values (?,?) returning ingredient_id";
-                jdbcTemplate.update(sql3,ingredientId,ingredients[i].getIngredientName());
+                long ingredientId;
+
+                for (int i = 0; i<ingredients.length; i++) {
+                    String sql2 = "select ingredient_name from ingredients where ingredient_name =?";
+                    SqlRowSet ingredientResult = jdbcTemplate.queryForRowSet(sql2, ingredients[i].getIngredientName());
+                    ingredientId = ingredients[i].getIngredientId();
+                    if (!ingredientResult.next()) {
+                        String sql3 = "insert into ingredients (ingredient_id, ingredient_name) " +
+                                "values (?,?) returning ingredient_id";
+                        jdbcTemplate.update(sql3, ingredientId, ingredients[i].getIngredientName());
+                    }
+                    String sql4 = "insert into recipe_ingredients (ingredient_id, recipe_id, measurement_unit, measurement_amount) " +
+                            "values (?,?,?,?)";
+                    jdbcTemplate.update(sql4, ingredientId, recipeId, ingredients[i].getMeasurementUnit(), ingredients[i].getMeasurementAmount());
+                }
             }
-            String sql4="insert into recipe_ingredients (ingredient_id, recipe_id, measurement_unit, measurement_amount) " +
-                        "values (?,?,?,?)";
-            jdbcTemplate.update(sql4,ingredientId,recipeId,ingredients[i].getMeasurementUnit(),ingredients[i].getMeasurementAmount());
-
         }
     }
 }
