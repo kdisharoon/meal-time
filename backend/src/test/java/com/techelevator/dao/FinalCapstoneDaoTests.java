@@ -1,13 +1,17 @@
 package com.techelevator.dao;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
+import org.springframework.jdbc.datasource.init.ScriptUtils;
 
 public abstract class FinalCapstoneDaoTests {
 
@@ -28,6 +32,11 @@ public abstract class FinalCapstoneDaoTests {
          * any changes after each test */
         dataSource.setAutoCommit(false);
     }
+
+//    @Before
+//    public void loadTestData() throws IOException, SQLException {
+//        ScriptUtils.executeSqlScript(dataSource.getConnection(), new ClassPathResource("test-data.sql"));
+//    }
 
     /* After all tests have finished running, this method will close the DataSource */
     @AfterClass

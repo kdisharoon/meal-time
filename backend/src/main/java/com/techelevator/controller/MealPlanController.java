@@ -37,7 +37,7 @@ public class MealPlanController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(path = "/mealplans/{mealplansId}/recipes/{recipeId}", method = RequestMethod.POST)
+    @RequestMapping(path = "/mealplans/{mealPlanId}/recipes/{recipeId}", method = RequestMethod.POST)
     public void addRecipeToUserMealPlan(@PathVariable long mealPlanId, @PathVariable long recipeId, @RequestBody OrganizedRecipe organizedRecipe){
         mealPlanDao.addRecipeToUserMealPlan(mealPlanId, recipeId, organizedRecipe);
 
