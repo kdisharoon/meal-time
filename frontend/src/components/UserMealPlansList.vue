@@ -31,11 +31,16 @@ export default {
   },
   methods: {
     addMealPlan() {
-      mealPlanService.addUserMealPlan(this.$route.params.userID).then(response => {
+      let newMealPlan = {
+        userId: this.$route.params.userID,
+        mealPlanName: "Pizza All Day Every Day Woooo!!!",    //add the meal plan name that the user inputs here
+      };
+      console.log(newMealPlan);
+      mealPlanService.addUserMealPlan(this.$route.params.userID, newMealPlan).then(response => {
         if (response.status === 201) {
-          this.$router.push(`/users/${this.$route.params.userID}/mealplans}`);
-          }
-        })
+          console.log("Successfully added new meal plan to your meal plans!")
+        }
+      })
       .catch((error) => {
         console.log(error);
       });

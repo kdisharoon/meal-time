@@ -30,8 +30,9 @@ public class JdbcMealPlanDao implements MealPlanDao{
 
 
         String sql = "insert into user_meal_plan (user_id, meal_plan_name) " +
-                     "values (?,?) ";
+                     "values (?,?)";
         jdbcTemplate.update(sql, mealPlan.getUserId(), mealPlan.getMealPlanName());
+ //       Long newId = jdbcTemplate.queryForObject(sql, Long.class, mealPlan.getUserId(), mealPlan.getMealPlanName());
     }
 
     public void addRecipeToUserMealPlan(long mealPlanId, long recipeId, OrganizedRecipe organizedRecipe){
@@ -52,6 +53,7 @@ public class JdbcMealPlanDao implements MealPlanDao{
 
         while (mealPlanResults.next()) {
             MealPlan mealPlan = new MealPlan();
+            mealPlan.setUserId(userId);
             mealPlan.setMealPlanId(mealPlanResults.getLong("meal_plan_id"));
             mealPlan.setMealPlanName(mealPlanResults.getString("meal_plan_name"));
             mealPlans.add(mealPlan);
