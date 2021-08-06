@@ -33,7 +33,7 @@ export default {
     addMealPlan() {
       let newMealPlan = {
         userId: this.$route.params.userID,
-        mealPlanName: "test meal plan name"
+        mealPlanName: "Pizza All Day Every Day Woooo!!!",    //add the meal plan name that the user inputs here
       };
       console.log(newMealPlan);
       mealPlanService.addUserMealPlan(this.$route.params.userID, newMealPlan).then(response => {
