@@ -56,6 +56,12 @@ public class MealPlanController {
 
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @RequestMapping(path= "/mealplans/{mealPlanId}/recipes", method = RequestMethod.DELETE)
+    public void deleteRecipeFromMealPlan(){
+
+    }
+
 
 
 
