@@ -49,9 +49,11 @@ export default {
       recipeService.addRecipeToUserLibrary(this.$store.state.user.id, this.recipe.id).then(response => {
         if (response.status === 201) {
           this.$router.push('/recipes');
+          alert("Successfully Added!")
         }
       })
       .catch((error) => {
+        alert("This recipe is already in your library");
         console.log(error);
         console.log("This recipe is already saved to your recipes!");
       });

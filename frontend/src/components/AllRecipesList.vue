@@ -14,9 +14,9 @@
         <div class="all-recipes-list d-flex justify-content-around flex-wrap">
     
           <div v-for="recipe in recipes" v-bind:key="recipe.recipeId" class="recipe thumbnail">
-            <div class="card" style="width: 18rem">
+            <div class="card" style="width: 18rem;">
               <img v-bind:src="recipe.recipeImg" class="recipe-image" style="width:100%">
-                <h4><b>{{recipe.recipeName}}</b></h4>
+                <h4 id="rTwo"><b>{{recipe.recipeName}}</b></h4>
                 <p class="card-text">{{ recipe.cookTime }} minutes total time</p>
                 <router-link v-bind:to="{ name: 'recipe', params: { recipeID: recipe.recipeId } }">
                   <button> Recipe Details</button>
@@ -108,6 +108,19 @@ export default {
 
   #allRecipe{
     text-align: center;
+  }
+  #rTwo{
+text-align: center;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   width: 250px;
+   overflow: hidden;
+   
+  }
+  #rTwo:hover{
+text-align: center;
+  white-space: normal;
+  text-overflow: initial;
   }
  .card {
       padding: 5px;

@@ -5,11 +5,12 @@
     <div v-for="recipe in recipes" v-bind:key="recipe.recipeId" class="recipe">
       <div class="card">
         <img v-bind:src="recipe.recipeImg" class="recipe-image" style="width:100%">
-          <h4><b>{{recipe.recipeName}}</b></h4>
-          <p class="card-text">{{ recipe.prepTime }} minutes prep time || {{ recipe.cookTime }} minutes cook time</p>
+          <h4 id="rTwo"><b>{{recipe.recipeName}}</b></h4>
+          <p class="card-text">{{ recipe.cookTime }} minutes cook time</p>
           <router-link v-bind:to="{ name: 'recipe', params: { recipeID: recipe.recipeId } }">
-            <button> Recipe Details</button>
+            <button > Recipe Details</button>
         </router-link>
+        <button>Delete From My Recipes</button>
       </div>
       </div>
       </div>
