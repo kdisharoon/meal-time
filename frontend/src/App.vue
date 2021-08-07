@@ -11,6 +11,7 @@
       <router-link class="nav-btn-class" v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''"> LOGOUT</router-link>
     </div>
      </header>
+     
     <router-view />
    
   </div>
@@ -38,16 +39,20 @@ h1{
   border-bottom: 2px solid black;
   padding-right: 10px;
   padding-bottom:10px;
+  display:flex;
+  justify-content: flex-end;
 }
-.nav-btn-class{
-  position:relative;
-  margin-left: 2.5em;
+.nav-btn-class:hover{
+  position:static;
+  border:1px solid black;
   text-decoration: none;
   color: darkblue;
   text-align: right;
   padding: 5px 10px;
   background-color: aliceblue;
   border-radius: 10px;
+  visibility:initial;
+  display: inline-block;
 }
 .nav-btn-class:hover{
   background-color: orange;

@@ -1,5 +1,6 @@
 <template>
-<div>
+<div id="full">
+  
   <h2>All Recipes</h2>
 
   <div class="lds-ripple" v-if="isLoading">
@@ -7,7 +8,7 @@
   </div>
   
   <div v-else>
-    <button v-on:click.prevent="getNewRecipesFromAPI">Add 10 Recipes to Database from API</button>
+    <button v-on:click.prevent="getNewRecipesFromAPI" class="addRecipes">Add 10 Recipes to Database from API</button>
     <div class="container card-deck">
       <div class="row">
         <div class="all-recipes-list d-flex justify-content-around flex-wrap">
@@ -128,7 +129,11 @@ export default {
     font-size: 16px;
     border-radius: 10px;
   }
-  
+#top{
+  display:flex;
+
+}
+
   button:hover {
     background-color:rgba(255, 166, 0, 0.626);
     border-radius: 10px;
@@ -142,7 +147,7 @@ export default {
 
   img {
  
-    width:  100px;
+    width:  auto;
     height: 200px;
     object-fit: cover;
 
@@ -156,10 +161,9 @@ export default {
 .lds-ripple {
   display: flex;
   justify-content: center;
-  display: inline-block;
+  
   position: relative;
-  width: 80px;
-  height: 80px;
+  
 }
 .lds-ripple div {
   position: absolute;
