@@ -20,18 +20,19 @@ public class JdbcMealPlanDao implements MealPlanDao{
 
 
 
-    public void createMealPlan(MealPlan mealPlan){
+    public long createMealPlan(MealPlan mealPlan){
         String sql2 = "select * from user_meal_plan " +
                       "where user_id =? and meal_plan_name=?";
         SqlRowSet mealPlanResult = jdbcTemplate.queryForRowSet(sql2,mealPlan.getUserId(),mealPlan.getMealPlanName());
         if (mealPlanResult.next()) {
-            throw new RuntimeException();
+            throw new IllegalArgumentException();
         }
 
 
         String sql = "insert into user_meal_plan (user_id, meal_plan_name) " +
-                     "values (?,?)";
-        jdbcTemplate.update(sql, mealPlan.getUserId(), mealPlan.getMealPlanName());
+                     "values (?,?) returning meal_plan_id";
+        long id = jdbcTemplate.update(sql, mealPlan.getUserId(), mealPlan.getMealPlanName(), long.class);
+        return id;
  //       Long newId = jdbcTemplate.queryForObject(sql, Long.class, mealPlan.getUserId(), mealPlan.getMealPlanName());
     }
 
