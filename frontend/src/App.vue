@@ -42,7 +42,7 @@ h1{
   display:flex;
   justify-content: flex-end;
 }
-.nav-btn-class:hover{
+.nav-btn-class{
   position:static;
   border:1px solid black;
   text-decoration: none;
