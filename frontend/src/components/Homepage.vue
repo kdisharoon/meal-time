@@ -4,26 +4,28 @@
       <h3>Random Recipe Generator</h3>
       <h4>{{chosenRecipe.recipeName}}</h4>
       <img :src="chosenRecipe.recipeImg" class="image" id="randomImg">
-    <h5 >Ingredients</h5>
+    <h5>{{displayIngredients}}</h5>
+    
       <p v-for="ingredient in chosenRecipe.ingredients" v-bind:key="ingredient.ingredientId">{{ingredient.measurementAmount}} {{ingredient.measurementUnit}} {{ingredient.ingredientName}}</p>
-    <h5>Preparations</h5>
+    <h5>{{displayPreparations}}</h5>
     <p>{{chosenRecipe.preparation}}</p>
     
-    <button @click="randomizer" class="buttons">Get Random Recipe</button>
-    <button class="buttons" @click.prevent="saveRecipe">Add to My Recipes </button>
-    
+    <div id="buttons">
+    <button @click="randomizer(); requestText()">Get Random Recipe</button>
+    <button @click.prevent="saveRecipe">Add to My Recipes </button>
+    </div>
     </div>
     <div id="recipe">
       <h3>Popular Recipes</h3>
-     <div id="cards">
+     <div v-for="recipe in recipes.slice(11, 17)" v-bind:key="recipe.recipeId" id="cards">
       
-        <a href= "/recipes/1">
-        <h5>Caprese Salad</h5>
+        <router-link v-bind:to="{ name: 'recipe', params: { recipeID: recipe.recipeId } }">
+        
         <div class="card">
-          <img :src="recipes.recipeImg">
-            
+          <img :src="recipe.recipeImg">
+            <h4>{{recipe.recipeName}}</h4>
       </div>
-      </a>
+      </router-link>
       </div>
     </div>
   </div>
@@ -38,7 +40,9 @@ export default {
   data() {
     return {
       recipes: [],
-      chosenRecipe: {}
+      chosenRecipe: {},
+      displayIngredients: '',
+      displayPreparations: ''
     }
   },
   created() {
@@ -61,11 +65,16 @@ export default {
       });
     },
     
-   randomizer: function(){
+   randomizer(){
       let randomRecipe = Math.floor(Math.random() * this.recipes.length);
     this.chosenRecipe = this.recipes[randomRecipe];
-    }
+    },
+    requestText(){
+    this.displayIngredients = "Ingredients";
+    this.displayPreparations = "Directions";
+  }
   },
+  
 
     
   }
@@ -83,13 +92,9 @@ export default {
     
 }
 #popular #cards{
-  display:grid;
+  
   grid-area: cards;
-  gap: 30px;
-  grid-template-columns: 1fr 1fr;
-  justify-items: center;
-  grid-template-areas: "card card"
-                       "card card";
+  
 }
 #day {
     padding-left: 10px;
@@ -100,33 +105,57 @@ export default {
   text-align: center;
   background-color:aliceblue;
   border-radius: 3px;
+  background-size: cover;
 }
 #recipe {
   grid-area: recipe;
-  text-align: center;
+  display:flex;
+ flex-grow: initial;
+ flex-direction: column;
+ align-content: center;
+ align-items: center;
+ 
 }
 h5,p{
     text-align: left;
 }
-
+h4{
+  text-align: center;
+}
+a{
+  margin: 10px;
+  size: 100px;
+}
 #recipe .card{
-  display: inline-flex;
   align-items: center;
    background:aliceblue;
     max-width: 300px;
     margin: 30px ;
     padding: 10px;
     border: 2px solid black;
+    box-sizing: initial;
     border-radius: 5px  
 
 }
 .card img{
   align-self: start;
+  
 }
-.card{
+.card {
   grid-area: card;
   align-items: center;
+  flex: 1;
 }
+#cards{
+  display: flex;
+}
+#buttons{
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  gap: 6px;
+}
+
 
 .image{
   max-width: 180px;

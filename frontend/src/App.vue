@@ -11,6 +11,7 @@
       <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''"> LOGOUT</router-link>
     </div>
      </header>
+     
     <router-view />
    
   </div>
@@ -37,16 +38,20 @@ h1{
   border-bottom: 2px solid black;
   padding-right: 10px;
   padding-bottom:10px;
+  display:flex;
+  justify-content: flex-end;
 }
 a{
-  position:relative;
-  
+  position:static;
+  border:1px solid black;
   text-decoration: none;
   color: darkblue;
   text-align: right;
   padding: 5px 10px;
   background-color: aliceblue;
   border-radius: 10px;
+  visibility:initial;
+  display: inline-block;
 }
 a:hover{
   background-color: orange;

@@ -4,9 +4,10 @@
   <div class="recipe-details">
     <h1 class="recipe-name">{{ recipe.name }}</h1>
     <img v-bind:src="recipe.imageURL" class="recipe-detail-image" />
-    <h3>{{ recipe.prepTime }} minutes prep time || {{ recipe.cookTime }} minutes cook time</h3>
-    <h5>Ingredients</h5>
+    <h3>{{ recipe.cookTime }} minutes total cook time</h3>
+    
     <div class="grouped-ingredients">
+      <h5>Ingredients</h5>
     <div class="recipe-ingredients" v-for="ingredient in recipe.ingredients" v-bind:key="ingredient.ingredientId">
       <h4>{{ ingredient.measurementAmount }} {{ ingredient.measurementUnit }} {{ ingredient.ingredientName}}</h4>
     </div>
@@ -143,7 +144,9 @@ h3{
   margin-left: 10px;
   margin-top: 25px;
 }
-
+h4{
+  text-align: left;
+}
 h2 {
   font-size: 35px;
   text-decoration: underline;
@@ -152,6 +155,7 @@ h2 {
 h5 {
   font-size: 35px;
   text-decoration: underline;
+  
 }
 
 .btn {
