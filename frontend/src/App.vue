@@ -3,12 +3,12 @@
     <header class="header">
     <h1>meal TimE</h1>
     <div id="nav" class="fake-btn">
-      <router-link id="home" v-bind:to="{ name: 'home' }">HOME </router-link >
-      <router-link id="all-recipes" v-bind:to="{ name: 'all-recipes' }"> ALL RECIPES </router-link>
-      <router-link id="saved-recipes" v-bind:to="{ name: 'saved-recipes', params: { userID: this.$store.state.user.id } }"> MY RECIPES </router-link>
-      <router-link id="user-meal-plans" v-bind:to="{ name: 'user-meal-plans', params: { userID: this.$store.state.user.id } }"> MY MEAL PLANS </router-link> 
-      <a href="#" id="recipe"> GROCERY LIST </a> 
-      <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''"> LOGOUT</router-link>
+      <router-link class="nav-btn-class" id="home" v-bind:to="{ name: 'home' }">HOME </router-link >
+      <router-link class="nav-btn-class" id="all-recipes" v-bind:to="{ name: 'all-recipes' }"> ALL RECIPES </router-link>
+      <router-link class="nav-btn-class" id="saved-recipes" v-bind:to="{ name: 'saved-recipes', params: { userID: this.$store.state.user.id } }"> MY RECIPES </router-link>
+      <router-link class="nav-btn-class" id="user-meal-plans" v-bind:to="{ name: 'user-meal-plans', params: { userID: this.$store.state.user.id } }"> MY MEAL PLANS </router-link> 
+      <a class="nav-btn-class" href="#" id="recipe"> GROCERY LIST </a> 
+      <router-link class="nav-btn-class" v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''"> LOGOUT</router-link>
     </div>
      </header>
      
@@ -26,6 +26,7 @@
   background-size: cover !important;
   font-family: Arial, Helvetica, sans-serif;
 }
+
 h1{
   font-size: 40px;
   padding-left: 10px;
@@ -41,7 +42,7 @@ h1{
   display:flex;
   justify-content: flex-end;
 }
-a{
+.nav-btn-class{
   position:static;
   border:1px solid black;
   text-decoration: none;
@@ -53,7 +54,7 @@ a{
   visibility:initial;
   display: inline-block;
 }
-a:hover{
+.nav-btn-class:hover{
   background-color: orange;
 }
 
