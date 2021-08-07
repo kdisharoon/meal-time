@@ -1,13 +1,13 @@
 <template>
 <div id="full">
   
-  <h2>All Recipes</h2>
+  <h2 id="allRecipe">All Recipes</h2>
 
   <div class="lds-ripple" v-if="isLoading">
     <div></div><div></div>
   </div>
   
-  <div v-else>
+  <div v-else >
     <button v-on:click.prevent="getNewRecipesFromAPI" class="addRecipes">Add 10 Recipes to Database from API</button>
     <div class="container card-deck">
       <div class="row">
@@ -105,6 +105,10 @@ export default {
     border: 2px solid black;
     border-radius: 5px; 
   } */
+
+  #allRecipe{
+    text-align: center;
+  }
  .card {
       padding: 5px;
       background:white;
@@ -129,10 +133,7 @@ export default {
     font-size: 16px;
     border-radius: 10px;
   }
-#top{
-  display:flex;
 
-}
 
   button:hover {
     background-color:grey;
@@ -154,7 +155,9 @@ export default {
   }
 
 
-
+.addRecipes{
+  margin:auto;
+}
 
 
 

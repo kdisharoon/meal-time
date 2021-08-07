@@ -9,7 +9,7 @@
     <div class="grouped-ingredients">
       <h5>Ingredients</h5>
     <div class="recipe-ingredients" v-for="ingredient in recipe.ingredients" v-bind:key="ingredient.ingredientId">
-      <h4>{{ ingredient.measurementAmount }} {{ ingredient.measurementUnit }} {{ ingredient.ingredientName}}</h4>
+      <h4 id="ingedInfo">{{ ingredient.measurementAmount }} {{ ingredient.measurementUnit }} {{ ingredient.ingredientName}}</h4>
     </div>
     </div>
     <ol>
@@ -101,7 +101,7 @@ export default {
   display:list-item;
 } */
 
-h4 {
+#ingredInfo {
   text-indent: 10px;
 }
 

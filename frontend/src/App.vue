@@ -40,6 +40,8 @@ h1{
   padding-bottom:10px;
   display:flex;
   justify-content: flex-end;
+  flex-wrap: nowrap;
+  flex-shrink: initial;
 }
 a{
   position:static;

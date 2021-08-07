@@ -111,10 +111,10 @@ export default {
   grid-area: recipe;
   display:flex;
  flex-grow: initial;
- flex-direction: column;
+ flex-direction: row;
  align-content: center;
  align-items: center;
- 
+ flex-wrap: wrap;
 }
 h5,p{
     text-align: left;
