@@ -1,30 +1,34 @@
 <template>
 <div>
   <h2>All Recipes</h2>
-  <button v-on:click.prevent="getNewRecipesFromAPI">Add 10 Recipes to Database from API</button>
-  <div class="container card-deck">
-    <div class="row">
-  <div class="all-recipes-list d-flex justify-content-around flex-wrap">
+
+  <div class="lds-ripple" v-if="isLoading">
+    <div></div><div></div>
+  </div>
+  
+  <div v-else>
+    <button v-on:click.prevent="getNewRecipesFromAPI">Add 10 Recipes to Database from API</button>
+    <div class="container card-deck">
+      <div class="row">
+        <div class="all-recipes-list d-flex justify-content-around flex-wrap">
     
-
-
-    <div v-for="recipe in recipes" v-bind:key="recipe.recipeId" class="recipe thumbnail">
-      <div class="card" style="width: 18rem">
-        <img v-bind:src="recipe.recipeImg" class="recipe-image" style="width:100%">
-          <h4><b>{{recipe.recipeName}}</b></h4>
-          <p class="card-text">{{ recipe.cookTime }} minutes total time</p>
-          <router-link v-bind:to="{ name: 'recipe', params: { recipeID: recipe.recipeId } }">
-            <button> Recipe Details</button>
-          </router-link>
-         
-            
-
-
+          <div v-for="recipe in recipes" v-bind:key="recipe.recipeId" class="recipe thumbnail">
+            <div class="card" style="width: 18rem">
+              <img v-bind:src="recipe.recipeImg" class="recipe-image" style="width:100%">
+                <h4><b>{{recipe.recipeName}}</b></h4>
+                <p class="card-text">{{ recipe.cookTime }} minutes total time</p>
+                <router-link v-bind:to="{ name: 'recipe', params: { recipeID: recipe.recipeId } }">
+                  <button> Recipe Details</button>
+                </router-link>
+            </div>
+          </div>
       </div>
-      </div>
-      </div>
+
     </div>
+
     </div>
+  </div>
+  
 </div>
 </template>
 
@@ -35,6 +39,7 @@ export default {
   name: 'all-recipes-list',
   data() {
     return {
+      isLoading: true,
       recipes: []
     }
   },
@@ -82,6 +87,7 @@ export default {
   created() {
     recipeService.getAllRecipes().then(response => {
       this.recipes = response.data;
+      this.isLoading = false;
     })
     
   }
@@ -143,6 +149,44 @@ export default {
   }
 
 
+
+
+
+
+.lds-ripple {
+  display: flex;
+  justify-content: center;
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ripple div {
+  position: absolute;
+  border: 4px solid #fff;
+  opacity: 1;
+  border-radius: 50%;
+  animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.lds-ripple div:nth-child(2) {
+  animation-delay: -0.5s;
+}
+@keyframes lds-ripple {
+  0% {
+    top: 36px;
+    left: 36px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: 0px;
+    left: 0px;
+    width: 72px;
+    height: 72px;
+    opacity: 0;
+  }
+}
   
 
 </style>
