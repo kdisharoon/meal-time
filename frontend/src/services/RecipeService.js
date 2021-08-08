@@ -29,6 +29,10 @@ export default {
 
     addRecipeToUserLibrary(userID, recipeID) {
         return axios.post(`/users/${userID}/recipes/${recipeID}`);
+    },
+
+    deleteRecipeFromUserLibrary(userID, recipeID){
+        return axios.delete(`/users/${userID}/recipes/${recipeID}`);
     }
 
 }

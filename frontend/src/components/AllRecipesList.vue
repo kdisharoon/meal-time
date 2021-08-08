@@ -1,22 +1,22 @@
 <template>
 <div id="full">
   
-  <h2>All Recipes</h2>
+  <h2 id="allRecipe">All Recipes</h2>
 
   <div class="lds-ripple" v-if="isLoading">
     <div></div><div></div>
   </div>
   
-  <div v-else>
+  <div v-else >
     <button v-on:click.prevent="getNewRecipesFromAPI" class="addRecipes">Add 10 Recipes to Database from API</button>
     <div class="container card-deck">
       <div class="row">
         <div class="all-recipes-list d-flex justify-content-around flex-wrap">
     
           <div v-for="recipe in recipes" v-bind:key="recipe.recipeId" class="recipe thumbnail">
-            <div class="card" style="width: 18rem">
+            <div class="card" style="width: 18rem;">
               <img v-bind:src="recipe.recipeImg" class="recipe-image" style="width:100%">
-                <h4><b>{{recipe.recipeName}}</b></h4>
+                <h4 id="rTwo"><b>{{recipe.recipeName}}</b></h4>
                 <p class="card-text">{{ recipe.cookTime }} minutes total time</p>
                 <router-link v-bind:to="{ name: 'recipe', params: { recipeID: recipe.recipeId } }">
                   <button> Recipe Details</button>
@@ -105,6 +105,23 @@ export default {
     border: 2px solid black;
     border-radius: 5px; 
   } */
+
+  #allRecipe{
+    text-align: center;
+  }
+  #rTwo{
+text-align: center;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   width: 250px;
+   overflow: hidden;
+   
+  }
+  #rTwo:hover{
+text-align: center;
+  white-space: normal;
+  text-overflow: initial;
+  }
  .card {
       padding: 5px;
       background:white;
@@ -129,10 +146,7 @@ export default {
     font-size: 16px;
     border-radius: 10px;
   }
-#top{
-  display:flex;
 
-}
 
   button:hover {
     background-color:rgba(255, 166, 0, 0.626);
@@ -154,7 +168,9 @@ export default {
   }
 
 
-
+.addRecipes{
+  margin:auto;
+}
 
 
 
