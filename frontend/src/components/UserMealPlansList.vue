@@ -1,6 +1,7 @@
 <template>
   <div>
     <h2>My Meal Plans</h2>
+
     <div class="user-meal-plans-list d-flex justify-content-around">
       <div v-for="mealPlan in mealPlans" v-bind:key="mealPlan.mealPlanId" class="meal-plan">
         <div class="card">
