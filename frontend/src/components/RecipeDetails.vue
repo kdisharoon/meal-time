@@ -18,8 +18,12 @@
         {{ step }}
       </li>
     </ol>
-    <button class="btn btn-add-recipe-to-user-library" v-on:click.prevent="saveRecipe">Save Recipe To My Library</button>
-  </div>
+   <div id="butt"> 
+ <button class="btn btn-add-recipe-to-user-library" v-on:click.prevent="saveRecipe">Save Recipe To My Library</button>
+<button class="btn btn-add-recipe-to-user-library" >Add Recipe to Meal Plan</button>
+<button class="btn btn-add-recipe-to-user-library" >Add Ingredients to Grocery List</button>
+</div>
+</div>
   </div>
   </div>
 </template>
@@ -125,7 +129,10 @@ li {
   font-size: 20px;
   border-style: outset;
 }
-
+#butt{
+  display: flex;
+  justify-content: space-around;
+}
 .recipe-detail-image {
   /* object-fit: contain; */
   /* display: block;
