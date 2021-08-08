@@ -14,4 +14,6 @@ public interface MealPlanDao {
 
     MealPlan getMealPlanByUser(long mealPlanId);
 
+    void deleteRecipeFromMealPlan(long mealPlanId, long recipeId);
+
 }
