@@ -11,8 +11,8 @@
     <p>{{chosenRecipe.preparation}}</p>
     
     <div id="buttons">
-    <button @click="randomizer(); requestText()">Get Random Recipe</button>
-    <button @click.prevent="saveRecipe">Add to My Recipes</button>
+    <button @click="randomizer(); requestText(); revealButton()">Get Random Recipe</button>
+    <button hidden id="hiding" @click.prevent="saveRecipe">Add to My Recipes</button>
     </div>
   
     </div>
