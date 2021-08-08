@@ -48,7 +48,7 @@ export default {
     saveRecipe() {
       recipeService.addRecipeToUserLibrary(this.$store.state.user.id, this.recipe.id).then(response => {
         if (response.status === 201) {
-          this.$router.push('/recipes');
+          this.$router.push({name: 'saved-recipes', params: { userID: this.$store.state.user.id } });
           alert("Successfully Added!")
         }
       })

@@ -5,11 +5,11 @@ public class Ingredient {
     private long ingredientId;
     private String ingredientName;
     private String measurementUnit;
-    private long measurementAmount;
+    private double measurementAmount;
 
     public Ingredient(){}
 
-    public Ingredient(long ingredientId, String ingredientName, String measurementUnit, long measurementAmount){
+    public Ingredient(long ingredientId, String ingredientName, String measurementUnit, double measurementAmount){
         this.ingredientId=ingredientId;
         this.ingredientName=ingredientName;
         this.measurementAmount=measurementAmount;
@@ -17,11 +17,11 @@ public class Ingredient {
 
     }
 
-    public long getMeasurementAmount() {
+    public double getMeasurementAmount() {
         return measurementAmount;
     }
 
-    public void setMeasurementAmount(long measurementAmount) {
+    public void setMeasurementAmount(double measurementAmount) {
         this.measurementAmount = measurementAmount;
     }
 
