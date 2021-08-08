@@ -14,7 +14,7 @@ export default {
     },
 
     getUserMealPlanById(mealPlanID) {
-        return axios.get(`/mealplans/${mealPlanID}`);
+        return axios.get(`/users/mealplans/${mealPlanID}`);
     },
 
     addRecipeToUserMealPlan() {

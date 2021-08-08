@@ -11,8 +11,8 @@
     <p>{{chosenRecipe.preparation}}</p>
     
     <div id="buttons">
-    <button @click="randomizer(); requestText(); revealButton()">Get Random Recipe</button>
-    <button hidden id="hiding" @click.prevent="saveRecipe" >Add to My Recipes </button>
+    <button @click="randomizer(); requestText()">Get Random Recipe</button>
+    <button @click.prevent="saveRecipe">Add to My Recipes</button>
     </div>
   
     </div>
@@ -53,18 +53,18 @@ export default {
     });
   },
   methods:{
+
     saveRecipe() {
-      recipeService.addRecipeToUserLibrary(this.$store.state.user.id, this.recipe.id).then(response => {
+      recipeService.addRecipeToUserLibrary(this.$store.state.user.id, this.chosenRecipe.recipeId).then(response => {
         if (response.status === 201) {
-
-          alert("Recipe added to your library of recipes")
-
-          this.$router.push(`users/${this.$store.state.user.id}/recipes`);
+          this.$router.push({name: 'saved-recipes', params: { userID: this.$store.state.user.id } });
+          alert("Successfully Added!")
         }
       })
       .catch((error) => {
+        alert("There was an error adding the recipe");
         console.log(error);
-        alert("error")
+        console.log("This recipe is already saved to your recipes.");
       });
     },
     

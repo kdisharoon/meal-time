@@ -67,7 +67,7 @@ public class MealPlan {
     public OrganizedRecipe[] buildOrganizedRecipeArray(){
         OrganizedRecipe[] organizedRecipes1 = new OrganizedRecipe[21];
 
-        
+
         organizedRecipes1[0]= new OrganizedRecipe();
         organizedRecipes1[0].setDay("sunday");
         organizedRecipes1[0].setMeal("breakfast");

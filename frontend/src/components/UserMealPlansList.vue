@@ -19,13 +19,13 @@
       
 
 <div class="container mealPlanStyle">
-  <form id="planForm" action="/action_page.php">
+  <form v-on:submit.prevent="addMealPlan" id="planForm">
   <div class="card">
     <div class="col-25">
       <label for="fname">Meal Plan Name</label>
     </div>
     <div class="col-75">
-      <input type="text" id="mname" name="mealplanname" placeholder="Plan name..">
+      <input type="text" id="mname" name="mealplanname" v-model="newPlan.mealPlanName" />
     </div>
   </div>
   <div class="row">
@@ -46,25 +46,32 @@ export default {
   name: 'user-meal-plans-list',
   data() {
     return {
-      mealPlans: []
+      mealPlans: [],
+      newPlan: {
+        mealPlanName: "",
+        userId: this.$route.params.userID,
+      }
     }
   },
   methods: {
     addMealPlan() {
-      let newMealPlan = {
-        userId: this.$route.params.userID,
-        mealPlanName: "Pizza All Day Every Day Woooo!!!",    //add the meal plan name that the user inputs here
-      };
-      console.log(newMealPlan);
-      mealPlanService.addUserMealPlan(this.$route.params.userID, newMealPlan).then(response => {
+      mealPlanService.addUserMealPlan(this.$route.params.userID, this.newPlan).then(response => {
         if (response.status === 201) {
-          console.log("Successfully added new meal plan to your meal plans!")
+          alert("Successfully added new meal plan to your meal plans!");
+          this.$router.go();          
         }
       })
       .catch((error) => {
         console.log(error);
       });
+      this.resetForm();
+    },
+
+    resetForm() {
+  //    this.showForm = false;
+      this.newPlan.mealPlanName = ""
     }
+
   },
   created() {
     mealPlanService.getAllUserMealPlans(this.$route.params.userID).then(response => {
