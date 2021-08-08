@@ -32,7 +32,7 @@ export default {
   methods: {
     deleteRecipe(recipeID) {
       recipeService.deleteRecipeFromUserLibrary(this.$route.params.userID, recipeID).then(response => {
-        if (response.status === 204) {
+        if (confirm("Are you sure you want to delete this recipe?") && response.status === 204) {
           alert("Recipe successfully removed from your recipe collection!");
           this.$router.go();
         }  

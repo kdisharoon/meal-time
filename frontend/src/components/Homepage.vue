@@ -11,8 +11,8 @@
     <p>{{chosenRecipe.preparation}}</p>
     
     <div id="buttons">
-    <button @click="randomizer(); requestText()">Get Random Recipe</button>
-    <button @click.prevent="saveRecipe">Add to My Recipes </button>
+    <button @click="randomizer(); requestText(); revealButton()">Get Random Recipe</button>
+    <button hidden id="hiding" @click.prevent="saveRecipe" >Add to My Recipes </button>
     </div>
   
     </div>
@@ -75,7 +75,11 @@ export default {
     requestText(){
     this.displayIngredients = "Ingredients";
     this.displayPreparations = "Directions";
-  }
+    },
+    revealButton(){
+      document.getElementById("hiding").innerHTML = "Add to My Recipes";
+      document.getElementById("hiding").removeAttribute("hidden");
+    }
   },
   
 
@@ -175,10 +179,10 @@ a{
 
 #buttons{
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   
   padding: 5px;
-  gap: 6px;
+  gap:15px;
 }
 
 
