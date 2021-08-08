@@ -2,25 +2,13 @@
   <div class="meal-plan-details">
     <h1 class="meal-plan-name">{{ mealPlan.mealPlanName }}</h1>
     
-    <div v-for="currentMeal in mealPlan.organizedRecipes" v-bind:key="currentMeal" class="meal-plan-meal">
-        {{ currentMeal.day }} {{ currentMeal.meal }}: {{ currentMeal.recipeIds.length }} recipes
-        <div v-for="recipeID in recipeIds" v-bind:key="recipeID" class="recipe">
-            <p>{{ getRecipe(recipeID) }}</p>
+    <div v-for="thisMeal in mealPlan.recipes" v-bind:key="thisMeal.aFakeNumber" class="meal-plan-meal">
+        {{ thisMeal.day }} {{ thisMeal.meal }}: {{ thisMeal.recipeIds.length }} recipes
+        <div v-for="recipeID in thisMeal.recipeIds" v-bind:key="recipeID" class="recipe"> 
+          <p> {{ getRecipeName(recipeID) }} </p>
+<!-- add a link to the recipe details page to each recipe's name -->         
         </div>
     </div>
-    
-    
-    <h3>{{ recipe.cookTime }} minutes cook time</h3>
-    <h5>Ingredients</h5>
-    <div class="recipe-ingredients" v-for="ingredient in recipe.ingredients" v-bind:key="ingredient.ingredientId">
-      <h4>{{ ingredient.measurementAmount }} {{ ingredient.measurementUnit }} {{ ingredient.ingredientName}}</h4>
-    </div>
-    <ol>
-      <li v-for="step in recipe.preparation" v-bind:key="step" class="recipe-step">
-        {{ step }}
-      </li>
-    </ol>
-    <button class="btn btn-add-recipe-to-user-library" v-on:click.prevent="saveRecipe">Save Recipe To My Library</button>
   </div>
 </template>
 
@@ -44,32 +32,30 @@ export default {
                 recipeIds: []
               }
           ]
-      }
+      },
+      
     }
   },
+
   methods: {
-    getRecipe(id) {
-      recipeService.getRecipeById(id);
+    getRecipeName(id) {
+      recipeService.getRecipeById(id).then(response => {
+        console.log(response.data.recipeName);
+        return response.data.recipeName; 
+      });  
     }
-  
-//    saveMealPlan() {
-//      mealPlanService.addUserMealPlan(this.$store.state.user.id).then(response => {
-//        if (response.status === 201) {
-//          this.$router.push(`/users/${this.$store.state.user.id}/mealplans`);
-//        }
-//      })
-//      .catch((error) => {
-//        console.log(error);
-//      });
-//    }
+
   },
 
   created() {
     mealPlanService.getUserMealPlanById(this.$route.params.mealPlanID).then(response => {
+      console.log(response.data);
       this.mealPlan = response.data;
     })
+  },
   
 
-  }
+
+  
 }
 </script>
