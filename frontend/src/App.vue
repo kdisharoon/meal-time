@@ -7,7 +7,7 @@
       <router-link id="all-recipes" v-bind:to="{ name: 'all-recipes' }"> ALL RECIPES </router-link>
       <router-link id="saved-recipes" v-bind:to="{ name: 'saved-recipes', params: { userID: this.$store.state.user.id } }"> MY RECIPES </router-link>
       <router-link id="user-meal-plans" v-bind:to="{ name: 'user-meal-plans', params: { userID: this.$store.state.user.id } }"> MY MEAL PLANS </router-link> 
-      <router-link id="groceryList" v-bind:to="{ name: 'user-meal-plans', params: { userID: this.$store.state.user.id } }"> GROCERY LIST </router-link> 
+      <router-link v-if="0 === 1" id="user-grocery-list" v-bind:to="{ name: 'user-grocery-list', params: { userID: this.$store.state.user.id } }"> GROCERY LIST </router-link> 
       <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''"> LOGOUT</router-link>
     </div>
      </header>
