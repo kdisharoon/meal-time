@@ -75,13 +75,15 @@ public class JdbcMealPlanDao implements MealPlanDao{
         MealPlan mealPlan = new MealPlan();
         RecipeList[] recipeLists = createRecipeListArray();
 
-        String sql = "select meal_plan_name " +
+        String sql = "select meal_plan_name, user_id " +
                      "from user_meal_plan " +
                      "where meal_plan_id = ?";
 
         SqlRowSet mealPlanNameResult= jdbcTemplate.queryForRowSet(sql,mealPlanId);
         if (mealPlanNameResult.next()){
             mealPlan.setMealPlanName(mealPlanNameResult.getString("meal_plan_name"));
+            mealPlan.setMealPlanId(mealPlanId);
+            mealPlan.setUserId(mealPlanNameResult.getLong("user_id"));
         }
 
         String sql2 = "select recipe_id, day, meal " +

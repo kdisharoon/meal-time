@@ -20,7 +20,7 @@
     </ol>
    <div id="butt"> 
  <button class="btn btn-add-recipe-to-user-library" v-on:click.prevent="saveRecipe">Save Recipe To My Library</button>
-<button class="btn btn-add-recipe-to-user-library" >Add Recipe to Meal Plan</button>
+<button class="btn btn-add-recipe-to-user-library" v-on:click.prevent="addToMealPlan">Add Recipe to Meal Plan</button>
 <button class="btn btn-add-recipe-to-user-library" >Add Ingredients to Grocery List</button>
 </div>
 </div>
@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import mealPlanService from '../services/MealPlanService'
 import recipeService from '../services/RecipeService'
 
 export default {
@@ -49,6 +50,29 @@ export default {
     }
   },
   methods: {
+
+    addToMealPlan() {
+
+      // add a popup or menu to ask the user to choose which of their meal plans to add to!
+      // then the popup or menu should ask which meal (date and breakfast/lunch/dinner) to add the recipe to.
+      // the id and meal variables hard-coded below are just temporary.
+
+      let planID = 2;
+      let whichDateTime = {
+        day: 'tuesday',
+        meal: 'lunch',
+        recipeIDs: [this.recipe.id]
+      };
+      
+
+      mealPlanService.addRecipeToUserMealPlan(planID, this.recipe.id, whichDateTime).then(response => {
+        if (response.status === 201) {
+          this.$router.push({ name: 'meal-plan', params: { mealPlanID: planID } });
+        }
+      });
+    },
+
+
     saveRecipe() {
       recipeService.addRecipeToUserLibrary(this.$store.state.user.id, this.recipe.id).then(response => {
         if (response.status === 201) {
