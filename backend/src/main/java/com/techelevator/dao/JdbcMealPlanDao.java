@@ -20,18 +20,27 @@ public class JdbcMealPlanDao implements MealPlanDao{
 
 
 
-    public void createMealPlan(MealPlan mealPlan){
+    public long createMealPlan(MealPlan mealPlan){
         String sql2 = "select * from user_meal_plan " +
                       "where user_id =? and meal_plan_name=?";
         SqlRowSet mealPlanResult = jdbcTemplate.queryForRowSet(sql2,mealPlan.getUserId(),mealPlan.getMealPlanName());
         if (mealPlanResult.next()) {
-            throw new RuntimeException();
+            throw new IllegalArgumentException();
         }
 
 
         String sql = "insert into user_meal_plan (user_id, meal_plan_name) " +
                      "values (?,?)";
         jdbcTemplate.update(sql, mealPlan.getUserId(), mealPlan.getMealPlanName());
+
+        String sql3 = "select meal_plan_id from user_meal_plan where meal_plan_name=?";
+
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql3,mealPlan.getMealPlanName());
+        long id= 0;
+        if (result.next()){
+            id = result.getLong("meal_plan_id");
+        }
+        return id;
  //       Long newId = jdbcTemplate.queryForObject(sql, Long.class, mealPlan.getUserId(), mealPlan.getMealPlanName());
     }
 
@@ -64,7 +73,7 @@ public class JdbcMealPlanDao implements MealPlanDao{
 
     public MealPlan getMealPlanByUser(long mealPlanId){
         MealPlan mealPlan = new MealPlan();
-        RecipeList[] recipeLists = new RecipeList[21];
+        RecipeList[] recipeLists = createRecipeListArray();
 
         String sql = "select meal_plan_name " +
                      "from user_meal_plan " +
@@ -91,6 +100,20 @@ public class JdbcMealPlanDao implements MealPlanDao{
         }
 
         return mealPlan;
+    }
+
+    public void deleteRecipeFromMealPlan(long mealPlanId, long recipeId){
+
+        String sql = "delete from ";
+
+    }
+
+    public RecipeList[] createRecipeListArray(){
+        RecipeList[] recipeList = new RecipeList[21];
+        for (int i = 0; i< 21; i++){
+            recipeList[i] = new RecipeList();
+        }
+        return recipeList;
     }
 
 

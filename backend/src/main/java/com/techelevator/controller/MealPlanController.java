@@ -27,11 +27,11 @@ public class MealPlanController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/users/{userId}/mealplans", method = RequestMethod.POST)
-    public void addMealPlanToUser(@RequestBody MealPlan mealPlan){
+    public long addMealPlanToUser(@RequestBody MealPlan mealPlan){
 
         try{
-            mealPlanDao.createMealPlan(mealPlan);
-        } catch (RuntimeException e){
+            return mealPlanDao.createMealPlan(mealPlan);
+        } catch (IllegalArgumentException e){
             throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY);
         }
     }
@@ -57,8 +57,8 @@ public class MealPlanController {
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @RequestMapping(path= "/mealplans/{mealPlanId}/recipes", method = RequestMethod.DELETE)
-    public void deleteRecipeFromMealPlan(){
+    @RequestMapping(path= "/mealplans/{mealPlanId}/recipes/{recipeId}", method = RequestMethod.DELETE)
+    public void deleteRecipeFromMealPlan(@PathVariable long mealPlanId, @PathVariable long recipeId){
 
     }
 
