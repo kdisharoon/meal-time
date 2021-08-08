@@ -17,8 +17,8 @@ export default {
         return axios.get(`/users/mealplans/${mealPlanID}`);
     },
 
-    addRecipeToUserMealPlan() {
-        return axios.post(`/mealplans/recipes`);
+    addRecipeToUserMealPlan(mealPlanID, recipeID, planPlacementInfo) {
+        return axios.post(`/mealplans/${mealPlanID}/recipes/${recipeID}`, planPlacementInfo);
     }
 
     //deleteRecipeFromUserMealPlan(mealPlanID, recipeID)

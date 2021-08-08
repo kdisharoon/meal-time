@@ -67,6 +67,7 @@ CREATE TABLE user_meal_plan (
         meal_plan_id int PRIMARY KEY DEFAULT NEXTVAL('seq_user_meal_plan_id'),
         user_id int NOT NULL,
         meal_plan_name varchar(100) NOT NULL,
+        
         CONSTRAINT FK_user_meal_plan_users FOREIGN KEY (user_id) REFERENCES users(user_id)
         
 );
@@ -99,8 +100,8 @@ CREATE TABLE meal_plan_user_recipes (
         meal varchar(100) Null,
         
         CONSTRAINT fk_meal_plan_user_recipe_user_meal_plan FOREIGN KEY (meal_plan_id) REFERENCES user_meal_plan(meal_plan_id),
-        CONSTRAINT fk_meal_plan_user_recipe_recipes FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id),
-        CONSTRAINT pk_meal_plan_user_recipe PRIMARY KEY (day)
+        CONSTRAINT fk_meal_plan_user_recipe_recipes FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id)
+--        CONSTRAINT pk_meal_plan_user_recipe PRIMARY KEY (day)
 );
 
 
@@ -187,9 +188,9 @@ INSERT INTO recipe_ingredients (ingredient_id, recipe_id, measurement_unit, meas
 INSERT INTO recipe_ingredients (ingredient_id, recipe_id, measurement_unit, measurement_amount) VALUES(28, 6, 'tube', 1);
 
 
---INSERT INTO user_meal_plan (meal_plan_name, user_id) VALUES ('Healthy', 3);
---INSERT INTO user_meal_plan (meal_plan_name, user_id) VALUES ('Pizza All the Time!', 3);
---INSERT INTO user_meal_plan (meal_plan_name, user_id) VALUES ('Stay Up All Night Coding', 3);
+INSERT INTO user_meal_plan (meal_plan_name, user_id) VALUES ('Healthy', 3);
+INSERT INTO user_meal_plan (meal_plan_name, user_id) VALUES ('Pizza All the Time!', 3);
+INSERT INTO user_meal_plan (meal_plan_name, user_id) VALUES ('Stay Up All Night Coding', 3);
 
 
 COMMIT TRANSACTION;
