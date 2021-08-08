@@ -2,7 +2,7 @@
 <div>
   <h2 id="myRecipe">My Recipes</h2>
   <div class="saved-recipes-list d-flex justify-content-around">
-    <div v-for="recipe in recipes" v-bind:key="recipe.recipeId" class="recipe">
+    <div v-for="(recipe, index) in recipes" v-bind:key="recipe.recipeId" class="recipe">
       <div class="card">
         <img v-bind:src="recipe.recipeImg" class="recipe-image" style="width:100%">
           <h4 id="rTwo"><b>{{recipe.recipeName}}</b></h4>
@@ -10,7 +10,7 @@
           <router-link v-bind:to="{ name: 'recipe', params: { recipeID: recipe.recipeId } }">
             <button > Recipe Details</button>
         </router-link>
-        <button>Delete From My Recipes</button>
+        <button @click="deleteRecipe(index)">Delete From My Recipes</button>
       </div>
       </div>
       </div>
@@ -28,6 +28,20 @@ export default {
       recipes: []
     }
   },
+  methods:{
+    deleteRecipe(index){
+      this.$delete(this.recipes, index);
+    }
+  },
+  // deleteRecipeTwo(recipe.recipeId){
+  //   recipeService.deleteRecipeFromUserLibrary(this.$route.params.userID, this.$route.recipes.recipeID).then(response => {
+  //     if(response.status ===200){
+  //       this.getAllUserRecipes(this.$route.params.userID);
+  //     } 
+  //   }).catch((error) => {
+  //     console.log(error);
+  //   });
+  // },
   created() {
     recipeService.getAllUserRecipes(this.$route.params.userID).then(response => {
       this.recipes = response.data;
