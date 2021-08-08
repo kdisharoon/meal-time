@@ -1,15 +1,16 @@
 <template>
 <div>
-  <h2>My Recipes</h2>
+  <h2 id="myRecipe">My Recipes</h2>
   <div class="saved-recipes-list d-flex justify-content-around">
     <div v-for="recipe in recipes" v-bind:key="recipe.recipeId" class="recipe">
       <div class="card">
         <img v-bind:src="recipe.recipeImg" class="recipe-image" style="width:100%">
-          <h4><b>{{recipe.recipeName}}</b></h4>
-          <p class="card-text">{{ recipe.prepTime }} minutes prep time || {{ recipe.cookTime }} minutes cook time</p>
+          <h4 id="rTwo"><b>{{recipe.recipeName}}</b></h4>
+          <p class="card-text">{{ recipe.cookTime }} minutes cook time</p>
           <router-link v-bind:to="{ name: 'recipe', params: { recipeID: recipe.recipeId } }">
-            <button> Recipe Details</button>
+            <button > Recipe Details</button>
         </router-link>
+        <button v-on:click.prevent="deleteRecipe(recipe.recipeId)">Delete From My Recipes</button>
       </div>
       </div>
       </div>
@@ -27,6 +28,20 @@ export default {
       recipes: []
     }
   },
+
+  methods: {
+    deleteRecipe(recipeID) {
+      recipeService.deleteRecipeFromUserLibrary(this.$route.params.userID, recipeID).then(response => {
+        if (response.status === 204) {
+          alert("Recipe successfully removed from your recipe collection!");
+          this.$router.go();
+        }  
+      }).catch((error) => {
+        console.log(error);
+      });
+    }
+  },
+
   created() {
     recipeService.getAllUserRecipes(this.$route.params.userID).then(response => {
       this.recipes = response.data;
@@ -34,3 +49,15 @@ export default {
   }
 }
 </script>
+<style>
+#myRecipe{
+  text-align: center;
+}
+
+.d-flex{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+</style>

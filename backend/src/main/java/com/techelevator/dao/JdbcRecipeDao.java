@@ -119,7 +119,7 @@ public class JdbcRecipeDao implements RecipeDao{
             Ingredient ingredient = new Ingredient();
             ingredient.setIngredientId(results.getLong("ingredient_id"));
             ingredient.setIngredientName(results.getString("ingredient_name"));
-            ingredient.setMeasurementAmount(results.getLong("measurement_amount"));
+            ingredient.setMeasurementAmount(results.getDouble("measurement_amount"));
             ingredient.setMeasurementUnit(results.getString("measurement_unit"));
             ingredients.add(ingredient);
         }

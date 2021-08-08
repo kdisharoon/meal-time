@@ -2,7 +2,7 @@
   <div id="popular">
     <div id="day" class="random-recipe">
       <h3>Random Recipe Generator</h3>
-      <h4>{{chosenRecipe.recipeName}}</h4>
+      <h4 id="recName">{{chosenRecipe.recipeName}}</h4>
       <img :src="chosenRecipe.recipeImg" class="image" id="randomImg">
     <h5>{{displayIngredients}}</h5>
     
@@ -12,18 +12,20 @@
     
     <div id="buttons">
     <button @click="randomizer(); requestText()">Get Random Recipe</button>
-    <button @click.prevent="saveRecipe">Add to My Recipes </button>
+    <button @click.prevent="saveRecipe">Add to My Recipes</button>
     </div>
+  
     </div>
+    
     <div id="recipe">
-      <h3>Popular Recipes</h3>
+    <h3 id="recTry">Recipes to Try</h3>  
      <div v-for="recipe in recipes.slice(11, 17)" v-bind:key="recipe.recipeId" id="cards">
       
         <router-link v-bind:to="{ name: 'recipe', params: { recipeID: recipe.recipeId } }">
         
         <div class="card">
           <img :src="recipe.recipeImg">
-            <h4>{{recipe.recipeName}}</h4>
+            <h4 id="rName">{{recipe.recipeName}}</h4>
       </div>
       </router-link>
       </div>
@@ -51,17 +53,18 @@ export default {
     });
   },
   methods:{
+
     saveRecipe() {
-      recipeService.addRecipeToUserLibrary(this.$store.state.user.id, this.recipe.id).then(response => {
+      recipeService.addRecipeToUserLibrary(this.$store.state.user.id, this.chosenRecipe.recipeId).then(response => {
         if (response.status === 201) {
-
-          // add a popup "Success!" message here
-
-          this.$router.push(`users/${this.$store.state.user.id}/recipes`);
+          this.$router.push({name: 'saved-recipes', params: { userID: this.$store.state.user.id } });
+          alert("Successfully Added!")
         }
       })
       .catch((error) => {
+        alert("There was an error adding the recipe");
         console.log(error);
+        console.log("This recipe is already saved to your recipes.");
       });
     },
     
@@ -82,19 +85,29 @@ export default {
 </script>
 
 <style>
-#popular {
-  display: grid;
-  grid-template-columns: 350px 1fr;
-  grid-template-areas:
-    "day recipe"
-    "day cards"
-    "day cards";
-    
+
+#popular{
+  display:grid;
+  grid-template-columns: 300px 1fr;
+  grid-template-areas: "day recipe "
+                       "day recipe ";
 }
-#popular #cards{
-  
-  grid-area: cards;
-  
+
+#recName{
+  text-align: center;
+}
+#rName{
+  text-align: center;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   width: 300px;
+   overflow: hidden;
+   position: relative;
+}
+#rName:hover{
+  text-align: center;
+  white-space: normal;
+  text-overflow: initial;
 }
 #day {
     padding-left: 10px;
@@ -106,15 +119,21 @@ export default {
   background-color:aliceblue;
   border-radius: 3px;
   background-size: cover;
+  height: 49rem;
+  overflow: scroll;
 }
+
 #recipe {
   grid-area: recipe;
-  display:flex;
- flex-grow: initial;
- flex-direction: column;
+  display:grid;
+  grid-auto-rows: 75px 1fr 1fr;
+ grid-auto-columns: 1fr 1fr 1fr;
+ grid-template-areas: "try try try"
+                      "cards cards cards"
+                      "cards cards cards";
  align-content: center;
  align-items: center;
- 
+ flex-wrap: wrap;
 }
 h5,p{
     text-align: left;
@@ -122,9 +141,16 @@ h5,p{
 h4{
   text-align: center;
 }
+#recTry{
+  text-align: center;
+  grid-area: try;
+  border:0px;
+  text-decoration: underline;
+}
 a{
   margin: 10px;
   size: 100px;
+  text-align: center;
 }
 #recipe .card{
   align-items: center;
@@ -134,24 +160,23 @@ a{
     padding: 10px;
     border: 2px solid black;
     box-sizing: initial;
-    border-radius: 5px  
+    border-radius: 5px;
+
 
 }
 .card img{
   align-self: start;
   
 }
-.card {
-  grid-area: card;
-  align-items: center;
-  flex: 1;
-}
 #cards{
-  display: flex;
+  margin:auto;
+
 }
+
 #buttons{
   display: flex;
   justify-content: space-between;
+  
   padding: 5px;
   gap: 6px;
 }
