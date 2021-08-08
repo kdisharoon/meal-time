@@ -9,6 +9,8 @@
   
   <div v-else >
     <button v-on:click.prevent="getNewRecipesFromAPI" class="addRecipes">Add 10 Recipes to Database from API</button>
+    
+    
     <div class="container card-deck">
       <div class="row">
         <div class="all-recipes-list d-flex justify-content-around flex-wrap">
@@ -21,8 +23,11 @@
                 <router-link v-bind:to="{ name: 'recipe', params: { recipeID: recipe.recipeId } }">
                   <button> Recipe Details</button>
                 </router-link>
+                
             </div>
+            
           </div>
+          
       </div>
 
     </div>
@@ -41,9 +46,11 @@ export default {
   data() {
     return {
       isLoading: true,
-      recipes: []
+      recipes: [],
+      
     }
   },
+  
 
   methods: {
     saveToDatabase(recipesToAdd) {
@@ -57,7 +64,7 @@ export default {
         console.log(error);
       });
     },
-
+   
     getNewRecipesFromAPI() {
       recipeService.getRandomRecipesFromSpoonacular().then(response => {
         let newRecipes = [];
@@ -92,7 +99,7 @@ export default {
       this.isLoading = false;
     })
     
-  }
+  },
 }
 </script>
 
