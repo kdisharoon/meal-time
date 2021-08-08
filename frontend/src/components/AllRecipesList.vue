@@ -49,7 +49,8 @@ export default {
     saveToDatabase(recipesToAdd) {
       recipeService.addRecipesFromAPIToDatabase(recipesToAdd).then(response => {
         if (response.status === 201) {
-          console.log("Successfully added 10 recipes to database from API!");
+          alert("Successfully added recipes to database from API!");
+          this.$router.go();
           }
         })
       .catch((error) => {
