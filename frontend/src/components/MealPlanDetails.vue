@@ -10,7 +10,7 @@
     </div>
     
     
-    <h3>{{ recipe.prepTime }} minutes prep time || {{ recipe.cookTime }} minutes cook time</h3>
+    <h3>{{ recipe.cookTime }} minutes cook time</h3>
     <h5>Ingredients</h5>
     <div class="recipe-ingredients" v-for="ingredient in recipe.ingredients" v-bind:key="ingredient.ingredientId">
       <h4>{{ ingredient.measurementAmount }} {{ ingredient.measurementUnit }} {{ ingredient.ingredientName}}</h4>
