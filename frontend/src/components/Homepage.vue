@@ -25,13 +25,10 @@
 
 
 
-
-
-
     <div id="recipe">
     <h3 id="recTry">Recipes to Try</h3>  
      <div v-for="recipe in recipes.slice(11,17)" v-bind:key="recipe.recipeId" id="cards">
-      
+       
         <router-link v-bind:to="{ name: 'recipe', params: { recipeID: recipe.recipeId } }">
         
         <div class="card">
@@ -154,6 +151,31 @@ export default {
 </script>
 
 <style>
+.search input[type=text]{
+  padding: 15px 15px;
+  border: none;
+  width: 200px;
+  height: 25px;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+@media screen and (max-width: 100px){
+  .search input[type=text]{
+    float: none;
+    display: block;
+    text-align: left;
+    width: 10%;
+    margin: 0;
+    padding: 14px;
+
+  }
+  .search {
+    float: right;
+    margin: 7px;
+  }
+}
 
 #popular{
   display:grid;
