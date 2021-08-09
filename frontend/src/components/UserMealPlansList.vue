@@ -1,6 +1,7 @@
 <template>
   <div>
     <h2>My Meal Plans</h2>
+
     <div class="user-meal-plans-list d-flex justify-content-around">
       <div v-for="mealPlan in mealPlans" v-bind:key="mealPlan.mealPlanId" class="meal-plan">
         <div class="card">
@@ -12,13 +13,13 @@
         </div>
       </div>
       <div class="clearfix">
-      <button id="btnToggleForm" type="button" class="btn" v-on:click.prevent="addMealPlan">
+      <button id="btnToggleForm" type="button" class="btn" v-on:click="revealButton()">
           Add a Meal Plan
       </button>
       </div>
       
 
-<div class="container mealPlanStyle">
+<div hidden id="isHiding" class="container mealPlanStyle">
   <form v-on:submit.prevent="addMealPlan" id="planForm">
   <div class="card">
     <div class="col-25">
@@ -70,9 +71,13 @@ export default {
     resetForm() {
   //    this.showForm = false;
       this.newPlan.mealPlanName = ""
-    }
-
+    },
+revealButton(){
+      document.getElementById("isHiding").innerHTML;
+      document.getElementById("isHiding").removeAttribute("hidden");
+    },
   },
+  
   created() {
     mealPlanService.getAllUserMealPlans(this.$route.params.userID).then(response => {
       this.mealPlans = response.data;

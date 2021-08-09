@@ -1,5 +1,7 @@
 <template>
 <div class="container rpDetails">
+  
+ 
 <div class="row">
   <div class="recipe-details">
     <h1 class="recipe-name">{{ recipe.name }}</h1>
@@ -18,13 +20,56 @@
         {{ step }}
       </li>
     </ol>
-    <button class="btn btn-add-recipe-to-user-library" v-on:click.prevent="saveRecipe">Save Recipe To My Library</button>
+
+ 
+
+   <div id="butt"> 
+ <button class="btn btn-add-recipe-to-user-library" v-on:click.prevent="saveRecipe">Save Recipe To My Library</button>
+<button class="btn btn-add-recipe-to-user-library"  v-on:click="revealForm()">Add Recipe to Meal Plan</button>
+<button class="btn btn-add-recipe-to-user-library">Add Ingredients to Grocery List</button>
+
+
+</div>
+<div hidden id="hidden-form">
+  <form @submit.prevent="submitForm">
+    <div>
+    
+  
+    </div>
+    <div>
+      <label for="dayofweek">Day of Week</label><br>
+      <select id="day-of-week" name="daysWeek">
+    <option value="monday">Monday</option>
+    <option value="tuesday">Tuesday</option>
+    <option value="wednesday">Wednesday</option>
+    <option value="thursday">Thursday</option>
+    <option value="friday">Friday</option>
+    <option value="saturday">Saturday</option>
+    <option value="sunday">Sunday</option>
+  </select>
+    </div>
+    <div>
+      <label for="mealtime">Meal Time</label><br>
+      <select id="meal-time" name="meal-time">
+    <option value="breakfast">Breakfast</option>
+    <option value="lunch">Lunch</option>
+    <option value="dinner">Dinner</option>
+    
+  </select>
+    </div>
+    <button  v-on:click.prevent="addToMealPlan" type="submit">Submit</button>
+    
+  </form>
+</div>
+
+</div>
+
   </div>
-  </div>
-  </div>
+ </div>
 </template>
 
 <script>
+import mealPlanService from '../services/MealPlanService'
 import recipeService from '../services/RecipeService'
 
 export default {
@@ -42,9 +87,49 @@ export default {
         mealType: '',
         ingredients: []
       },
+        mealPlans: []
     }
   },
+  computed:{
+    options: () => mealPlanService,
+    // options(){
+    //   return Object.keys(this.mealPlan).map(k => {
+    //     let o = this.mealPlan[k]
+    //     return `${o.mealPlanName}`
+    //   })
+    // }
+  },
   methods: {
+    changeMealPlan(event){
+      this.toMealPlan = event.target.options[event.target.options.selectedIndex].text
+    },
+    addToMealPlan() {
+
+      // add a popup or menu to ask the user to choose which of their meal plans to add to!
+      // then the popup or menu should ask which meal (date and breakfast/lunch/dinner) to add the recipe to.
+      // the id and meal variables hard-coded below are just temporary.
+
+      let planID = 2;
+      let whichDateTime = {
+        day: 'tuesday',
+        meal: 'lunch',
+        recipeIDs: [this.recipe.id]
+      };
+      
+
+      mealPlanService.addRecipeToUserMealPlan(planID, this.recipe.id, whichDateTime).then(response => {
+        if (response.status === 201) {
+          this.$router.push({ name: 'meal-plan', params: { mealPlanID: planID } });
+        }
+      });
+    },
+
+    revealForm(){
+      document.getElementById("hidden-form").innerHTML;
+      document.getElementById("hidden-form").removeAttribute("hidden");
+    },
+
+
     saveRecipe() {
       recipeService.addRecipeToUserLibrary(this.$store.state.user.id, this.recipe.id).then(response => {
         if (response.status === 201) {
@@ -72,6 +157,10 @@ export default {
       this.recipe.ingredients = response.data.ingredients;
     })
     
+     mealPlanService.getAllUserMealPlans(this.$route.params.userID).then(response => {
+      this.mealPlans = response.data;
+    });
+    
   }
 
 }
@@ -79,6 +168,9 @@ export default {
 
 <style>
 
+#hidden-form{
+  z-index: 10;
+}
 .rpDetails {
   border: solid black 5px;
   background: white;
@@ -125,7 +217,10 @@ li {
   font-size: 20px;
   border-style: outset;
 }
-
+#butt{
+  display: flex;
+  justify-content: space-around;
+}
 .recipe-detail-image {
   /* object-fit: contain; */
   /* display: block;
@@ -174,7 +269,7 @@ h5 {
   }
   
   .btn:hover {
-    background-color:grey;
+    background-color:rgba(255, 166, 0, 0.626);
     border-radius: 10px;
   }
   

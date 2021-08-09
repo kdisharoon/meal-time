@@ -3,12 +3,12 @@
     <header class="header">
     <h1>meal TimE</h1>
     <div id="nav" class="fake-btn">
-      <router-link id="home" v-bind:to="{ name: 'home' }">HOME </router-link >
-      <router-link id="all-recipes" v-bind:to="{ name: 'all-recipes' }"> ALL RECIPES </router-link>
-      <router-link id="saved-recipes" v-bind:to="{ name: 'saved-recipes', params: { userID: this.$store.state.user.id } }"> MY RECIPES </router-link>
-      <router-link id="user-meal-plans" v-bind:to="{ name: 'user-meal-plans', params: { userID: this.$store.state.user.id } }"> MY MEAL PLANS </router-link> 
-      <router-link v-if="0 === 1" id="user-grocery-list" v-bind:to="{ name: 'user-grocery-list', params: { userID: this.$store.state.user.id } }"> GROCERY LIST </router-link> 
-      <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''"> LOGOUT</router-link>
+      <router-link class="btn-fix-class" id="home" v-bind:to="{ name: 'home' }">HOME </router-link >
+      <router-link class="btn-fix-class" id="all-recipes" v-bind:to="{ name: 'all-recipes' }"> ALL RECIPES </router-link>
+      <router-link class="btn-fix-class" id="saved-recipes" v-bind:to="{ name: 'saved-recipes', params: { userID: this.$store.state.user.id } }"> MY RECIPES </router-link>
+      <router-link class="btn-fix-class" id="user-meal-plans" v-bind:to="{ name: 'user-meal-plans', params: { userID: this.$store.state.user.id } }"> MY MEAL PLANS </router-link> 
+      <router-link class="btn-fix-class" v-if="0 === 1" id="user-grocery-list" v-bind:to="{ name: 'user-grocery-list', params: { userID: this.$store.state.user.id } }"> GROCERY LIST </router-link> 
+      <router-link class="btn-fix-class" v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''"> LOGOUT</router-link>
     </div>
      </header>
      
@@ -42,7 +42,7 @@ h1{
   justify-content: flex-end;
   
 }
-a{
+.btn-fix-class{
   position:static;
   border:1px solid black;
   text-decoration: none;
@@ -54,7 +54,7 @@ a{
   visibility:initial;
   display: inline-block;
 }
-a:hover{
+.btn-fix-class:hover{
   background-color: orange;
 }
 
