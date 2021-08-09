@@ -27,8 +27,8 @@
 
     <div id="recipe">
     <h3 id="recTry">Recipes to Try</h3>  
-     <div v-for="recipe in recipes.slice(11,17)" v-bind:key="recipe.recipeId" id="cards">
-       
+     <div v-for="recipe in recipes.slice(12,18)" v-bind:key="recipe.recipeId" id="cards">
+      
         <router-link v-bind:to="{ name: 'recipe', params: { recipeID: recipe.recipeId } }">
         
         <div class="card">

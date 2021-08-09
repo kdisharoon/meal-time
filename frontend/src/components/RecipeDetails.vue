@@ -119,7 +119,7 @@ export default {
 
       mealPlanService.addRecipeToUserMealPlan(planID, this.recipe.id, whichDateTime).then(response => {
         if (response.status === 201) {
-          this.$router.push({ name: 'meal-plan', params: { mealPlanID: planID } });
+          this.$router.push({ name: 'meal-plan', params: { userID: this.$store.state.user.id } });
         }
       });
     },
@@ -157,9 +157,9 @@ export default {
       this.recipe.ingredients = response.data.ingredients;
     })
     
-     mealPlanService.getAllUserMealPlans(this.$route.params.userID).then(response => {
-      this.mealPlans = response.data;
-    });
+//     mealPlanService.getAllUserMealPlans(this.$route.params.userID).then(response => {
+//      this.mealPlans = response.data;
+//    });
     
   }
 
