@@ -9,9 +9,12 @@
   
   <div v-else >
     <button v-on:click.prevent="getNewRecipesFromAPI" class="addRecipes">Add 10 Recipes to Database from External Source</button>
+    
     <div class="search">
-    <input type="text" placeholder="Search...">
+      <input type="text" placeholder="Search..." v-model="userSearchTerm">
+      <button v-on:click.prevent="searchRecipesFromAPI(userSearchTerm)" class="searchRecipes">Search For Recipes</button>
     </div>
+    
     
     <div class="container card-deck">
       <div class="row">
@@ -23,7 +26,7 @@
                 <h4 id="rTwo"><b>{{recipe.recipeName}}</b></h4>
                 <p class="card-text">{{ recipe.cookTime }} minutes total time</p>
                 <router-link v-bind:to="{ name: 'recipe', params: { recipeID: recipe.recipeId } }">
-                  <button> Recipe Details</button>
+                  <button>Recipe Details</button>
                 </router-link>
                 
             </div>
@@ -47,14 +50,17 @@ export default {
   name: 'all-recipes-list',
   data() {
     return {
+      userSearchTerm: '',
       isLoading: true,
       recipes: [],
-      
     }
   },
   
 
   methods: {
+
+    
+
     saveToDatabase(recipesToAdd) {
       recipeService.addRecipesFromAPIToDatabase(recipesToAdd).then(response => {
         if (response.status === 201) {

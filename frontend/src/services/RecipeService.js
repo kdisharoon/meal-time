@@ -15,8 +15,12 @@ export default {
         return axios.get('https://api.spoonacular.com/recipes/random?number=10&apiKey=d391dd6b7d7c47358081f54cbadbfec0');
     },
     
-    getAllRecipesFromSpoonacular() {
-        return axios.get('https://api.spoonacular.com/recipes/complexSearch?query=dinner&addRecipeInformation=true&apiKey=941ba16793664284808b0c07b47ed70f');
+    searchRecipesFromSpoonacular(searchTerm) {
+        return axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=${searchTerm}&number=3&sort=random&apiKey=941ba16793664284808b0c07b47ed70f`);
+    },
+
+    getSpecificRecipesFromSpoonacular(idString) {
+        return axios.get(`https://api.spoonacular.com/recipes/informationBulk?ids=${idString}&apiKey=941ba16793664284808b0c07b47ed70f`)
     },
 
     getAllUserRecipes(userID) {

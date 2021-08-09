@@ -11,12 +11,23 @@
     <p>{{chosenRecipe.preparation}}</p>
     
     <div id="buttons">
-    <button @click="randomizer(); requestText(); revealButton()">Get Random Recipe</button>
-    <button hidden id="hiding" @click.prevent="saveRecipe">Add to My Recipes</button>
+      <button @click="randomizer(); requestText(); revealButton()">Get Random Recipe</button>
+      <button hidden id="hiding" @click.prevent="saveRecipe">Add to My Recipes</button>
     </div>
   
     </div>
     
+
+    <div class="search">
+      <input type="text" placeholder="Search..." v-model="userSearchTerm">
+      <button v-on:click.prevent="searchRecipesFromAPI(userSearchTerm)" class="searchRecipes">Search For Recipes</button>
+    </div>
+
+
+
+
+
+
     <div id="recipe">
     <h3 id="recTry">Recipes to Try</h3>  
      <div v-for="recipe in recipes.slice(11,17)" v-bind:key="recipe.recipeId" id="cards">
@@ -41,18 +52,72 @@ export default {
   name: "random-recipe",
   data() {
     return {
+      userSearchTerm: '',
       recipes: [],
       chosenRecipe: {},
       displayIngredients: '',
       displayPreparations: ''
     }
   },
+
   created() {
       recipeService.getAllRecipes().then(response => {
       this.recipes = response.data;
     });
   },
+
   methods:{
+
+    searchRecipesFromAPI(userSearchTerm) {
+      recipeService.searchRecipesFromSpoonacular(userSearchTerm).then(response => {
+        console.log(response.data.results)
+        let idString = '';
+        for (let i = 0; i < response.data.results.length; i++) {
+          idString += response.data.results[i].id + ',';
+        }
+        console.log(idString);
+        this.getSpecificRecipesFromAPI(idString.slice(0, -1));
+      });
+    },
+
+    getSpecificRecipesFromAPI(parsedRecipeIds) {
+      recipeService.getSpecificRecipesFromSpoonacular(parsedRecipeIds).then(response => {
+        let newRecipes = [];
+        for (let i = 0; i < response.data.length; i++) {
+          let tempArr = {
+            ingredients: []
+          };
+          tempArr.recipeId = response.data[i].id;
+          tempArr.recipeName = response.data[i].title;
+          tempArr.recipeImg = response.data[i].image;
+          tempArr.preparation = response.data[i].instructions;
+          tempArr.cookTime = response.data[i].readyInMinutes;
+          for (let j = 0; j < response.data[i].extendedIngredients.length; j++) {
+            let tempIngredientsArr = {};
+            tempIngredientsArr.ingredientId = response.data[i].extendedIngredients[j].id;
+            tempIngredientsArr.ingredientName = response.data[i].extendedIngredients[j].name;
+            tempIngredientsArr.measurementAmount = response.data[i].extendedIngredients[j].amount;
+            tempIngredientsArr.measurementUnit = response.data[i].extendedIngredients[j].unit;
+            tempArr.ingredients.push(tempIngredientsArr);
+          }
+          newRecipes.push(tempArr);
+        }
+        this.saveToDatabase(newRecipes);
+
+      });
+    },
+
+    saveToDatabase(recipesToAdd) {
+      recipeService.addRecipesFromAPIToDatabase(recipesToAdd).then(response => {
+        if (response.status === 201) {
+          alert("Successfully searched API and added results to database!");
+          this.$router.go();    // make this go to a Search Results page instead!
+          }
+        })
+      .catch((error) => {
+        console.log(error);
+      });
+    },
 
     saveRecipe() {
       recipeService.addRecipeToUserLibrary(this.$store.state.user.id, this.chosenRecipe.recipeId).then(response => {
