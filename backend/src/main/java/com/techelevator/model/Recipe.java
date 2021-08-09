@@ -32,6 +32,9 @@ public class Recipe {
     public Recipe(){
 
    }
+   public Recipe(long recipeId){
+        this.recipeId=recipeId;
+   }
 
    public Recipe(long recipeId, String preparation, String recipeName,int cookTime, String recipeImg, String recipeType){
        this.recipeId=recipeId;
