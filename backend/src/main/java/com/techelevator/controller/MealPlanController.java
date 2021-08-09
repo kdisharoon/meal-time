@@ -40,16 +40,16 @@ public class MealPlanController {
 
     }
 
-    @ResponseStatus(HttpStatus.OK)
+    /*@ResponseStatus(HttpStatus.OK)
     @RequestMapping(path = "/users/{userId}/mealplans", method = RequestMethod.GET)
     public MealPlan[] getAllMealPlansByUser(@PathVariable long userId){
         return mealPlanDao.getAllUserMealPlans(userId);
-    }
+    }*/
 
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(path = "/users/mealplans/{mealPlanId}", method = RequestMethod.GET)
-    public MealPlan getMealPlanByUser(@PathVariable long mealPlanId){
-        return mealPlanDao.getMealPlanByUser(mealPlanId);
+    @RequestMapping(path = "/users/{userId}/mealplans", method = RequestMethod.GET)
+    public MealPlan getMealPlanByUser(@PathVariable long userId){
+        return mealPlanDao.getMealPlanByUser(userId);
 
     }
 
