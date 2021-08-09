@@ -1,14 +1,22 @@
 <template>
   <div class="meal-plan-details">
-    <h1 class="meal-plan-name">{{ mealPlan.mealPlanName }}</h1>
+   
     
-    <div v-for="thisMeal in mealPlan.recipes" v-bind:key="thisMeal.aFakeNumber" class="meal-plan-meal">
-        {{ thisMeal.day }} {{ thisMeal.meal }}: {{ thisMeal.recipeIds.length }} recipes
+    <div v-for="thisMeal in mealPlan.recipes.slice(0,1)" v-bind:key="thisMeal.aFakeNumber" class="meal-plan-meal">
+       <div id="dayTwo" v-for= "day in days" :key="day.name"> {{ day }} <br> 
+       <div id="breakfast" ><h6>Breakfast</h6></div>
+       <div id="placeholder">recipes go here</div>
+       <div id="lunch" ><h6>Lunch</h6></div>
+       <div id="placeholder">recipes go here</div>
+       <div id="dinner"><h6>Dinner</h6></div>
+       <div id="placeholder">recipes go here</div>
+       
         <div v-for="recipeID in thisMeal.recipeIds" v-bind:key="recipeID" class="recipe"> 
           <p> {{ getRecipeName(recipeID) }} </p>
 <!-- add a link to the recipe details page to each recipe's name -->         
         </div>
     </div>
+  </div>
   </div>
 </template>
 
@@ -33,7 +41,7 @@ export default {
               }
           ]
       },
-      
+      days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     }
   },
 
@@ -43,7 +51,8 @@ export default {
         console.log(response.data.recipeName);
         return response.data.recipeName; 
       });  
-    }
+    },
+
 
   },
 
@@ -61,5 +70,36 @@ export default {
 </script>
 
 <style>
+.meal-plan-meal{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+#dayTwo{
+  background-color: aliceblue;
+  display: grid;
+  grid-auto-columns: 200px;
+  height:500px;
+  width: 200px;
+  justify-content: center;
+  
+  border:1px solid black;
+  border-radius: 8px;
+  text-decoration: underline;
+  padding-left: 5px;
+}
+
+#breakfast{
+  margin: auto;
+ 
+}
+#lunch{
+  margin: auto;
+}
+#dinner{
+  margin: auto;
+}
 
 </style>
