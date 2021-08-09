@@ -8,8 +8,10 @@
   </div>
   
   <div v-else >
-    <button v-on:click.prevent="getNewRecipesFromAPI" class="addRecipes">Add 10 Recipes to Database from API</button>
-    
+    <button v-on:click.prevent="getNewRecipesFromAPI" class="addRecipes">Add 10 Recipes to Database from External Source</button>
+    <div class="search">
+    <input type="text" placeholder="Search...">
+    </div>
     
     <div class="container card-deck">
       <div class="row">
@@ -113,6 +115,30 @@ export default {
     border: 2px solid black;
     border-radius: 5px; 
   } */
+
+.search input[type=text]{
+  float: right;
+  padding: 20px;
+  border: none;
+  margin-top: 8px;
+  margin-right: 16px;
+  margin-left: 50px;
+  font-size: 15px;
+}
+@media screen and (max-width: 600px){
+  .search input[type=text]{
+    float: none;
+    display: block;
+    text-align: left;
+    width: 100%;
+    margin: 0;
+    padding: 14px;
+
+  }
+  .search input[type=text] {
+    border: 1px solid #ccc;
+  }
+}
 
   #allRecipe{
     text-align: center;
