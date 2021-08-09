@@ -8,7 +8,7 @@ import store from '../store/index'
 import SavedRecipes from '../views/SavedRecipes.vue'
 import Recipe from '../views/Recipe.vue'
 import AllRecipes from '../views/AllRecipes.vue'
-import UserMealPlans from '../views/UserMealPlans.vue'
+//import UserMealPlans from '../views/UserMealPlans.vue'
 import MealPlan from '../views/MealPlan.vue'
 import UserGroceryList from '../views/UserGroceryList.vue'
 
@@ -84,21 +84,23 @@ const router = new Router({
       }
     },
     {
-      path: "/users/:userID/mealplans",
-      name: "user-meal-plans",
-      component: UserMealPlans,
-      meta: {
-        requiresAuth: true
-      }
-    },
-    {
-      path: "/mealplans/:mealPlanID",
+      path: "/users/:userID/mealplan",
+//      name: "user-meal-plans",
       name: "meal-plan",
+//      component: UserMealPlans,
       component: MealPlan,
       meta: {
         requiresAuth: true
       }
     },
+//    {
+//      path: "/mealplans/:mealPlanID",
+//      name: "meal-plan",
+//      component: MealPlan,
+//      meta: {
+//        requiresAuth: true
+//      }
+//    },
     {
       path: "/users/:userID/grocerylist",
       name: "user-grocery-list",
