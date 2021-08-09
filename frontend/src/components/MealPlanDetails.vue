@@ -101,7 +101,5 @@ export default {
 #dinner{
   margin: auto;
 }
-#placeholder{
-  text-decoration: wavy;
-}
+
 </style>
