@@ -3,24 +3,22 @@ import axios from 'axios';
 
 export default {
 
-    addUserMealPlan(userID, newMealPlan) {
-        return axios.post(`/users/${userID}/mealplans`, newMealPlan)
+    addUserMealPlan(newMealPlan) {
+        return axios.post(`/users/mealplans`, newMealPlan)
     },
 
     //deleteUserMealPlan(userID, mealPlanID)
 
-//    getAllUserMealPlans(userID) {
-//        return axios.get(`/users/${userID}/mealplans`);
-//    },
-
     getUserMealPlanById(userID) {
         return axios.get(`/users/${userID}/mealplans`);
     },
+                                                //just the day and meal in planPlacementInfo
+    addRecipeToUserMealPlan(userID, recipeID, planPlacementInfo) {
+        return axios.post(`/users/${userID}/mealplans/recipes/${recipeID}`, planPlacementInfo);
+    },
 
-    addRecipeToUserMealPlan(mealPlanID, recipeID, planPlacementInfo) {
-        return axios.post(`/mealplans/${mealPlanID}/recipes/${recipeID}`, planPlacementInfo);
+    deleteRecipeFromUserMealPlan(userID, recipeID){
+        return axios.post(`/users/${userID}/mealplans/recipes/${recipeID}`);
     }
-
-    //deleteRecipeFromUserMealPlan(mealPlanID, recipeID)
 
 }
