@@ -17,9 +17,13 @@
   
     </div>
     
+  
+
 
     <div class="search">
-      <input type="text" placeholder="Search..." v-model="userSearchTerm">
+      
+      <input type="text" placeholder="Search..." results = "0" v-model="userSearchTerm">
+      <input type="image" class="searchbutton" name="search" src="http://www.spheretekk.com/bc/images/search-icon.gif" alt="Search">
       <button v-on:click.prevent="searchRecipesFromAPI(userSearchTerm)" class="searchRecipes">Search For Recipes</button>
     </div>
 
@@ -175,6 +179,12 @@ export default {
     float: right;
     margin: 7px;
   }
+ 
+}
+ .search.searchbutton {
+position:absolute;
+top:23%;
+right:5px;
 }
 
 #popular{
