@@ -205,7 +205,7 @@ h5 {
   }
   
   .btn:hover {
-    background-color:grey;
+    background-color:rgba(255, 166, 0, 0.626);
     border-radius: 10px;
   }
   
