@@ -75,7 +75,7 @@ CREATE TABLE user_meal_plan (
 CREATE TABLE recipe_ingredients (
         ingredient_id int NOT NULL,
         recipe_id int NOT NULL,
-        measurement_unit varchar(50),
+        measurement_unit varchar(50) NULL,
         measurement_amount numeric(6,3) NOT NULL,
         
         CONSTRAINT FK_recipe_ingredients_recipes FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id),
@@ -179,10 +179,10 @@ INSERT INTO recipe_ingredients (ingredient_id, recipe_id, measurement_unit, meas
 INSERT INTO recipe_ingredients (ingredient_id, recipe_id, measurement_unit, measurement_amount) VALUES(21, 4, 'teaspoon', 1);
 
 INSERT INTO recipe_ingredients (ingredient_id, recipe_id, measurement_unit, measurement_amount) VALUES(22, 5, 'cup', 1);
-INSERT INTO recipe_ingredients (ingredient_id, recipe_id, measurement_unit, measurement_amount) VALUES(23, 5, 'ice cubes', 15);
+INSERT INTO recipe_ingredients (ingredient_id, recipe_id, measurement_unit, measurement_amount) VALUES(23, 5, null, 15);
 INSERT INTO recipe_ingredients (ingredient_id, recipe_id, measurement_unit, measurement_amount) VALUES(24, 5, 'teaspoon', 1);
 INSERT INTO recipe_ingredients (ingredient_id, recipe_id, measurement_unit, measurement_amount) VALUES(25, 5, 'tablespoon', 1);
-INSERT INTO recipe_ingredients (ingredient_id, recipe_id, measurement_unit, measurement_amount) VALUES(26, 5, 'banana', 1);
+INSERT INTO recipe_ingredients (ingredient_id, recipe_id, measurement_unit, measurement_amount) VALUES(26, 5, null, 1);
 
 INSERT INTO recipe_ingredients (ingredient_id, recipe_id, measurement_unit, measurement_amount) VALUES(27, 6, 'oz', 20);
 INSERT INTO recipe_ingredients (ingredient_id, recipe_id, measurement_unit, measurement_amount) VALUES(28, 6, 'tube', 1);
