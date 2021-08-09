@@ -13,6 +13,8 @@ public class JdbcMealPlanDao implements MealPlanDao{
 
     private final JdbcTemplate jdbcTemplate;
 
+
+
     public JdbcMealPlanDao(JdbcTemplate jdbcTemplate){
         this.jdbcTemplate=jdbcTemplate;
     }
@@ -71,43 +73,103 @@ public class JdbcMealPlanDao implements MealPlanDao{
 
     }
 
-    public MealPlan getMealPlanByUser(long mealPlanId){
+    public MealPlan getMealPlanByUser(long userId){
         MealPlan mealPlan = new MealPlan();
         RecipeList[] recipeLists = createRecipeListArray();
 
-        String sql = "select meal_plan_name, user_id " +
-                     "from user_meal_plan " +
-                     "where meal_plan_id = ?";
+        String sql3 = "select meal_plan_id from user_meal_plan " +
+                     "where user_id =?";
+        SqlRowSet mealPlanResults = jdbcTemplate.queryForRowSet(sql3, userId);
 
-        SqlRowSet mealPlanNameResult= jdbcTemplate.queryForRowSet(sql,mealPlanId);
-        if (mealPlanNameResult.next()){
-            mealPlan.setMealPlanName(mealPlanNameResult.getString("meal_plan_name"));
-            mealPlan.setMealPlanId(mealPlanId);
-            mealPlan.setUserId(mealPlanNameResult.getLong("user_id"));
+
+        if (mealPlanResults.next()) {
+
+            long mealPlanId = mealPlanResults.getLong("meal_plan_id");
+            String sql = "select meal_plan_name, user_id " +
+                    "from user_meal_plan " +
+                    "where meal_plan_id = ?";
+
+            SqlRowSet mealPlanNameResult = jdbcTemplate.queryForRowSet(sql, mealPlanId);
+            if (mealPlanNameResult.next()) {
+                mealPlan.setMealPlanName(mealPlanNameResult.getString("meal_plan_name"));
+                mealPlan.setMealPlanId(mealPlanId);
+                mealPlan.setUserId(mealPlanNameResult.getLong("user_id"));
+            }
+
+            String sql2 = "select recipe_id, day, meal " +
+                    "from meal_plan_user_recipes " +
+                    "where meal_plan_id=?";
+            SqlRowSet recipeIdResults = jdbcTemplate.queryForRowSet(sql2, mealPlanId);
+            while (recipeIdResults.next()) {
+                String day = recipeIdResults.getString("day");
+                String meal = recipeIdResults.getString("meal");
+                int index = mealPlan.findIndex(day, meal);
+                recipeLists[index].addToList(recipeIdResults.getLong("recipe_id"));
+
+            }
+            for (int i = 0; i < 21; i++) {
+                mealPlan.setOrganizedRecipeAtIndex(i, recipeLists[i].getArray());
+            }
         }
-
-        String sql2 = "select recipe_id, day, meal " +
-                      "from meal_plan_user_recipes " +
-                      "where meal_plan_id=?";
-        SqlRowSet recipeIdResults = jdbcTemplate.queryForRowSet(sql2, mealPlanId);
-        while(recipeIdResults.next()){
-            String day = recipeIdResults.getString("day");
-            String meal = recipeIdResults.getString("meal");
-            int index = mealPlan.findIndex(day, meal);
-            recipeLists[index].addToList(recipeIdResults.getLong("recipe_id"));
-
-        }
-        for (int i = 0; i< 21; i++){
-            mealPlan.setOrganizedRecipeAtIndex(i, recipeLists[i].getArray());
-        }
-
         return mealPlan;
+
     }
 
     public void deleteRecipeFromMealPlan(long mealPlanId, long recipeId){
 
-        String sql = "delete from ";
+        String sql = "delete from meal_plan_user_recipes " +
+                     "where meal_plan_id=? and recipe_id=?";
+        jdbcTemplate.update(sql,mealPlanId,recipeId);
 
+    }
+
+    public Ingredient[] groceryList(long mealPlanId){
+
+        List<Ingredient> ingredients = new ArrayList<>();
+        List<Ingredient> orderedIngredients = new ArrayList<>();
+
+        String sql = "select recipe_id from meal_plan_user_recipes " +
+                     "where meal_plan_id=?";
+        SqlRowSet recipeIdResults = jdbcTemplate.queryForRowSet(sql,mealPlanId);
+
+        while (recipeIdResults.next()){
+            ingredients = addToListOfIngredients((recipeIdResults.getLong("recipe_id")),ingredients);
+        }
+        Set<String> names = new HashSet<>();
+        for (Ingredient ingredient : ingredients){
+            names.add(ingredient.getIngredientName());
+        }
+
+        for (String name :  names){
+
+            for (Ingredient ingredient : ingredients){
+                if (ingredient.getIngredientName().equals(name)){
+                    orderedIngredients.add(ingredient);
+                }
+            }
+        }
+
+        return orderedIngredients.toArray(new Ingredient[0]);
+
+    }
+
+    private List<Ingredient> addToListOfIngredients(long recipeId, List<Ingredient> ingredients) {
+
+
+        String sql = "select * from recipes " +
+                "where recipe_id=?";
+        String sql2 = "select ingredient_id, measurement_amount, measurement_unit, ingredients.ingredient_name " +
+                "from recipe_ingredients " +
+                "join ingredients using (ingredient_id) " +
+                "where recipe_id=?";
+        SqlRowSet recipeResults = jdbcTemplate.queryForRowSet(sql, recipeId);
+        if (recipeResults.next()){
+
+            SqlRowSet ingredientResults = jdbcTemplate.queryForRowSet(sql2, recipeId);
+            ingredients= mapRowsToIngredients(ingredientResults, ingredients);
+
+        }
+        return ingredients;
     }
 
     public RecipeList[] createRecipeListArray(){
@@ -116,6 +178,20 @@ public class JdbcMealPlanDao implements MealPlanDao{
             recipeList[i] = new RecipeList();
         }
         return recipeList;
+    }
+
+
+
+    public List<Ingredient> mapRowsToIngredients(SqlRowSet results, List<Ingredient> ingredients){
+        while (results.next()){
+            Ingredient ingredient = new Ingredient();
+            ingredient.setIngredientId(results.getLong("ingredient_id"));
+            ingredient.setIngredientName(results.getString("ingredient_name"));
+            ingredient.setMeasurementAmount(results.getDouble("measurement_amount"));
+            ingredient.setMeasurementUnit(results.getString("measurement_unit"));
+            ingredients.add(ingredient);
+        }
+        return ingredients;
     }
 
 

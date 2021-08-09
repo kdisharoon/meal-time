@@ -2,10 +2,7 @@ package com.techelevator.controller;
 
 
 import com.techelevator.dao.MealPlanDao;
-import com.techelevator.model.MealPlan;
-import com.techelevator.model.OrganizedRecipe;
-import com.techelevator.model.Recipe;
-import com.techelevator.model.User;
+import com.techelevator.model.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -59,6 +56,13 @@ public class MealPlanController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(path= "/mealplans/{mealPlanId}/recipes/{recipeId}", method = RequestMethod.DELETE)
     public void deleteRecipeFromMealPlan(@PathVariable long mealPlanId, @PathVariable long recipeId){
+        mealPlanDao.deleteRecipeFromMealPlan(mealPlanId,recipeId);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(path = "/mealplans/{mealPlanId}", method = RequestMethod.GET)
+    public Ingredient[] groceryList(@PathVariable long mealPlanId){
+        return mealPlanDao.groceryList(mealPlanId);
 
     }
 
