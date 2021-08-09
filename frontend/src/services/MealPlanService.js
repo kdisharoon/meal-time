@@ -9,12 +9,12 @@ export default {
 
     //deleteUserMealPlan(userID, mealPlanID)
 
-    getAllUserMealPlans(userID) {
-        return axios.get(`/users/${userID}/mealplans`);
-    },
+//    getAllUserMealPlans(userID) {
+//        return axios.get(`/users/${userID}/mealplans`);
+//    },
 
-    getUserMealPlanById(mealPlanID) {
-        return axios.get(`/users/mealplans/${mealPlanID}`);
+    getUserMealPlanById(userID) {
+        return axios.get(`/users/${userID}/mealplans`);
     },
 
     addRecipeToUserMealPlan(mealPlanID, recipeID, planPlacementInfo) {
