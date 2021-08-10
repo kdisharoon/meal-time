@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RecipeList {
+    // class is created to allow recipes to be added to an array of objects
+    // list is used instead of array to allow for resizing as the amount of recipes per day/meal is unknown
 
     private List<Long> rIds;
 
