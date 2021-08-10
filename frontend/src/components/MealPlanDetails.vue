@@ -1,17 +1,5 @@
 <template>
   <div class="meal-plan-details">
-<<<<<<< HEAD
-   <h2 style="text-align:center"> My Meal Plan</h2>
-    
-    <div v-for="thisMeal in mealPlan.recipes.slice(0,1)" v-bind:key="thisMeal.aFakeNumber" class="meal-plan-meal">
-       <div id="dayTwo" v-for= "day in days" :key="day.name"> {{ day }} <br> 
-       <div id="breakfast" ><h6>Breakfast</h6></div>
-       <div id="placeholder">recipes go here</div>
-       <div id="lunch" ><h6>Lunch</h6></div>
-       <div id="placeholder">recipes go here</div>
-       <div id="dinner"><h6>Dinner</h6></div>
-       <div id="placeholder">recipes go here</div>
-=======
 
     <h2 style="text-align: center">{{mealPlan.mealPlanName}}</h2>
 
@@ -67,7 +55,6 @@
           <div id="placeholder">recipes go here</div>
           <div id="dinner"><h6>Dinner</h6></div>
           <div id="placeholder">recipes go here</div>
->>>>>>> a89f9d85aeb8fd8b197983c678aeb799a56de5e2
        
           <div v-for="recipeID in thisMeal.recipeIds" v-bind:key="recipeID" class="recipe"> 
             <p> {{ getRecipeName(recipeID) }} </p>
@@ -129,7 +116,7 @@ export default {
 
     addMealPlan() {
       if (this.mealPlanId === 0) {
-        mealPlanService.addUserMealPlan(this.newPlan).then(response => {
+        mealPlanService.addUserMealPlan(this.mealPlan).then(response => {
           if (response.status === 201) {
             alert("Successfully named your meal plan!");
             this.$router.go();          
