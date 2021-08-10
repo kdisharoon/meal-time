@@ -22,7 +22,7 @@ public class JdbcMealPlanDao implements MealPlanDao{
 
 
 
-    public void createMealPlan(MealPlan mealPlan){
+    public MealPlan createMealPlan(MealPlan mealPlan){
         String sql2 = "select * from user_meal_plan " +
                       "where user_id =? and meal_plan_name=?";
         SqlRowSet mealPlanResult = jdbcTemplate.queryForRowSet(sql2,mealPlan.getUserId(),mealPlan.getMealPlanName());
@@ -34,6 +34,17 @@ public class JdbcMealPlanDao implements MealPlanDao{
         String sql = "insert into user_meal_plan (user_id, meal_plan_name) " +
                      "values (?,?)";
         jdbcTemplate.update(sql, mealPlan.getUserId(), mealPlan.getMealPlanName());
+
+        String sql3 = "select meal_plan_id from user_meal_plan where user_id=?";
+
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql3, mealPlan.getUserId());
+        if (result.next()){
+            mealPlan.setMealPlanId(result.getLong("meal_plan_id"));
+        }
+        return mealPlan;
+
+
+
 
 
     }

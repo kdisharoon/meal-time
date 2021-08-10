@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 public interface MealPlanDao {
 
-    void createMealPlan(MealPlan mealPlan);
+    MealPlan createMealPlan(MealPlan mealPlan);
 
     void addRecipeToUserMealPlan(long mealPlanId, long recipeId, OrganizedRecipe organizedRecipe);
 
