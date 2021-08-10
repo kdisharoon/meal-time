@@ -1,18 +1,17 @@
 BEGIN TRANSACTION;
 
 DROP TABLE IF EXISTS recipe_ingredients;
-DROP TABLE IF EXISTS user_grocery_list;
 DROP TABLE IF EXISTS meal_plan_user_recipes;
 DROP TABLE IF EXISTS user_recipes;
 DROP TABLE IF EXISTS user_meal_plan;
-DROP TABLE IF EXISTS ingredients;
+DROP TABLE IF EXISTS ingredients CASCADE;
 DROP TABLE IF EXISTS recipes;
-DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS users CASCADE;
 
 DROP SEQUENCE IF EXISTS seq_user_meal_plan_id;
 DROP SEQUENCE IF EXISTS seq_recipe_id;
 DROP SEQUENCE IF EXISTS seq_ingredient_id;
-DROP SEQUENCE IF EXISTS seq_user_id;
+DROP SEQUENCE IF EXISTS seq_user_id CASCADE;
 
 
 CREATE SEQUENCE seq_user_id
@@ -45,6 +44,7 @@ CREATE TABLE users (
 	username varchar(50) NOT NULL,
 	password_hash varchar(200) NOT NULL,
 	role varchar(50) NOT NULL,
+	
 	CONSTRAINT PK_user PRIMARY KEY (user_id)
 );
 
@@ -95,26 +95,14 @@ CREATE TABLE meal_plan_user_recipes (
 --        CONSTRAINT pk_meal_plan_user_recipe PRIMARY KEY (day)
 );
 
-CREATE TABLE user_grocery_list (
-        grocery_list_id int NOT NULL PRIMARY KEY,
-        user_id int DEFAULT nextval('seq_user_id'::regclass) NOT NULL,
-        ingredient_id int NOT NULL,
-        recipe_id int NOT NULL,
-        
-        CONSTRAINT fk_user_grocery_list_users FOREIGN KEY (user_id) REFERENCES users(user_id),
-        CONSTRAINT fk_user_grocery_list_ingredients FOREIGN KEY (ingredient_id) REFERENCES ingredients(ingredient_id)
-);
-
 CREATE TABLE recipe_ingredients (
         ingredient_id int NOT NULL,
         recipe_id int NOT NULL,
         measurement_unit varchar(50) NULL,
         measurement_amount numeric(6,3) NOT NULL,
-        grocery_list_id int NULL,
         
         CONSTRAINT FK_recipe_ingredients_recipes FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id),
-        CONSTRAINT FK_recipe_ingredients_ingredients FOREIGN KEY (ingredient_id) REFERENCES ingredients(ingredient_id),
-        CONSTRAINT FK_recipe_ingredients_user_grocery_list FOREIGN KEY (grocery_list_id) REFERENCES user_grocery_list(grocery_list_id)
+        CONSTRAINT FK_recipe_ingredients_ingredients FOREIGN KEY (ingredient_id) REFERENCES ingredients(ingredient_id)
 --        CONSTRAINT pk_recipe_ingredients PRIMARY KEY (ingredient_id, recipe_id, measurement_amount)
 );
 
