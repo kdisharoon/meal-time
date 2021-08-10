@@ -125,6 +125,7 @@ public class JdbcMealPlanDao implements MealPlanDao{
 
     public Ingredient[] groceryList(long mealPlanId){
 
+
         List<Ingredient> ingredients = new ArrayList<>();
         List<Ingredient> orderedIngredients = new ArrayList<>();
 

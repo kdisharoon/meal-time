@@ -23,7 +23,7 @@ public class MealPlanController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(path = "/users/{userId}/mealplans", method = RequestMethod.POST)
+    @RequestMapping(path = "/users/mealplans", method = RequestMethod.POST)
     public long addMealPlanToUser(@RequestBody MealPlan mealPlan){
 
         try{
@@ -34,9 +34,9 @@ public class MealPlanController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(path = "/mealplans/{mealPlanId}/recipes/{recipeId}", method = RequestMethod.POST)
-    public void addRecipeToUserMealPlan(@PathVariable long mealPlanId, @PathVariable long recipeId, @RequestBody OrganizedRecipe organizedRecipe){
-        mealPlanDao.addRecipeToUserMealPlan(mealPlanId, recipeId, organizedRecipe);
+    @RequestMapping(path = "/users/{userId}/mealplans/recipes/{recipeId}", method = RequestMethod.POST)
+    public void addRecipeToUserMealPlan(@PathVariable long userId, @PathVariable long recipeId, @RequestBody OrganizedRecipe organizedRecipe){
+        mealPlanDao.addRecipeToUserMealPlan(userId, recipeId, organizedRecipe);
 
     }
 
@@ -54,17 +54,18 @@ public class MealPlanController {
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @RequestMapping(path= "/mealplans/{mealPlanId}/recipes/{recipeId}", method = RequestMethod.DELETE)
-    public void deleteRecipeFromMealPlan(@PathVariable long mealPlanId, @PathVariable long recipeId){
-        mealPlanDao.deleteRecipeFromMealPlan(mealPlanId,recipeId);
+    @RequestMapping(path= "/users/{userId}/mealplans/recipes/{recipeId}", method = RequestMethod.DELETE)
+    public void deleteRecipeFromMealPlan(@PathVariable long userId, @PathVariable long recipeId){
+        mealPlanDao.deleteRecipeFromMealPlan(userId,recipeId);
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(path = "/mealplans/{mealPlanId}", method = RequestMethod.GET)
+    @RequestMapping(path = "/users/{userId}/grocerylist", method = RequestMethod.GET)
     public Ingredient[] groceryList(@PathVariable long mealPlanId){
         return mealPlanDao.groceryList(mealPlanId);
-
     }
+
+
 
 
 
