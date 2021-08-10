@@ -4,7 +4,11 @@
 <div id="paper">
   <div id="pattern">
     <div id="content">
-      List Input Here X - Ryan No Smart Enuff two Make werk
+      <ol>
+        <li v-for="item in groceryList" v-bind:key="item.ingredientId" class="shopping-list-item">
+            {{ item.measurementAmount }} {{ item.measurementUnit }} {{ item.ingredientName }}
+          </li>
+        </ol>
       </div>
   </div>
 </div>
@@ -94,4 +98,6 @@ body {
 
 
 /* Are you paying detailed attention to my commits? */
+
+/*Commit commit commit*/
 </style>
