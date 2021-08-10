@@ -61,8 +61,8 @@ public class MealPlanController {
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(path = "/users/{userId}/grocerylist", method = RequestMethod.GET)
-    public Ingredient[] groceryList(@PathVariable long mealPlanId){
-        return mealPlanDao.groceryList(mealPlanId);
+    public Ingredient[] groceryList(@PathVariable long userId){
+        return mealPlanDao.groceryList(userId);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)

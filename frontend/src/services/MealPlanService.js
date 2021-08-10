@@ -10,9 +10,9 @@ export default {
     getUserMealPlanById(userID) {
         return axios.get(`/users/${userID}/mealplans`);
     },
-                                                //just the day and meal in planPlacementInfo
-    addRecipeToUserMealPlan(userID, recipeID, planPlacementInfo) {
-        return axios.post(`/users/${userID}/mealplans/recipes/${recipeID}`, planPlacementInfo);
+
+    addRecipeToUserMealPlan(userID, recipeID, dayAndMeal) {
+        return axios.post(`/users/${userID}/mealplans/recipes/${recipeID}`, dayAndMeal);
     },
 
     deleteRecipeFromUserMealPlan(userID, recipeID){
@@ -20,7 +20,7 @@ export default {
     },
 
     renameMealPlan(userID, newName) {
-        return axios.put(`/users/${userID}/mealplans?mealplanname=${newName}`);
+        return axios.put(`/users/${userID}/mealplans?mealPlanName=${newName}`);
     }
 
 }

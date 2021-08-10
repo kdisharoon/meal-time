@@ -10,10 +10,15 @@
   <div v-else >
     <button v-on:click.prevent="getNewRecipesFromAPI" class="addRecipes">Add 10 Recipes to Database from External Source</button>
     
-    <div class="search">
-      <input type="text" placeholder="Search..." v-model="userSearchTerm">
-      <button v-on:click.prevent="searchRecipesFromAPI(userSearchTerm)" class="searchRecipes">Search For Recipes</button>
+   <!-- Load an icon library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ 
+  <form action="">
+     <div class="form-group">
+       <input type="text" placeholder="Search..." v-model="userSearchTerm">
+      <button class ="searchButton" v-on:click.passive="searchRecipesFromAPI(userSearchTerm)" type="submit"><i class="fa fa-search"></i></button>
     </div>
+  </form>
     
     
     <div class="container card-deck">
@@ -122,30 +127,45 @@ export default {
     border-radius: 5px; 
   } */
 
-.search input[type=text]{
-  padding: 15px 15px;
-  border: none;
-  width: 200px;
-  height: 25px;
-  text-decoration: none;
-  font-size: 16px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
+.form-group {
+ display: -webkit-flex;
+ -webkit-flex-wrap: wrap;
+ display: flex;
+ flex-wrap: nowrap;
+ margin-bottom: 1rem;
+ display: inline-block;
+ 
 }
-@media screen and (max-width: 100px){
-  .search input[type=text]{
-    float: none;
-    display: block;
-    text-align: left;
-    width: 10%;
-    margin: 0;
-    padding: 14px;
-
-  }
-  .search {
-    float: right;
-    margin: 7px;
-  }
+ 
+input {
+ flex: 1 1 auto;
+ font-weight: 400;
+ height: calc(1.5em + 1rem + 2px);
+ padding: .5rem 1rem;
+ font-size: 14px;
+ line-height: 1.5;
+ color: #495057;
+ background-color: #fff;
+ border: 1px solid #ced4da;
+ border-radius: .3rem 0 0 .3rem;
+ outline: 0;
+ 
+}
+ 
+.searchButton {
+ font-weight: 400;
+ color: #ffffff;
+ cursor: pointer;
+ text-align: center;
+ user-select: none;
+ border: 1px solid transparent; 
+ padding: .5rem 1rem;
+ font-size: 14px;
+ line-height: 1.5;
+ border-radius: 0 .3rem .3rem 0;
+ background-color: #007bff;
+ outline: 0;
+ 
 }
 
   #allRecipe{
