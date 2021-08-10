@@ -14,12 +14,8 @@
         </button>
       </div>
 
-      <div class="rename-meal-plan-wrapper" v-if="mealPlan.mealPlanId > 0">
-        <button id="btnRenameMealPlan" type="button" class="btn" v-on:click="flipRevealButton">
-          Rename Your Meal Plan
-          </button>
-      </div>
       
+     
 
       <div hidden id="isHiding" class="container mealPlanStyle">
         <form v-on:submit.prevent="checkAddMealPlan" id="planForm">
@@ -48,24 +44,78 @@
 
     <div id="plan-cards-wrapper" v-if="mealPlan.mealPlanId > 0">
       <div v-for="thisMeal in mealPlan.recipes.slice(0,1)" v-bind:key="thisMeal.aFakeNumber" class="meal-plan-meal">
-        <div id="dayTwo" v-for= "day in days" :key="day.name"> {{ day }} <br> 
-          <div id="breakfast" ><h6>Breakfast</h6></div>
-          <div id="placeholder">recipes go here</div>
-          <div id="lunch" ><h6>Lunch</h6></div>
-          <div id="placeholder">recipes go here</div>
-          <div id="dinner"><h6>Dinner</h6></div>
-          <div id="placeholder">recipes go here</div>
+          <div id="daysOfWeek">
+            <div class="day">Sunday
+              <div class="mealtime">
+              <div class="breakfast">Breakfast<div>recipes go here </div></div>
+              <div class="lunch">Lunch<div>recipes go here</div></div>
+              <div class="dinner">Dinner<div>recipes go here</div></div>
+            </div>
+            </div>
+           <div class="day">Monday
+             <div class="mealtime">
+              <div class="breakfast">Breakfast<div>recipes go here</div></div>
+              <div class="lunch">Lunch<div>recipes go here</div></div>
+              <div class="dinner">Dinner<div>recipes go here</div></div>
+            </div>
+            </div>
+            <div class="day">Tuesday
+              <div class="mealtime">
+              <div class="breakfast">Breakfast<div>recipes go here</div></div>
+              <div class="lunch">Lunch<div>recipes go here</div></div>
+              <div class="dinner">Dinner<div>recipes go here</div></div>
+            </div>
+            </div>
+            <div class="day">Wednesday
+              <div class="mealtime">
+              <div class="breakfast">Breakfast<div>recipes go here</div></div>
+              <div class="lunch">Lunch<div>recipes go here</div></div>
+              <div class="dinner">Dinner<div>recipes go here</div></div>
+            </div>
+            </div>
+            <div class="day">Thursday
+              <div class="mealtime">
+              <div class="breakfast">Breakfast<div>recipes go here</div></div>
+              <div class="lunch">Lunch<div>recipes go here</div></div>
+              <div class="dinner">Dinner<div>recipes go here</div></div>
+            </div>
+            </div>
+            <div class="day">Friday
+              <div class="mealtime">
+              <div class="breakfast">Breakfast<div>recipes go here</div></div>
+              <div class="lunch">Lunch<div>recipes go here</div></div>
+              <div class="dinner">Dinner<div>recipes go here</div></div>
+            </div>
+            </div>
+            <div class="day">Saturday
+              <div class="mealtime">
+              <div class="breakfast">Breakfast<div>recipes go here</div></div>
+              <div class="lunch">Lunch<div>recipes go here</div></div>
+              <div class="dinner">Dinner<div>recipes go here</div></div>
+              </div>
+            </div>
+          </div>
        
           <div v-for="recipeID in thisMeal.recipeIds" v-bind:key="recipeID" class="recipe"> 
             <p> {{ getRecipeName(recipeID) }} </p>
             <!-- add a link to the recipe details page to each recipe's name -->         
           </div>
-        </div>
+       
       </div>
     </div>
-
-
-
+    <div id="mealPlanButts">
+<div class="rename-meal-plan-wrapper" v-if="mealPlan.mealPlanId > 0">
+        <button id="btnRenameMealPlan" type="button" class="btn" v-on:click="flipRevealButton">
+          Rename Your Meal Plan
+          </button>
+      </div>
+      
+ <div class="rename-meal-plan-wrapper" v-if="mealPlan.mealPlanId > 0">
+        <button id="btnRenameMealPlan" type="button" class="btn" v-on:click="flipRevealButton">
+          Clear your meal plan
+          </button>
+      </div>
+</div>
   </div>
 
 </template>
@@ -93,7 +143,7 @@ export default {
               }
           ]
       },
-      days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    
     }
   },
 
@@ -176,36 +226,37 @@ export default {
 </script>
 
 <style>
-.meal-plan-meal{
+#mealPlanButts{
   display: flex;
   justify-content: space-around;
-  flex-wrap: wrap;
-  margin-top: 10px;
 }
-
-#dayTwo{
+.day{
   background-color: aliceblue;
-  display: grid;
-  grid-auto-columns: 200px;
-  height:500px;
+  display: flex;
+  font-size: 20px;
+  flex-direction: column;
+  border: 1px solid black;
+  border-radius: 3px;
+  text-align: center;
+  height: 400px;
   width: 200px;
-  justify-content: center;
-  
-  border:1px solid black;
-  border-radius: 8px;
   text-decoration: underline;
-  padding-left: 5px;
+}
+.mealtime{
+  display:grid;
+  grid-template-rows: 125px 125px 125px;
+  padding:5px;
+  text-align: left;
+  max-width: 180px;
 }
 
-#breakfast{
-  margin: auto;
- 
-}
-#lunch{
-  margin: auto;
-}
-#dinner{
-  margin: auto;
+#daysOfWeek{
+  display: flex;
+  justify-content: space-evenly;
+  margin: 20px;
+  margin-top: 75px;
+  flex-wrap: wrap;
+  text-align: left;
 }
 
 </style>
