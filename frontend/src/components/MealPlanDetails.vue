@@ -14,12 +14,8 @@
         </button>
       </div>
 
-      <div class="rename-meal-plan-wrapper" v-if="mealPlan.mealPlanId > 0">
-        <button id="btnRenameMealPlan" type="button" class="btn" v-on:click="flipRevealButton">
-          Rename Your Meal Plan
-          </button>
-      </div>
       
+     
 
       <div hidden id="isHiding" class="container mealPlanStyle">
         <form v-on:submit.prevent="checkAddMealPlan" id="planForm">
@@ -49,40 +45,54 @@
     <div id="plan-cards-wrapper" v-if="mealPlan.mealPlanId > 0">
       <div v-for="thisMeal in mealPlan.recipes.slice(0,1)" v-bind:key="thisMeal.aFakeNumber" class="meal-plan-meal">
           <div id="daysOfWeek">
-            <div id="sunday">Sunday
-              <div id="breakfast">Breakfast<div>recipes go here</div></div>
-              <div id="lunch">Lunch<div>recipes go here</div></div>
-              <div id="dinner">Dinner<div>recipes go here</div></div>
+            <div class="day">Sunday
+              <div class="mealtime">
+              <div class="breakfast">Breakfast<div>recipes go here </div></div>
+              <div class="lunch">Lunch<div>recipes go here</div></div>
+              <div class="dinner">Dinner<div>recipes go here</div></div>
             </div>
-           <div id="monday">Monday
-              <div id="breakfast">Breakfast<div>recipes go here</div></div>
-              <div id="lunch">Lunch<div>recipes go here</div></div>
-              <div id="dinner">Dinner<div>recipes go here</div></div>
             </div>
-            <div id="tuesday">Tuesday
-              <div id="breakfast">Breakfast<div>recipes go here</div></div>
-              <div id="lunch">Lunch<div>recipes go here</div></div>
-              <div id="dinner">Dinner<div>recipes go here</div></div>
+           <div class="day">Monday
+             <div class="mealtime">
+              <div class="breakfast">Breakfast<div>recipes go here</div></div>
+              <div class="lunch">Lunch<div>recipes go here</div></div>
+              <div class="dinner">Dinner<div>recipes go here</div></div>
             </div>
-            <div id="wednesday">Wednesday
-              <div id="breakfast">Breakfast<div>recipes go here</div></div>
-              <div id="lunch">Lunch<div>recipes go here</div></div>
-              <div id="dinner">Dinner<div>recipes go here</div></div>
             </div>
-            <div id="thursday">Thursday
-              <div id="breakfast">Breakfast<div>recipes go here</div></div>
-              <div id="lunch">Lunch<div>recipes go here</div></div>
-              <div id="dinner">Dinner<div>recipes go here</div></div>
+            <div class="day">Tuesday
+              <div class="mealtime">
+              <div class="breakfast">Breakfast<div>recipes go here</div></div>
+              <div class="lunch">Lunch<div>recipes go here</div></div>
+              <div class="dinner">Dinner<div>recipes go here</div></div>
             </div>
-            <div id="friday">Friday
-              <div id="breakfast">Breakfast<div>recipes go here</div></div>
-              <div id="lunch">Lunch<div>recipes go here</div></div>
-              <div id="dinner">Dinner<div>recipes go here</div></div>
             </div>
-            <div id="saturday">Saturday
-              <div id="breakfast">Breakfast<div>recipes go here</div></div>
-              <div id="lunch">Lunch<div>recipes go here</div></div>
-              <div id="dinner">Dinner<div>recipes go here</div></div>
+            <div class="day">Wednesday
+              <div class="mealtime">
+              <div class="breakfast">Breakfast<div>recipes go here</div></div>
+              <div class="lunch">Lunch<div>recipes go here</div></div>
+              <div class="dinner">Dinner<div>recipes go here</div></div>
+            </div>
+            </div>
+            <div class="day">Thursday
+              <div class="mealtime">
+              <div class="breakfast">Breakfast<div>recipes go here</div></div>
+              <div class="lunch">Lunch<div>recipes go here</div></div>
+              <div class="dinner">Dinner<div>recipes go here</div></div>
+            </div>
+            </div>
+            <div class="day">Friday
+              <div class="mealtime">
+              <div class="breakfast">Breakfast<div>recipes go here</div></div>
+              <div class="lunch">Lunch<div>recipes go here</div></div>
+              <div class="dinner">Dinner<div>recipes go here</div></div>
+            </div>
+            </div>
+            <div class="day">Saturday
+              <div class="mealtime">
+              <div class="breakfast">Breakfast<div>recipes go here</div></div>
+              <div class="lunch">Lunch<div>recipes go here</div></div>
+              <div class="dinner">Dinner<div>recipes go here</div></div>
+              </div>
             </div>
           </div>
        
@@ -93,9 +103,19 @@
        
       </div>
     </div>
-
-
-
+    <div id="mealPlanButts">
+<div class="rename-meal-plan-wrapper" v-if="mealPlan.mealPlanId > 0">
+        <button id="btnRenameMealPlan" type="button" class="btn" v-on:click="flipRevealButton">
+          Rename Your Meal Plan
+          </button>
+      </div>
+      
+ <div class="rename-meal-plan-wrapper" v-if="mealPlan.mealPlanId > 0">
+        <button id="btnRenameMealPlan" type="button" class="btn" v-on:click="flipRevealButton">
+          Clear your meal plan
+          </button>
+      </div>
+</div>
   </div>
 
 </template>
@@ -206,79 +226,37 @@ export default {
 </script>
 
 <style>
-#sunday{
+#mealPlanButts{
+  display: flex;
+  justify-content: space-around;
+}
+.day{
   background-color: aliceblue;
   display: flex;
+  font-size: 20px;
   flex-direction: column;
   border: 1px solid black;
   border-radius: 3px;
   text-align: center;
-}
-#monday{
-  background-color: aliceblue;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid black;
-  border-radius: 3px;
-  text-align: center;
-}
-#tuesday{
-  background-color: aliceblue;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid black;
-  border-radius: 3px;
-  text-align: center;
-}
-#wednesday{
-  background-color: aliceblue;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid black;
-  border-radius: 3px;
-  text-align: center;
-}
-#thursday{
-  background-color: aliceblue;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid black;
-  border-radius: 3px;
-  text-align: center;
-}
-#friday{
-  background-color: aliceblue;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid black;
-  border-radius: 3px;
-  text-align: center;
-}
-#saturday{
-  background-color: aliceblue;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid black;
-  border-radius: 3px;
-  text-align: center;
-}
-#breakfast{
-text-align: left;
-text-decoration: underline;
-}
-#lunch{
-  text-align: left;
+  height: 400px;
+  width: 200px;
   text-decoration: underline;
 }
-#dinner{
+.mealtime{
+  display:grid;
+  grid-template-rows: 125px 125px 125px;
+  padding:5px;
   text-align: left;
-  text-decoration: underline;
+  max-width: 180px;
 }
 
 #daysOfWeek{
   display: flex;
   justify-content: space-evenly;
-  margin: 10px;
+  margin: 20px;
+  margin-top: 75px;
+  flex-wrap: wrap;
+  text-align: left;
 }
 
 </style>
