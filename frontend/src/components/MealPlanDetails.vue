@@ -48,19 +48,49 @@
 
     <div id="plan-cards-wrapper" v-if="mealPlan.mealPlanId > 0">
       <div v-for="thisMeal in mealPlan.recipes.slice(0,1)" v-bind:key="thisMeal.aFakeNumber" class="meal-plan-meal">
-        <div id="dayTwo" v-for= "day in days" :key="day.name"> {{ day }} <br> 
-          <div id="breakfast" ><h6>Breakfast</h6></div>
-          <div id="placeholder">recipes go here</div>
-          <div id="lunch" ><h6>Lunch</h6></div>
-          <div id="placeholder">recipes go here</div>
-          <div id="dinner"><h6>Dinner</h6></div>
-          <div id="placeholder">recipes go here</div>
+          <div id="daysOfWeek">
+            <div id="sunday">Sunday
+              <div id="breakfast">Breakfast<div>recipes go here</div></div>
+              <div id="lunch">Lunch<div>recipes go here</div></div>
+              <div id="dinner">Dinner<div>recipes go here</div></div>
+            </div>
+           <div id="monday">Monday
+              <div id="breakfast">Breakfast<div>recipes go here</div></div>
+              <div id="lunch">Lunch<div>recipes go here</div></div>
+              <div id="dinner">Dinner<div>recipes go here</div></div>
+            </div>
+            <div id="tuesday">Tuesday
+              <div id="breakfast">Breakfast<div>recipes go here</div></div>
+              <div id="lunch">Lunch<div>recipes go here</div></div>
+              <div id="dinner">Dinner<div>recipes go here</div></div>
+            </div>
+            <div id="wednesday">Wednesday
+              <div id="breakfast">Breakfast<div>recipes go here</div></div>
+              <div id="lunch">Lunch<div>recipes go here</div></div>
+              <div id="dinner">Dinner<div>recipes go here</div></div>
+            </div>
+            <div id="thursday">Thursday
+              <div id="breakfast">Breakfast<div>recipes go here</div></div>
+              <div id="lunch">Lunch<div>recipes go here</div></div>
+              <div id="dinner">Dinner<div>recipes go here</div></div>
+            </div>
+            <div id="friday">Friday
+              <div id="breakfast">Breakfast<div>recipes go here</div></div>
+              <div id="lunch">Lunch<div>recipes go here</div></div>
+              <div id="dinner">Dinner<div>recipes go here</div></div>
+            </div>
+            <div id="saturday">Saturday
+              <div id="breakfast">Breakfast<div>recipes go here</div></div>
+              <div id="lunch">Lunch<div>recipes go here</div></div>
+              <div id="dinner">Dinner<div>recipes go here</div></div>
+            </div>
+          </div>
        
           <div v-for="recipeID in thisMeal.recipeIds" v-bind:key="recipeID" class="recipe"> 
             <p> {{ getRecipeName(recipeID) }} </p>
             <!-- add a link to the recipe details page to each recipe's name -->         
           </div>
-        </div>
+       
       </div>
     </div>
 
@@ -93,7 +123,7 @@ export default {
               }
           ]
       },
-      days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    
     }
   },
 
@@ -176,36 +206,79 @@ export default {
 </script>
 
 <style>
-.meal-plan-meal{
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  margin-top: 10px;
-}
-
-#dayTwo{
+#sunday{
   background-color: aliceblue;
-  display: grid;
-  grid-auto-columns: 200px;
-  height:500px;
-  width: 200px;
-  justify-content: center;
-  
-  border:1px solid black;
-  border-radius: 8px;
-  text-decoration: underline;
-  padding-left: 5px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  border-radius: 3px;
+  text-align: center;
 }
-
+#monday{
+  background-color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  border-radius: 3px;
+  text-align: center;
+}
+#tuesday{
+  background-color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  border-radius: 3px;
+  text-align: center;
+}
+#wednesday{
+  background-color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  border-radius: 3px;
+  text-align: center;
+}
+#thursday{
+  background-color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  border-radius: 3px;
+  text-align: center;
+}
+#friday{
+  background-color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  border-radius: 3px;
+  text-align: center;
+}
+#saturday{
+  background-color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  border-radius: 3px;
+  text-align: center;
+}
 #breakfast{
-  margin: auto;
- 
+text-align: left;
+text-decoration: underline;
 }
 #lunch{
-  margin: auto;
+  text-align: left;
+  text-decoration: underline;
 }
 #dinner{
-  margin: auto;
+  text-align: left;
+  text-decoration: underline;
+}
+
+#daysOfWeek{
+  display: flex;
+  justify-content: space-evenly;
+  margin: 10px;
 }
 
 </style>
