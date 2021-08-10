@@ -11,7 +11,13 @@ export default {
   name: 'user-grocery-list',
   data() {
     return {
-      groceryList: []
+      groceryList: [
+        { ingredientId: '0',
+          ingredientName: '',
+          measurementAmount: '',
+          measurementUnit: ''
+        }
+      ]
     }
   },
 
