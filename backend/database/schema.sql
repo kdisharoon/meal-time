@@ -1,18 +1,17 @@
 BEGIN TRANSACTION;
 
-
+DROP TABLE IF EXISTS recipe_ingredients;
 DROP TABLE IF EXISTS meal_plan_user_recipes;
 DROP TABLE IF EXISTS user_recipes;
-DROP TABLE IF EXISTS recipe_ingredients;
 DROP TABLE IF EXISTS user_meal_plan;
-DROP TABLE IF EXISTS ingredients;
+DROP TABLE IF EXISTS ingredients CASCADE;
 DROP TABLE IF EXISTS recipes;
-DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS users CASCADE;
 
 DROP SEQUENCE IF EXISTS seq_user_meal_plan_id;
 DROP SEQUENCE IF EXISTS seq_recipe_id;
 DROP SEQUENCE IF EXISTS seq_ingredient_id;
-DROP SEQUENCE IF EXISTS seq_user_id;
+DROP SEQUENCE IF EXISTS seq_user_id CASCADE;
 
 
 CREATE SEQUENCE seq_user_id
@@ -45,6 +44,7 @@ CREATE TABLE users (
 	username varchar(50) NOT NULL,
 	password_hash varchar(200) NOT NULL,
 	role varchar(50) NOT NULL,
+	
 	CONSTRAINT PK_user PRIMARY KEY (user_id)
 );
 
@@ -72,16 +72,7 @@ CREATE TABLE user_meal_plan (
         
 );
 
-CREATE TABLE recipe_ingredients (
-        ingredient_id int NOT NULL,
-        recipe_id int NOT NULL,
-        measurement_unit varchar(50) NULL,
-        measurement_amount numeric(6,3) NOT NULL,
-        
-        CONSTRAINT FK_recipe_ingredients_recipes FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id),
-        CONSTRAINT FK_recipe_ingredients_ingredients FOREIGN KEY (ingredient_id) REFERENCES ingredients(ingredient_id)
---        CONSTRAINT pk_recipe_ingredients PRIMARY KEY (ingredient_id, recipe_id, measurement_amount)
-);
+
         
 CREATE TABLE user_recipes (
         recipe_id serial NOT NULL,
@@ -104,8 +95,16 @@ CREATE TABLE meal_plan_user_recipes (
 --        CONSTRAINT pk_meal_plan_user_recipe PRIMARY KEY (day)
 );
 
-
-
+CREATE TABLE recipe_ingredients (
+        ingredient_id int NOT NULL,
+        recipe_id int NOT NULL,
+        measurement_unit varchar(50) NULL,
+        measurement_amount numeric(6,3) NOT NULL,
+        
+        CONSTRAINT FK_recipe_ingredients_recipes FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id),
+        CONSTRAINT FK_recipe_ingredients_ingredients FOREIGN KEY (ingredient_id) REFERENCES ingredients(ingredient_id)
+--        CONSTRAINT pk_recipe_ingredients PRIMARY KEY (ingredient_id, recipe_id, measurement_amount)
+);
 
 INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
 INSERT INTO users (username,password_hash,role) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN');
@@ -152,6 +151,10 @@ INSERT INTO ingredients (ingredient_name) VALUES ('Banana');
 INSERT INTO ingredients (ingredient_name) VALUES ('Can of Apple Pie Filling');
 INSERT INTO ingredients (ingredient_name) VALUES ('Pillsbury Cinnamon Rolls');
 
+INSERT INTO user_meal_plan (meal_plan_name, user_id) VALUES ('Healthy', 3);
+INSERT INTO user_meal_plan (meal_plan_name, user_id) VALUES ('Pizza All the Time!', 3);
+INSERT INTO user_meal_plan (meal_plan_name, user_id) VALUES ('Stay Up All Night Coding', 3);
+
 INSERT INTO recipe_ingredients (ingredient_id, recipe_id, measurement_unit, measurement_amount) VALUES (1, 1, 'cup', 1);
 INSERT INTO recipe_ingredients (ingredient_id, recipe_id, measurement_unit, measurement_amount) VALUES (2,  1, 'tablespoon', 3);
 INSERT INTO recipe_ingredients (ingredient_id, recipe_id, measurement_unit, measurement_amount) VALUES (3,  1, 'cup', 1);
@@ -188,9 +191,7 @@ INSERT INTO recipe_ingredients (ingredient_id, recipe_id, measurement_unit, meas
 INSERT INTO recipe_ingredients (ingredient_id, recipe_id, measurement_unit, measurement_amount) VALUES(28, 6, 'tube', 1);
 
 
-INSERT INTO user_meal_plan (meal_plan_name, user_id) VALUES ('Healthy', 3);
-INSERT INTO user_meal_plan (meal_plan_name, user_id) VALUES ('Pizza All the Time!', 3);
-INSERT INTO user_meal_plan (meal_plan_name, user_id) VALUES ('Stay Up All Night Coding', 3);
+
 
 
 COMMIT TRANSACTION;
