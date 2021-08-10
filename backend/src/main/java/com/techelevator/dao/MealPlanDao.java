@@ -19,4 +19,6 @@ public interface MealPlanDao {
 
     Ingredient[] groceryList(long mealPlanId);
 
+    void updateMealPlanName(long userId, String mealPlanName);
+
 }

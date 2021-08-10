@@ -56,23 +56,7 @@ export default {
     }
   },
   methods: {
-    addMealPlan() {
-      mealPlanService.addUserMealPlan(this.newPlan).then(response => {
-        if (response.status === 201) {
-          alert("Successfully added new meal plan to your meal plans!");
-          this.$router.go();          
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-      this.resetForm();
-    },
-
-    resetForm() {
-  //    this.showForm = false;
-      this.newPlan.mealPlanName = ""
-    },
+    
 revealButton(){
       document.getElementById("isHiding").innerHTML;
       document.getElementById("isHiding").removeAttribute("hidden");
