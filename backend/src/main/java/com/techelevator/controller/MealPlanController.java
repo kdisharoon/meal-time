@@ -24,10 +24,10 @@ public class MealPlanController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/users/mealplans", method = RequestMethod.POST)
-    public long addMealPlanToUser(@RequestBody MealPlan mealPlan){
+    public void addMealPlanToUser(@RequestBody MealPlan mealPlan){
 
         try{
-            return mealPlanDao.createMealPlan(mealPlan);
+            mealPlanDao.createMealPlan(mealPlan);
         } catch (IllegalArgumentException e){
             throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY);
         }
