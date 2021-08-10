@@ -16,7 +16,8 @@
   <form action="">
      <div class="form-group">
        <input type="text" placeholder="Search..." v-model="userSearchTerm">
-      <button class ="searchButton" v-on:click.passive="searchRecipesFromAPI(userSearchTerm)" type="submit"><i class="fa fa-search"></i></button>
+      <button class ="searchButton" v-on:click.prevent="searchForRecipeName(userSearchTerm)" type="submit"><i class="fa fa-search"></i></button>
+      
     </div>
   </form>
     
@@ -25,6 +26,7 @@
       <div class="row">
         <div class="all-recipes-list d-flex justify-content-around flex-wrap">
     
+
           <div v-for="recipe in recipes" v-bind:key="recipe.recipeId" class="recipe thumbnail">
             <div class="card" style="width: 18rem;">
               <img v-bind:src="recipe.recipeImg" class="recipe-image" style="width:100%">
@@ -51,6 +53,7 @@
 <script>
 import recipeService from '../services/RecipeService';
 
+
 export default {
   name: 'all-recipes-list',
   data() {
@@ -64,7 +67,30 @@ export default {
 
   methods: {
 
+
+    searchForRecipeName(userSearchTerm) {
+      if(typeof userSearchTerm !== 'string' || userSearchTerm.length === 0) {
+        return false;
+      }
+      recipeService.getAllRecipes().then(response => {
+      this.recipes = response.data; 
+      this.isLoading = false;
+        });
+      let lowerCase = userSearchTerm.toLowerCase();
+      console.log(userSearchTerm);
+      console.log(lowerCase);
+      console.log(this.recipes);
+      let filter = this.recipes.filter(recipe => {
+        if(recipe.recipeName.toLowerCase().includes(lowerCase)){
+          return true;
+        }
+        return false;
+      });
+      this.recipes = filter;
     
+    },
+
+  
 
     saveToDatabase(recipesToAdd) {
       recipeService.addRecipesFromAPIToDatabase(recipesToAdd).then(response => {
@@ -108,7 +134,7 @@ export default {
 
   created() {
     recipeService.getAllRecipes().then(response => {
-      this.recipes = response.data;
+      this.recipes = response.data; 
       this.isLoading = false;
     })
     
