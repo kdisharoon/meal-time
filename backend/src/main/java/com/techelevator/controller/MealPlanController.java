@@ -65,6 +65,13 @@ public class MealPlanController {
         return mealPlanDao.groceryList(mealPlanId);
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @RequestMapping(path = "/users/{userId}/mealplans", method = RequestMethod.PUT)
+    public void updateMealPlanName(@PathVariable long userId, @RequestParam String mealPlanName){
+        mealPlanDao.updateMealPlanName(userId, mealPlanName);
+
+    }
+
 
 
 
