@@ -22,13 +22,13 @@
       
 
       <div hidden id="isHiding" class="container mealPlanStyle">
-        <form v-on:submit.prevent="addMealPlan" id="planForm">
+        <form v-on:submit.prevent="checkAddMealPlan" id="planForm">
           <div class="card">
             <div class="col-25">
               <label for="fname">Meal Plan Name</label>
             </div>
             <div class="col-75">
-              <input type="text" id="mname" name="mealplanname" v-model="mealPlan.mealPlanName" />
+              <input type="text" id="mname" name="mealplanname" v-model.lazy="mealPlan.mealPlanName" />
             </div>
           </div>
           <div class="row">
@@ -83,7 +83,7 @@ export default {
       showPlanCards: false,
       mealPlan: {
           mealPlanId: 0,
-          userId: 0,
+          userId: this.$route.params.userID,
           mealPlanName: "",
           organizedRecipes: [
               {
@@ -98,6 +98,20 @@ export default {
   },
 
   methods: {
+
+    checkAddMealPlan() {
+      if (this.mealPlan.mealPlanId === 0) {
+        this.addMealPlan();
+        mealPlanService.getUserMealPlanById(this.$store.state.user.id).then(response => {
+          console.log(response.data);
+          this.mealPlan = response.data;
+        })
+      }
+      else {
+        this.renameMealPlan(this.mealPlan.mealPlanName);
+      }
+    },
+
     getRecipeName(id) {
       recipeService.getRecipeById(id).then(response => {
         console.log(response.data.recipeName);
@@ -115,31 +129,43 @@ export default {
     },
 
     addMealPlan() {
-      if (this.mealPlanId === 0) {
-        mealPlanService.addUserMealPlan(this.mealPlan).then(response => {
-          if (response.status === 201) {
-            alert("Successfully named your meal plan!");
-            this.$router.go();          
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      }
-
+      mealPlanService.addUserMealPlan(this.mealPlan).then(response => {
+        if (response.status === 201) {
+          alert("Successfully named your meal plan!");
+          this.$router.go();          
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+      
       this.showForm = false;
       this.showPlanCards = true;
 
     },
+
+    renameMealPlan(newName) {
+      mealPlanService.renameMealPlan(this.$store.state.user.id, newName).then(response => {
+        if (response.status === 204) {
+          alert ("Successfully renamed your meal plan!");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    }
+
 
 
 
   },
 
   created() {                                     
-    mealPlanService.getUserMealPlanById(this.$route.params.userID).then(response => {
+    mealPlanService.getUserMealPlanById(this.$store.state.user.id).then(response => {
       console.log(response.data);
-      this.mealPlan = response.data;
+      if (response.data.mealPlanId > 0) {
+        this.mealPlan = response.data;
+      }
     })
   },
   
