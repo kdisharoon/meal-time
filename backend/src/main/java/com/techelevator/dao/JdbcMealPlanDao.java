@@ -196,6 +196,13 @@ public class JdbcMealPlanDao implements MealPlanDao{
 
     }
 
+    public void updateMealPlanName(long userId, String mealPlanName){
+        String sql = "update user_meal_plan set meal_plan_name = ? " +
+                     "where user_id = ?";
+
+        jdbcTemplate.update(sql, mealPlanName, userId);
+    }
+
     private List<Ingredient> addToListOfIngredients(long recipeId, List<Ingredient> ingredients) {
 
 

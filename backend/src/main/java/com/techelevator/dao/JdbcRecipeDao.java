@@ -20,22 +20,31 @@ public class JdbcRecipeDao implements RecipeDao{
 
     @Override
     public Recipe[] getAllRecipesByUser(long userId){
+
         List<Recipe> recipes = new ArrayList<>();
+        // query to get all recipes for a specific user
         String sql = "select * from recipes " +
                      "join user_recipes using (recipe_id) " +
                      "join users using (user_id) " +
                      "where user_id=?";
+        // repeated query to get all ingredients for every recipe returned in the first query
         String sql2 = "select ingredient_id, measurement_amount, measurement_unit, ingredients.ingredient_name " +
                       "from recipe_ingredients " +
                       "join ingredients using (ingredient_id) " +
                       "where recipe_id=?";
+
+
         SqlRowSet recipeResults = jdbcTemplate.queryForRowSet(sql, userId);
         while (recipeResults.next()){
+            //create a new recipe
             Recipe recipe = mapRowToRecipe(recipeResults);
             SqlRowSet ingredientResults = jdbcTemplate.queryForRowSet(sql2, recipe.getRecipeId());
+            // map the ingredients to the recipe
             recipe.setIngredients(mapRowsToIngredients(ingredientResults));
+            //add the recipe to List<Recipe>
             recipes.add(recipe);
         }
+        // return the List<Recipe> as an array
         return recipes.toArray(new Recipe[0]);
 
     }
@@ -100,31 +109,9 @@ public class JdbcRecipeDao implements RecipeDao{
         jdbcTemplate.update(sql, userId, recipeId);
     }
 
-    public Recipe mapRowToRecipe(SqlRowSet result){
-        Recipe recipe = new Recipe();
-        recipe.setRecipeId(result.getLong("recipe_id"));
-        recipe.setPreparation(result.getString("preparation"));
-        recipe.setRecipeName(result.getString("recipe_name"));
-//        recipe.setPrepTime(result.getInt("prep_time"));
-        recipe.setCookTime(result.getInt("cook_time"));
-        recipe.setRecipeImg(result.getString("recipe_img"));
-        recipe.setRecipeType(result.getString("recipe_type"));
-        return recipe;
 
-    }
 
-    public Ingredient[] mapRowsToIngredients(SqlRowSet results){
-        List<Ingredient> ingredients = new ArrayList<>();
-        while (results.next()){
-            Ingredient ingredient = new Ingredient();
-            ingredient.setIngredientId(results.getLong("ingredient_id"));
-            ingredient.setIngredientName(results.getString("ingredient_name"));
-            ingredient.setMeasurementAmount(results.getDouble("measurement_amount"));
-            ingredient.setMeasurementUnit(results.getString("measurement_unit"));
-            ingredients.add(ingredient);
-        }
-        return ingredients.toArray(new Ingredient[0]);
-    }
+
 
     public void addRecipeToRecipeLibrary(Recipe[] recipe){
         for (int a = 0; a<recipe.length; a++ ){
@@ -160,5 +147,32 @@ public class JdbcRecipeDao implements RecipeDao{
                 }
             }
         }
+    }
+
+
+    public Recipe mapRowToRecipe(SqlRowSet result){
+        Recipe recipe = new Recipe();
+        recipe.setRecipeId(result.getLong("recipe_id"));
+        recipe.setPreparation(result.getString("preparation"));
+        recipe.setRecipeName(result.getString("recipe_name"));
+//        recipe.setPrepTime(result.getInt("prep_time"));
+        recipe.setCookTime(result.getInt("cook_time"));
+        recipe.setRecipeImg(result.getString("recipe_img"));
+        recipe.setRecipeType(result.getString("recipe_type"));
+        return recipe;
+
+    }
+
+    public Ingredient[] mapRowsToIngredients(SqlRowSet results){
+        List<Ingredient> ingredients = new ArrayList<>();
+        while (results.next()){
+            Ingredient ingredient = new Ingredient();
+            ingredient.setIngredientId(results.getLong("ingredient_id"));
+            ingredient.setIngredientName(results.getString("ingredient_name"));
+            ingredient.setMeasurementAmount(results.getDouble("measurement_amount"));
+            ingredient.setMeasurementUnit(results.getString("measurement_unit"));
+            ingredients.add(ingredient);
+        }
+        return ingredients.toArray(new Ingredient[0]);
     }
 }
