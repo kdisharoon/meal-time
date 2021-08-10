@@ -1,4 +1,5 @@
 <template>
+<!-- Tom see's all -->
   <div id="popular">
     <div id="day" class="random-recipe">
       <h3>Random Recipe Generator</h3>
@@ -280,6 +281,7 @@ a{
 }
 .card img{
   align-self: start;
+  
   
 }
 #cards{
