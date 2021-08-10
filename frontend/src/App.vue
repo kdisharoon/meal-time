@@ -6,11 +6,7 @@
       <router-link class="btn-fix-class" id="home" v-bind:to="{ name: 'home' }">HOME </router-link >
       <router-link class="btn-fix-class" id="all-recipes" v-bind:to="{ name: 'all-recipes' }"> ALL RECIPES </router-link>
       <router-link class="btn-fix-class" id="saved-recipes" v-bind:to="{ name: 'saved-recipes', params: { userID: this.$store.state.user.id } }"> MY RECIPES </router-link>
-<<<<<<< HEAD
-      <router-link class="btn-fix-class" id="user-meal-plans" v-bind:to="{ name: 'user-meal-plans', params: { userID: this.$store.state.user.id } }"> MY MEAL PLAN </router-link> 
-=======
       <router-link class="btn-fix-class" id="meal-plan" v-bind:to="{ name: 'meal-plan', params: { userID: this.$store.state.user.id } }"> MY MEAL PLAN </router-link> 
->>>>>>> 373951d782092b34dbfd7d677985e6d82e6c2e4d
       <router-link class="btn-fix-class" v-if="0 === 1" id="user-grocery-list" v-bind:to="{ name: 'user-grocery-list', params: { userID: this.$store.state.user.id } }"> GROCERY LIST </router-link> 
       <router-link class="btn-fix-class" v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''"> LOGOUT</router-link>
     </div>

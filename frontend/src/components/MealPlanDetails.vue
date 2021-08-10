@@ -1,6 +1,6 @@
 <template>
   <div class="meal-plan-details">
-   
+   <h2 style="text-align:center"> My Meal Plan</h2>
     
     <div v-for="thisMeal in mealPlan.recipes.slice(0,1)" v-bind:key="thisMeal.aFakeNumber" class="meal-plan-meal">
        <div id="dayTwo" v-for= "day in days" :key="day.name"> {{ day }} <br> 

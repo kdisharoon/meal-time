@@ -18,10 +18,7 @@
     </div>
     
 
-    <div class="search">
-      <input type="text" placeholder="Search..." v-model="userSearchTerm">
-      <button v-on:click.prevent="searchRecipesFromAPI(userSearchTerm)" class="searchRecipes">Search For Recipes</button>
-    </div>
+  
 
 
 
@@ -29,8 +26,14 @@
 
 
     <div id="recipe">
-    <h3 id="recTry">Recipes to Try</h3>  
-     <div v-for="recipe in recipes.slice(12,18)" v-bind:key="recipe.recipeId" id="cards">
+       
+    <div  id="recTry"><h3>Recipes to Try</h3>  
+     <div class="search" id="searchbox">
+      <input type="text" placeholder="Search..." v-model="userSearchTerm">
+      <button id="searchbutt" v-on:click.passive="searchRecipesFromAPI(userSearchTerm)" class="searchRecipes">Search</button>
+    </div>
+    </div>
+     <div v-for="recipe in recipes.slice(-6)" v-bind:key="recipe.recipeId" id="cards">
       
         <router-link v-bind:to="{ name: 'recipe', params: { recipeID: recipe.recipeId } }">
         
@@ -110,8 +113,8 @@ export default {
     saveToDatabase(recipesToAdd) {
       recipeService.addRecipesFromAPIToDatabase(recipesToAdd).then(response => {
         if (response.status === 201) {
-          alert("Successfully searched API and added results to database!");
-          this.$router.go();    // make this go to a Search Results page instead!
+           alert("You found something");
+           this.$router.go();    // make this go to a Search Results page instead!
           }
         })
       .catch((error) => {
@@ -188,14 +191,14 @@ export default {
   background-color:aliceblue;
   border-radius: 3px;
   background-size: cover;
-  height: 49rem;
+  height: 60rem;
   overflow: scroll;
 }
 
 #recipe {
   grid-area: recipe;
   display:grid;
-  grid-auto-rows: 75px 1fr 1fr;
+  grid-auto-rows: 100px 1fr 1fr;
  grid-auto-columns: 1fr 1fr 1fr;
  grid-template-areas: "try try try"
                       "cards cards cards"
@@ -215,6 +218,13 @@ h4{
   grid-area: try;
   border:0px;
   text-decoration: underline;
+}
+
+#searchbutt{
+  height:30px;
+  width:auto;
+  padding:0;
+  margin-left:3px;
 }
 a{
   margin: 10px;
