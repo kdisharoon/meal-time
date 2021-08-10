@@ -7,8 +7,6 @@ export default {
         return axios.post(`/users/mealplans`, newMealPlan)
     },
 
-    //deleteUserMealPlan(userID, mealPlanID)
-
     getUserMealPlanById(userID) {
         return axios.get(`/users/${userID}/mealplans`);
     },
@@ -19,6 +17,10 @@ export default {
 
     deleteRecipeFromUserMealPlan(userID, recipeID){
         return axios.post(`/users/${userID}/mealplans/recipes/${recipeID}`);
+    },
+
+    renameMealPlan(userID, newName) {
+        return axios.put(`/users/${userID}/mealplans?mealplanname=${newName}`);
     }
 
 }

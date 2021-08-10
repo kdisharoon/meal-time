@@ -151,9 +151,9 @@ INSERT INTO ingredients (ingredient_name) VALUES ('Banana');
 INSERT INTO ingredients (ingredient_name) VALUES ('Can of Apple Pie Filling');
 INSERT INTO ingredients (ingredient_name) VALUES ('Pillsbury Cinnamon Rolls');
 
-INSERT INTO user_meal_plan (meal_plan_name, user_id) VALUES ('Healthy', 3);
-INSERT INTO user_meal_plan (meal_plan_name, user_id) VALUES ('Pizza All the Time!', 3);
-INSERT INTO user_meal_plan (meal_plan_name, user_id) VALUES ('Stay Up All Night Coding', 3);
+--INSERT INTO user_meal_plan (meal_plan_name, user_id) VALUES ('Healthy', 3);
+--INSERT INTO user_meal_plan (meal_plan_name, user_id) VALUES ('Pizza All the Time!', 3);
+--INSERT INTO user_meal_plan (meal_plan_name, user_id) VALUES ('Stay Up All Night Coding', 3);
 
 INSERT INTO recipe_ingredients (ingredient_id, recipe_id, measurement_unit, measurement_amount) VALUES (1, 1, 'cup', 1);
 INSERT INTO recipe_ingredients (ingredient_id, recipe_id, measurement_unit, measurement_amount) VALUES (2,  1, 'tablespoon', 3);
