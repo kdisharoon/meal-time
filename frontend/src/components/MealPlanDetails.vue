@@ -116,7 +116,7 @@ export default {
 
     addMealPlan() {
       if (this.mealPlanId === 0) {
-        mealPlanService.addUserMealPlan(this.newPlan).then(response => {
+        mealPlanService.addUserMealPlan(this.mealPlan).then(response => {
           if (response.status === 201) {
             alert("Successfully named your meal plan!");
             this.$router.go();          
