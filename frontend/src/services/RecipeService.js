@@ -16,7 +16,7 @@ export default {
     },
     
     searchRecipesFromSpoonacular(searchTerm) {
-        return axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=${searchTerm}&number=3&sort=random&apiKey=941ba16793664284808b0c07b47ed70f`);
+        return axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=${searchTerm}&number=6&sort=random&apiKey=941ba16793664284808b0c07b47ed70f`);
     },
 
     getSpecificRecipesFromSpoonacular(idString) {
