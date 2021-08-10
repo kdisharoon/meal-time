@@ -16,9 +16,9 @@ export default {
   },
 
   created() {
-      groceryListService.getUserGroceryList(this.$route.params.userID).then(response => {
+      groceryListService.getUserGroceryList(this.$store.state.user.id).then(response => {
         this.groceryList = response.data;
-      })
+      });
   }
 
 }
