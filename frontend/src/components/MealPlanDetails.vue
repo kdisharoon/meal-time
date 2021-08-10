@@ -42,64 +42,19 @@
 
 
 
-    <div id="plan-cards-wrapper" v-if="mealPlan.mealPlanId > 0">
-      <div v-for="thisMeal in mealPlan.recipes.slice(0,1)" v-bind:key="thisMeal.aFakeNumber" class="meal-plan-meal">
-          <div id="daysOfWeek">
-            <div class="day">Sunday
-              <div class="mealtime">
-              <div class="breakfast">Breakfast<div>recipes go here </div></div>
-              <div class="lunch">Lunch<div>recipes go here</div></div>
-              <div class="dinner">Dinner<div>recipes go here</div></div>
+    <div id="plan-cards-wrapper" v-if="mealPlan.mealPlanId > 0">                  <!-- if a meal plan has been created, mealPlanId will be greater than 0 -->
+      <div v-for="dayMeal in mealPlan.recipes" v-bind:key="dayMeal" class="day-meal">    <!-- goes through all 21 day-meal combinations in the mealPlan object -->
+          <div class="day">{{ dayMeal.day.charAt(0).toUpperCase() + dayMeal.day.slice(1) }} {{ dayMeal.meal }}     <!-- prints the day of the week "Wednesday" and meal "breakfast" at top of each card -->
+            <div class="recipe-name-display" v-for="rid in dayMeal.recipeIds" v-bind:key="rid">
+              {{ rid }} {{ getRecipeName(rid) }}
+            
             </div>
-            </div>
-           <div class="day">Monday
-             <div class="mealtime">
-              <div class="breakfast">Breakfast<div>recipes go here</div></div>
-              <div class="lunch">Lunch<div>recipes go here</div></div>
-              <div class="dinner">Dinner<div>recipes go here</div></div>
-            </div>
-            </div>
-            <div class="day">Tuesday
-              <div class="mealtime">
-              <div class="breakfast">Breakfast<div>recipes go here</div></div>
-              <div class="lunch">Lunch<div>recipes go here</div></div>
-              <div class="dinner">Dinner<div>recipes go here</div></div>
-            </div>
-            </div>
-            <div class="day">Wednesday
-              <div class="mealtime">
-              <div class="breakfast">Breakfast<div>recipes go here</div></div>
-              <div class="lunch">Lunch<div>recipes go here</div></div>
-              <div class="dinner">Dinner<div>recipes go here</div></div>
-            </div>
-            </div>
-            <div class="day">Thursday
-              <div class="mealtime">
-              <div class="breakfast">Breakfast<div>recipes go here</div></div>
-              <div class="lunch">Lunch<div>recipes go here</div></div>
-              <div class="dinner">Dinner<div>recipes go here</div></div>
-            </div>
-            </div>
-            <div class="day">Friday
-              <div class="mealtime">
-              <div class="breakfast">Breakfast<div>recipes go here</div></div>
-              <div class="lunch">Lunch<div>recipes go here</div></div>
-              <div class="dinner">Dinner<div>recipes go here</div></div>
-            </div>
-            </div>
-            <div class="day">Saturday
-              <div class="mealtime">
-              <div class="breakfast">Breakfast<div>recipes go here</div></div>
-              <div class="lunch">Lunch<div>recipes go here</div></div>
-              <div class="dinner">Dinner<div>recipes go here</div></div>
-              </div>
-            </div>
+              
+            
           </div>
        
-          <div v-for="recipeID in thisMeal.recipeIds" v-bind:key="recipeID" class="recipe"> 
-            <p> {{ getRecipeName(recipeID) }} </p>
-            <!-- add a link to the recipe details page to each recipe's name -->         
-          </div>
+
+    
        
       </div>
     </div>
@@ -131,11 +86,13 @@ export default {
     return {
       showForm: true,
       showPlanCards: false,
+
+
       mealPlan: {
           mealPlanId: 0,
           userId: this.$route.params.userID,
           mealPlanName: "",
-          organizedRecipes: [
+          recipes: [
               {
                 day: "",
                 meal: "",
@@ -165,8 +122,11 @@ export default {
     getRecipeName(id) {
       recipeService.getRecipeById(id).then(response => {
         console.log(response.data.recipeName);
-        return response.data.recipeName; 
-      });  
+        this.currentMealName = response.data.recipeName; 
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     },
 
     flipRevealButton(){
@@ -250,7 +210,7 @@ export default {
   max-width: 180px;
 }
 
-#daysOfWeek{
+#plan-cards-wrapper{
   display: flex;
   justify-content: space-evenly;
   margin: 20px;
