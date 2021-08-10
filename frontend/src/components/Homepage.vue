@@ -17,11 +17,15 @@
   
     </div>
     
-
   
 
 
-
+    <div class="search">
+      
+      <input type="text" placeholder="Search..." results = "0" v-model="userSearchTerm">
+      <input type="image" class="searchbutton" name="search" src="http://www.spheretekk.com/bc/images/search-icon.gif" alt="Search">
+      <button v-on:click.prevent="searchRecipesFromAPI(userSearchTerm)" class="searchRecipes">Search For Recipes</button>
+    </div>
 
 
 
@@ -157,6 +161,37 @@ export default {
 </script>
 
 <style>
+.search input[type=text]{
+  padding: 15px 15px;
+  border: none;
+  width: 200px;
+  height: 25px;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+@media screen and (max-width: 100px){
+  .search input[type=text]{
+    float: none;
+    display: block;
+    text-align: left;
+    width: 10%;
+    margin: 0;
+    padding: 14px;
+
+  }
+  .search {
+    float: right;
+    margin: 7px;
+  }
+ 
+}
+ .search.searchbutton {
+position:absolute;
+top:23%;
+right:5px;
+}
 
 #popular{
   display:grid;

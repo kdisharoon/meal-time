@@ -22,7 +22,7 @@ public class JdbcMealPlanDao implements MealPlanDao{
 
 
 
-    public long createMealPlan(MealPlan mealPlan){
+    public void createMealPlan(MealPlan mealPlan){
         String sql2 = "select * from user_meal_plan " +
                       "where user_id =? and meal_plan_name=?";
         SqlRowSet mealPlanResult = jdbcTemplate.queryForRowSet(sql2,mealPlan.getUserId(),mealPlan.getMealPlanName());
@@ -35,27 +35,26 @@ public class JdbcMealPlanDao implements MealPlanDao{
                      "values (?,?)";
         jdbcTemplate.update(sql, mealPlan.getUserId(), mealPlan.getMealPlanName());
 
-        String sql3 = "select meal_plan_id from user_meal_plan where meal_plan_name=?";
 
-        SqlRowSet result = jdbcTemplate.queryForRowSet(sql3,mealPlan.getMealPlanName());
-        long id= 0;
-        if (result.next()){
-            id = result.getLong("meal_plan_id");
+    }
+
+    public void addRecipeToUserMealPlan(long userId, long recipeId, OrganizedRecipe organizedRecipe){
+        String sql2 = "select meal_plan_id from user_meal_plan where user_id =?";
+
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql2, userId);
+        if (result.next()) {
+            long mealPlanId = result.getLong("meal_plan_id");
+
+            String sql = "insert into meal_plan_user_recipes (meal_plan_id, recipe_id, day, meal) " +
+                    "values (?,?,?,?)";
+            jdbcTemplate.update(sql, mealPlanId, recipeId, organizedRecipe.getDay().toLowerCase(), organizedRecipe.getMeal().toLowerCase());
+
+            //can you add multiple of the same recipe to the mealplan?
         }
-        return id;
- //       Long newId = jdbcTemplate.queryForObject(sql, Long.class, mealPlan.getUserId(), mealPlan.getMealPlanName());
-    }
-
-    public void addRecipeToUserMealPlan(long mealPlanId, long recipeId, OrganizedRecipe organizedRecipe){
-        String sql = "insert into meal_plan_user_recipes (meal_plan_id, recipe_id, day, meal) " +
-                     "values (?,?,?,?)";
-        jdbcTemplate.update(sql, mealPlanId,recipeId,organizedRecipe.getDay().toLowerCase(),organizedRecipe.getMeal().toLowerCase());
-
-        //can you add multiple of the same recipe to the mealplan?
 
     }
 
-    public MealPlan[] getAllUserMealPlans(long userId){
+    /*public MealPlan[] getAllUserMealPlans(long userId){
         List<MealPlan> mealPlans = new ArrayList<>();
 
         String sql = "select meal_plan_id, meal_plan_name from user_meal_plan " +
@@ -71,13 +70,13 @@ public class JdbcMealPlanDao implements MealPlanDao{
         }
         return mealPlans.toArray(new MealPlan[0]);
 
-    }
+    }*/
 
     public MealPlan getMealPlanByUser(long userId){
         MealPlan mealPlan = new MealPlan();
         RecipeList[] recipeLists = createRecipeListArray();
 
-        String sql3 = "select meal_plan_id from user_meal_plan " +
+        String sql3 = "select meal_plan_id, meal_plan_name from user_meal_plan " +
                      "where user_id =?";
         SqlRowSet mealPlanResults = jdbcTemplate.queryForRowSet(sql3, userId);
 
@@ -85,16 +84,10 @@ public class JdbcMealPlanDao implements MealPlanDao{
         if (mealPlanResults.next()) {
 
             long mealPlanId = mealPlanResults.getLong("meal_plan_id");
-            String sql = "select meal_plan_name, user_id " +
-                    "from user_meal_plan " +
-                    "where meal_plan_id = ?";
-
-            SqlRowSet mealPlanNameResult = jdbcTemplate.queryForRowSet(sql, mealPlanId);
-            if (mealPlanNameResult.next()) {
-                mealPlan.setMealPlanName(mealPlanNameResult.getString("meal_plan_name"));
-                mealPlan.setMealPlanId(mealPlanId);
-                mealPlan.setUserId(mealPlanNameResult.getLong("user_id"));
-            }
+            String mealPlanName = mealPlanResults.getString("meal_plan_name");
+            mealPlan.setUserId(userId);
+            mealPlan.setMealPlanId(mealPlanId);
+            mealPlan.setMealPlanName(mealPlanName);
 
             String sql2 = "select recipe_id, day, meal " +
                     "from meal_plan_user_recipes " +
@@ -115,37 +108,54 @@ public class JdbcMealPlanDao implements MealPlanDao{
 
     }
 
-    public void deleteRecipeFromMealPlan(long mealPlanId, long recipeId){
+    public void deleteRecipeFromMealPlan(long userId, long recipeId){
 
-        String sql = "delete from meal_plan_user_recipes " +
-                     "where meal_plan_id=? and recipe_id=?";
-        jdbcTemplate.update(sql,mealPlanId,recipeId);
+
+        String sql2 = "select meal_plan_id from user_meal_plan where user_id =?";
+
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql2,userId);
+
+        if (result.next()) {
+            long mealPlanId = result.getLong("meal_plan_id");
+
+            String sql = "delete from meal_plan_user_recipes " +
+                    "where meal_plan_id=? and recipe_id=?";
+            jdbcTemplate.update(sql, mealPlanId, recipeId);
+        }
 
     }
 
-    public Ingredient[] groceryList(long mealPlanId){
+    public Ingredient[] groceryList(long userId){
 
 
         List<Ingredient> ingredients = new ArrayList<>();
         List<Ingredient> orderedIngredients = new ArrayList<>();
 
-        String sql = "select recipe_id from meal_plan_user_recipes " +
-                     "where meal_plan_id=?";
-        SqlRowSet recipeIdResults = jdbcTemplate.queryForRowSet(sql,mealPlanId);
+        String sql2 = "select meal_plan_id from user_meal_plan where user_id =?";
 
-        while (recipeIdResults.next()){
-            ingredients = addToListOfIngredients((recipeIdResults.getLong("recipe_id")),ingredients);
-        }
-        Set<String> names = new HashSet<>();
-        for (Ingredient ingredient : ingredients){
-            names.add(ingredient.getIngredientName());
-        }
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql2,userId);
 
-        for (String name :  names){
+        if (result.next()) {
+            long mealPlanId = result.getLong("meal_plan_id");
 
-            for (Ingredient ingredient : ingredients){
-                if (ingredient.getIngredientName().equals(name)){
-                    orderedIngredients.add(ingredient);
+            String sql = "select recipe_id from meal_plan_user_recipes " +
+                    "where meal_plan_id=?";
+            SqlRowSet recipeIdResults = jdbcTemplate.queryForRowSet(sql, mealPlanId);
+
+            while (recipeIdResults.next()) {
+                ingredients = addToListOfIngredients((recipeIdResults.getLong("recipe_id")), ingredients);
+            }
+            Set<String> names = new HashSet<>();
+            for (Ingredient ingredient : ingredients) {
+                names.add(ingredient.getIngredientName());
+            }
+
+            for (String name : names) {
+
+                for (Ingredient ingredient : ingredients) {
+                    if (ingredient.getIngredientName().equals(name)) {
+                        orderedIngredients.add(ingredient);
+                    }
                 }
             }
         }
