@@ -12,9 +12,9 @@
         </router-link>
         <button v-on:click.prevent="deleteRecipe(recipe.recipeId)">Delete From My Recipes</button>
       </div>
-      </div>
-      </div>
     </div>
+  </div>
+</div>
 
 </template>
 

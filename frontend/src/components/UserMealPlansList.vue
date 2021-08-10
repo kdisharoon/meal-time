@@ -57,7 +57,7 @@ export default {
   },
   methods: {
     addMealPlan() {
-      mealPlanService.addUserMealPlan(this.$route.params.userID, this.newPlan).then(response => {
+      mealPlanService.addUserMealPlan(this.newPlan).then(response => {
         if (response.status === 201) {
           alert("Successfully added new meal plan to your meal plans!");
           this.$router.go();          

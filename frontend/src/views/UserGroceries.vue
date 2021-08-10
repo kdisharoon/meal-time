@@ -6,7 +6,7 @@
 import UserGroceryList from '@/components/UserGroceryList';
 
 export default {
-  name: 'user-grocery-list',
+  name: 'user-groceries',
   components: {
     UserGroceryList
   }

@@ -10,7 +10,7 @@ import Recipe from '../views/Recipe.vue'
 import AllRecipes from '../views/AllRecipes.vue'
 //import UserMealPlans from '../views/UserMealPlans.vue'
 import MealPlan from '../views/MealPlan.vue'
-import UserGroceryList from '../views/UserGroceryList.vue'
+import UserGroceries from '../views/UserGroceries.vue'
 
 Vue.use(Router)
 
@@ -104,7 +104,7 @@ const router = new Router({
     {
       path: "/users/:userID/grocerylist",
       name: "user-grocery-list",
-      component: UserGroceryList,
+      component: UserGroceries,
       meta: {
         requiresAuth: true
       }
