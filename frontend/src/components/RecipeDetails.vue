@@ -29,7 +29,7 @@
         </div>
 
         <div hidden id="hidden-form">
-          <form @submit.prevent="addToMealPlan">
+          <form id="dayMealSubmit" @submit.prevent="addToMealPlan">
             <div></div>
             <div>
               <label for="dayofweek">Day of Week</label><br>
@@ -53,7 +53,7 @@
               </select>
             </div>
 
-            <button type="submit">Submit</button>
+            <button type="submit" id="formSub">Submit</button>
     
           </form>
         </div>
@@ -159,7 +159,24 @@ export default {
 </script>
 
 <style>
-
+#formSub{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 15px;
+  width: 20px;
+  margin-top: 17px;
+  margin-left:3px;
+}
+#dayMealSubmit{
+  display:flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  align-content: center;
+  margin-right: 60px;
+  margin-top: 7px;
+}
 #hidden-form{
   z-index: 10;
 }

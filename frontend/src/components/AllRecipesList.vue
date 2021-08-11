@@ -13,7 +13,7 @@
    <!-- Load an icon library -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
  
-  <form action="">
+  <form id="allSearch" action="">
      <div class="form-group">
        <input type="text" placeholder="Search..." v-model="userSearchTerm">
       <button class ="searchButton" v-on:click.prevent="searchForRecipeName(userSearchTerm)" type="submit"><i class="fa fa-search"></i></button>
@@ -234,7 +234,7 @@ text-align: center;
     font-size: 16px;
     border-radius: 10px;
   }
-  form{
+  #allSearch{
     display: flex;
     align-content: center;
     justify-content: center;

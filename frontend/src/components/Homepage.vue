@@ -202,7 +202,7 @@ input {
  border-radius: 0 .3rem .3rem 0;
  background-color: #007bff;
  outline: 0;
- 
+ padding-bottom: 5px;
 }
 
 /*
