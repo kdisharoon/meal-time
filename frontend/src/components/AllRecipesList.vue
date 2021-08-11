@@ -7,19 +7,19 @@
     <div></div><div></div>
   </div>
   
-  <div v-else >
-    <button v-on:click.prevent="getNewRecipesFromAPI" class="addRecipes">Add 10 Recipes to Database from External Source</button>
+  <div  v-else>
+    <button hidden v-on:click.prevent="getNewRecipesFromAPI" class="addRecipes">Add 10 Recipes to Database from External Source</button>
     
    <!-- Load an icon library -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
  
-  <form action="">
+  <form id="allSearch" action="">
      <div class="form-group">
        <input type="text" placeholder="Search By Recipe Name" v-model="userSearchTerm">
       <button class="searchButton" v-on:click.prevent="searchForRecipeName(userSearchTerm)" type="submit">
         <i class="fa fa-search"></i>
       </button>
-      <button class="reset-filter" v-if="showResetButton" v-on:click.prevent="resetFilter">
+      <button id="resetButt" class="reset-filter" v-if="showResetButton" v-on:click.prevent="resetFilter">
         Reset Search
       </button>
       
@@ -156,7 +156,12 @@ export default {
 </script>
 
 <style>
-
+#resetButt{
+  display: flex;
+  align-items: center;
+  height: 30px;
+  
+}
 /* .all-recipes-list {
     background:white;
     max-width: 300px;
@@ -247,7 +252,11 @@ text-align: center;
     font-size: 16px;
     border-radius: 10px;
   }
-
+  #allSearch{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+  }
 
   button:hover {
     background-color:rgba(255, 166, 0, 0.626);

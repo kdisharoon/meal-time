@@ -17,8 +17,23 @@
       
      
 
-      
-
+      <div hidden id="isHiding" class="container mealPlanStyle">
+        <form v-on:submit.prevent="checkAddMealPlan" id="planForm">
+          <div class="card" id="mealCardName">
+            <div class="col-25">
+              <label for="fname">Meal Plan Name</label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="mname" name="mealplanname" v-model.lazy="mealPlan.mealPlanName" />
+            </div>
+          </div>
+          
+            <button id="plan-name-submit-button" type="submit" class="btn" v-on:click="flipRevealButton">
+              {{mealPlan.mealPlanId > 0 ? "Rename" : "Create"}} Meal Plan
+            </button>
+          
+        </form>
+      </div>
 
 
 
@@ -28,9 +43,9 @@
 
     <div id="plan-cards-wrapper" v-if="mealPlan.mealPlanId > 0">                  <!-- if a meal plan has been created, mealPlanId will be greater than 0 -->
       <div v-for="dayMeal in mealPlan.recipes" v-bind:key="dayMeal" class="day-meal">    <!-- goes through all 21 day-meal combinations in the mealPlan object -->
-          <div class="day">{{ dayMeal.day.charAt(0).toUpperCase() + dayMeal.day.slice(1) }} {{ dayMeal.meal }}     <!-- prints the day of the week "Wednesday" and meal "breakfast" at top of each card -->
+          <div class="day">{{ dayMeal.day.charAt(0).toUpperCase() + dayMeal.day.slice(1) }} <br> {{ dayMeal.meal.charAt(0).toUpperCase() +dayMeal.meal.slice(1) }}     <!-- prints the day of the week "Wednesday" and meal "breakfast" at top of each card -->
             <div class="recipe-name-display" v-for="rid in dayMeal.recipeIds" v-bind:key="rid">
-              {{ rid }} {{ getRecipeName(rid) }}
+              {{ rid }} {{ getRecipeName(id) }}
             
             </div>
               
@@ -51,10 +66,10 @@
         </button>
       </div>
       
-      <div class="rename-meal-plan-wrapper" v-if="mealPlan.mealPlanId > 0">
-        <button id="btnClearMealPlan" type="button" class="btn" v-on:click="flipRevealButton">
-          Clear Your Meal Plan
-        </button>
+ <div class="rename-meal-plan-wrapper" v-if="mealPlan.mealPlanId > 0">
+        <button id="clearMealPlanButt" type="button" class="btn" >
+          Clear your meal plan
+          </button>
       </div>
     </div>
 
@@ -135,6 +150,8 @@ export default {
     },
 
     flipRevealButton(){
+      document.getElementById("btnCreateMealPlan").setAttribute("hidden", "");
+
       if (document.getElementById("isHiding").hasAttribute("hidden")) {
         document.getElementById("isHiding").removeAttribute("hidden");
       }
@@ -191,6 +208,19 @@ export default {
 </script>
 
 <style>
+#mname{
+  border-radius: 5px;
+}
+#planForm{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#mealCardName{
+  display: flex;
+  align-items: center;
+  width:300px;
+}
 #mealPlanButts{
   display: flex;
   justify-content: space-around;
@@ -203,9 +233,10 @@ export default {
   border: 1px solid black;
   border-radius: 3px;
   text-align: center;
-  height: 400px;
+  height: 300px;
   width: 200px;
-  text-decoration: underline;
+  text-decoration: none;
+  margin-bottom: 10px;
 }
 .mealtime{
   display:grid;
@@ -222,6 +253,10 @@ export default {
   margin-top: 75px;
   flex-wrap: wrap;
   text-align: left;
+}
+#plan-name-submit-button{
+  width: 200px;
+  
 }
 
 </style>

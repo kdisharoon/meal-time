@@ -3,14 +3,18 @@
   <h2 id="myRecipe">My Recipes</h2>
   <div class="saved-recipes-list d-flex justify-content-around">
     <div v-for="recipe in recipes" v-bind:key="recipe.recipeId" class="recipe">
+    
       <div class="card">
+        <div id="delButt">
+        <button id="deleteButt" v-on:click.prevent="deleteRecipe(recipe.recipeId)">X</button>
+        </div>
         <img v-bind:src="recipe.recipeImg" class="recipe-image" style="width:100%">
           <h4 id="rTwo"><b>{{recipe.recipeName}}</b></h4>
           <p class="card-text">{{ recipe.cookTime }} minutes cook time</p>
           <router-link v-bind:to="{ name: 'recipe', params: { recipeID: recipe.recipeId } }">
-            <button > Recipe Details</button>
+            <button> Recipe Details</button>
         </router-link>
-        <button v-on:click.prevent="deleteRecipe(recipe.recipeId)">Delete From My Recipes</button>
+        
       </div>
     </div>
   </div>
@@ -53,11 +57,17 @@ export default {
 #myRecipe{
   text-align: center;
 }
-
-.d-flex{
+#delButt{
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: row-reverse;
+  margin-bottom:4px;
+}
+#deleteButt{
+  display: flex;
+  height: 5px;
+  width: 5px;
+  justify-content: center;
+  align-items: center;
 }
 
 </style>

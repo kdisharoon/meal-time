@@ -1,6 +1,6 @@
 <template>
   <div>
-      <h2>My Grocery List</h2>
+      <h2 style="text-align:center;">My Grocery List</h2>
 <div id="paper">
   <div id="pattern">
     <div id="content">
@@ -41,14 +41,9 @@ export default {
       groceryListService.getUserGroceryList(this.$store.state.user.id).then(response => {
         console.log(response.status);
         this.groceryList = response.data;
-//        if (response.status === 200) {
-//          alert("Successfully retrieved grocery list!");
-//        }
+        
       })
-      .catch((error) => {
-        console.log(error);
-      });
-  } ,
+  },
   methods: {
     toggleCrossed(item) {
       if(this.crossedOutItems.includes(item)) {
