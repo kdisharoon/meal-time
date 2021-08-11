@@ -11,14 +11,14 @@
   </div>
   
   <div  v-else>
-    <button hidden v-on:click.prevent="getNewRecipesFromAPI" class="addRecipes">Add 10 Recipes to Database from External Source</button>
+    
     
    <!-- Load an icon library -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
  
   <form id="allSearch" action="">
      <div class="form-group">
-       <input type="text" placeholder="Search By Recipe Name" v-model="userSearchTerm">
+       <input type="text" placeholder="Search By Recipe..." v-model="userSearchTerm">
       <button class="searchButton" v-on:click.prevent="searchForRecipeName(userSearchTerm)" type="submit">
         <i class="fa fa-search"></i>
       </button>
@@ -49,7 +49,7 @@
           </div>
           
       </div>
-
+<button v-on:click.prevent="getNewRecipesFromAPI" class="addRecipes">Generate 100 More Recipes</button>
     </div>
 
     </div>
@@ -173,9 +173,9 @@ export default {
     border: 2px solid black;
     border-radius: 5px; 
   } */
-
+ 
 .form-group {
- display: -webkit-flex;
+display: -webkit-flex;
  -webkit-flex-wrap: wrap;
  display: flex;
  flex-wrap: nowrap;
@@ -186,16 +186,17 @@ export default {
  
 input {
  flex: 1 1 auto;
- font-weight: 400;
+ font-weight: 500;
  height: calc(1.5em + 1rem + 2px);
- padding: .5rem 1rem;
- font-size: 14px;
+ padding: .5rem 2rem;
+ font-size: 12px;
  line-height: 1.5;
  color: #495057;
  background-color: #fff;
  border: 1px solid #ced4da;
  border-radius: .3rem 0 0 .3rem;
  outline: 0;
+ display: inline-block;
  
 }
  

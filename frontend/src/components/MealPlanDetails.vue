@@ -7,7 +7,19 @@
 
     <h2 style="text-align: center">{{mealPlan.mealPlanName}}</h2>
 
-
+  <div id="mealPlanButts">
+      <div class="rename-meal-plan-wrapper" v-if="mealPlan.mealPlanId > 0">
+        <button id="btnRenameMealPlan" type="button" class="btn" v-on:click="flipRevealButton">
+          Rename Your Meal Plan
+        </button>
+      </div>
+      
+ <div class="rename-meal-plan-wrapper" v-if="mealPlan.mealPlanId > 0">
+        <button id="clearMealPlanButt" type="button" class="btn" >
+          Clear your meal plan
+          </button>
+      </div>
+    </div>
 
       
    
@@ -43,11 +55,33 @@
 
 
 
-
+<div class="dayTitles">
+ <div> 
+   <h2 class="dtitle">Sunday</h2> 
+   </div>
+   <div>
+     <h2 class="dtitle">Monday</h2>
+     </div>
+     <div>
+     <h2 class="dtitle">Tuesday</h2>
+     </div>
+     <div>
+     <h2 class="dtitle">Wednesday</h2>
+     </div>
+     <div>
+     <h2 class="dtitle">Thursday</h2>
+     </div>
+     <div>
+     <h2 class="dtitle">Friday</h2>
+     </div>
+     <div>
+     <h2 class="dtitle">Saturday</h2>
+     </div>
+</div>
 
     <div id="plan-cards-wrapper" v-if="mealPlan.mealPlanId > 0">                  <!-- if a meal plan has been created, mealPlanId will be greater than 0 -->
       <div v-for="dayMeal in mealPlan.recipes" v-bind:key="dayMeal" class="day-meal">    <!-- goes through all 21 day-meal combinations in the mealPlan object -->
-          <div class="day">{{ dayMeal.day.charAt(0).toUpperCase() + dayMeal.day.slice(1) }} <br> {{ dayMeal.meal.charAt(0).toUpperCase() +dayMeal.meal.slice(1) }}     <!-- prints the day of the week "Wednesday" and meal "breakfast" at top of each card -->
+          <div class="day">{{ dayMeal.meal.charAt(0).toUpperCase() +dayMeal.meal.slice(1) }}     <!-- prints the day of the week "Wednesday" and meal "breakfast" at top of each card -->
             <div class="recipe-name-display" v-for="rid in dayMeal.recipeIds" v-bind:key="rid">
               {{ rid }} {{ getRecipeName(id) }}
             
@@ -63,19 +97,7 @@
     </div>
 
 
-    <div id="mealPlanButts">
-      <div class="rename-meal-plan-wrapper" v-if="mealPlan.mealPlanId > 0">
-        <button id="btnRenameMealPlan" type="button" class="btn" v-on:click="flipRevealButton">
-          Rename Your Meal Plan
-        </button>
-      </div>
-      
- <div class="rename-meal-plan-wrapper" v-if="mealPlan.mealPlanId > 0">
-        <button id="clearMealPlanButt" type="button" class="btn" >
-          Clear your meal plan
-          </button>
-      </div>
-    </div>
+  
 
     <div hidden id="isHiding" class="container">
         <form v-on:submit.prevent="checkAddMealPlan" id="planForm">
@@ -214,6 +236,19 @@ export default {
 </script>
 
 <style>
+.dtitle{
+  font-size: 28px;
+  
+}
+.dayTitles{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-left:13vh;
+  margin-right:13vh;
+  flex-wrap: nowrap;
+  position:relative;
+}
 #mname{
   border-radius: 5px;
 }
@@ -232,6 +267,7 @@ export default {
   justify-content: space-around;
 }
 .day{
+  position: relative;
   background-color: aliceblue;
   display: flex;
   font-size: 20px;
@@ -242,7 +278,12 @@ export default {
   height: 300px;
   width: 200px;
   text-decoration: none;
-  margin-bottom: 10px;
+  margin-left: 10px;
+  transition: transform 2s ease-in-out;
+}
+.day:hover{
+transform: scale(1.5);
+z-index: 1;
 }
 .mealtime{
   display:grid;
@@ -251,14 +292,20 @@ export default {
   text-align: left;
   max-width: 180px;
 }
-
+.meal-plan-details{
+  display: flex;
+  flex-direction: column;
+}
 #plan-cards-wrapper{
   display: flex;
-  justify-content: space-evenly;
+  text-decoration: underline;
   margin: 20px;
-  margin-top: 75px;
+  margin-top: 40px;
   flex-wrap: wrap;
   text-align: left;
+  height: 60rem;
+  width: auto;
+  flex-direction: column;
 }
 #plan-name-submit-button{
   width: 200px;

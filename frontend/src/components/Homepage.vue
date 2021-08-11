@@ -34,7 +34,7 @@
   <form action="">
      <div class="form-group">
        <input type="text" placeholder="Search..." v-model="userSearchTerm">
-      <button class ="searchButton" v-on:click.passive="searchRecipesFromAPI(userSearchTerm)" type="submit"><i class="fa fa-search"></i></button>
+      <button class ="searchButton" v-on:click.prevent="searchRecipesFromAPI(userSearchTerm)" type="submit"><i class="fa fa-search"></i></button>
     </div>
   </form>
 
@@ -126,7 +126,7 @@ export default {
     saveToDatabase(recipesToAdd) {
       recipeService.addRecipesFromAPIToDatabase(recipesToAdd).then(response => {
         if (response.status === 201) {
-           alert("You found something");
+           alert("You found recipes containing {{userSearchTerm}}");
            this.$router.go();    // make this go to a Search Results page instead!
           }
         })

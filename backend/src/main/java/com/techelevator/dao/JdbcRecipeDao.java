@@ -69,9 +69,10 @@ public class JdbcRecipeDao implements RecipeDao{
     @Override
     public Recipe getRecipeByRecipeId(long recipeId){
         Recipe recipe = new Recipe();
-
+        // query for selecting a single recipe
         String sql = "select * from recipes " +
                      "where recipe_id=?";
+        // query to get all ingredients in a recipe
         String sql2 = "select ingredient_id, measurement_amount, measurement_unit, ingredients.ingredient_name " +
                 "from recipe_ingredients " +
                 "join ingredients using (ingredient_id) " +
@@ -80,6 +81,7 @@ public class JdbcRecipeDao implements RecipeDao{
         if (recipeResults.next()){
             recipe = mapRowToRecipe(recipeResults);
             SqlRowSet ingredientResults = jdbcTemplate.queryForRowSet(sql2, recipeId);
+            // using selector to get all ingredients into an array to be in recipe
             recipe.setIngredients(mapRowsToIngredients(ingredientResults));
 
         }
@@ -90,13 +92,16 @@ public class JdbcRecipeDao implements RecipeDao{
 
     public void addRecipeToUserRecipe(long userId, long recipeId){
 
+        // check to make sure this recipe is not already inside the user's library
         String sql2 = "select user_id, recipe_id " +
                       "from user_recipes " +
                       "where user_id=? and recipe_id=?";
         SqlRowSet  containsRecipe = jdbcTemplate.queryForRowSet(sql2, userId, recipeId);
+        // if the row exists, then create an error
         if (containsRecipe.next()){
             throw new IllegalArgumentException();
         }
+        //  add the recipe to the linking table
         String sql = "insert into user_recipes (user_id, recipe_id) " +
                      "values (?,?) ";
 
@@ -112,13 +117,15 @@ public class JdbcRecipeDao implements RecipeDao{
 
 
 
-
+    // function to add recipes from an external api into the database
     public void addRecipeToRecipeLibrary(Recipe[] recipe){
+        // for every recipe to be added
         for (int a = 0; a<recipe.length; a++ ){
-
+            // make a check to make sure the recipe isn't already in the recipe database
             String sql5 = "select recipe_id from recipes where recipe_id =?";
             SqlRowSet recipeResult = jdbcTemplate.queryForRowSet(sql5,recipe[a].getRecipeId());
             if (!recipeResult.next()){
+                // if it is not in the database, then add it
                 String sql = "insert into recipes (recipe_id,preparation,recipe_name,prep_time,cook_time,recipe_img,recipe_type) " +
                          "values (?,?,?,?,?,?,?)";
                 long recipeId = recipe[a].getRecipeId();
@@ -132,15 +139,20 @@ public class JdbcRecipeDao implements RecipeDao{
 
                 long ingredientId;
 
+                // add the ingredients to the ingredient table, and recipe ingredients
+                // only add to ingredient table if it is a new ingredient
                 for (int i = 0; i<ingredients.length; i++) {
+                    // check if the ingredient exists in the database
                     String sql2 = "select ingredient_name from ingredients where ingredient_id =?";
                     SqlRowSet ingredientResult = jdbcTemplate.queryForRowSet(sql2, ingredients[i].getIngredientId());
                     ingredientId = ingredients[i].getIngredientId();
                     if (!ingredientResult.next()) {
+                        // if it doesn't, then add it to the table
                         String sql3 = "insert into ingredients (ingredient_id, ingredient_name) " +
                                 "values (?,?)";
                         jdbcTemplate.update(sql3, ingredientId, ingredients[i].getIngredientName());
                     }
+                    // create a link from the ingredient to the recipe in the recipe_ingredients linking table
                     String sql4 = "insert into recipe_ingredients (ingredient_id, recipe_id, measurement_unit, measurement_amount) " +
                             "values (?,?,?,?)";
                     jdbcTemplate.update(sql4, ingredientId, recipeId, ingredients[i].getMeasurementUnit(), ingredients[i].getMeasurementAmount());
