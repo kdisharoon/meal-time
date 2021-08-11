@@ -82,9 +82,8 @@
     <div id="plan-cards-wrapper" v-if="mealPlan.mealPlanId > 0">                  <!-- if a meal plan has been created, mealPlanId will be greater than 0 -->
       <div v-for="dayMeal in mealPlan.recipes" v-bind:key="dayMeal" class="day-meal">    <!-- goes through all 21 day-meal combinations in the mealPlan object -->
           <div class="day">{{ dayMeal.meal.charAt(0).toUpperCase() +dayMeal.meal.slice(1) }}     <!-- prints the day of the week "Wednesday" and meal "breakfast" at top of each card -->
-            <div class="recipe-name-display" v-for="rid in dayMeal.recipeIds" v-bind:key="rid">
-              {{ rid }} {{ getRecipeName(id) }}
-            
+            <div class="recipe-name-display" v-for="rname in dayMeal.recipeNames" v-bind:key="rname">
+              {{ rname }}
             </div>
           </div>
       </div>
@@ -127,6 +126,7 @@ export default {
     return {
       showForm: true,
       showPlanCards: false,
+      isLoading: true,
       currentMealName: "OOO",
       finalMealPlan: {},
       mealPlan: {
@@ -176,7 +176,12 @@ export default {
     },
 
     flipRevealButton(){
-      document.getElementById("btnCreateMealPlan").setAttribute("hidden", "");
+      if (document.getElementById("btnRenameMealPlan").hasAttribute("hidden")) {
+        document.getElementById("btnRenameMealPlan").removeAttribute("hidden");
+      }
+      else {
+        document.getElementById("btnRenameMealPlan").setAttribute("hidden", "");
+      }
 
       if (document.getElementById("isHiding").hasAttribute("hidden")) {
         document.getElementById("isHiding").removeAttribute("hidden");
@@ -263,7 +268,7 @@ export default {
 
          this.mealPlan = response.data;
 
-         
+
 // //        this.mealPlan.recipes.forEach(rec => {
 //  //         rec.recipeIds.forEach(recID => {
 // //            recipeService.getRecipeById(recID).then(response => {
