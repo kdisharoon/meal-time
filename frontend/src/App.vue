@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <header class="header">
-    <h1>meal TimE</h1>
+    <h1>
+    <img class="mealTimeLogo" src="./assets/MealTime 3.png">
+    </h1>
     <div id="nav" class="fake-btn">
       <router-link class="btn-fix-class" id="home" v-bind:to="{ name: 'home' }">HOME </router-link >
       <router-link class="btn-fix-class" id="all-recipes" v-bind:to="{ name: 'all-recipes' }"> ALL RECIPES </router-link>
@@ -56,6 +58,10 @@ h1{
 }
 .btn-fix-class:hover{
   background-color: orange;
+}
+
+.mealTimeLogo {
+  margin-bottom: -65px;
 }
 
 
