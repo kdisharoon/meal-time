@@ -44,11 +44,6 @@ public class JdbcMealPlanDao implements MealPlanDao{
             mealPlan.setMealPlanId(result.getLong("meal_plan_id"));
         }
         return mealPlan;
-
-
-
-
-
     }
 
     public void addRecipeToUserMealPlan(long userId, long recipeId, OrganizedRecipe organizedRecipe){
