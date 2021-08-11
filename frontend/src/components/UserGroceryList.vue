@@ -36,9 +36,9 @@ export default {
       groceryListService.getUserGroceryList(this.$store.state.user.id).then(response => {
         console.log(response.status);
         this.groceryList = response.data;
-        if (response.status === 200) {
-          alert("Successfully retrieved grocery list!");
-        }
+//        if (response.status === 200) {
+//          alert("Successfully retrieved grocery list!");
+//        }
       })
       .catch((error) => {
         console.log(error);
