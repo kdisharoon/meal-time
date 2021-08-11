@@ -5,9 +5,13 @@
   <div id="pattern">
     <div id="content">
       <ol>
-        <li v-for="item in groceryList" v-bind:key="item.ingredientId" class="shopping-list-item">
+        <li v-for="item in groceryList" 
+            v-bind:key="item.ingredientId" 
+            class="shopping-list-item" 
+            :class="{ crossedOut: crossedOutItems.includes(item) }"
+            @click="toggleCrossed(item)">
             {{ item.measurementAmount }} {{ item.measurementUnit }} {{ item.ingredientName }}
-          </li>
+          </li> 
         </ol>
       </div>
   </div>
@@ -15,7 +19,8 @@
   </div>
 </template>
 
-<script>
+<script href="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
+
 import groceryListService from '../services/GroceryListService';
 
 export default {
@@ -26,12 +31,12 @@ export default {
         { ingredientId: '0',
           ingredientName: '',
           measurementAmount: '',
-          measurementUnit: ''
+          measurementUnit: '',
         }
-      ]
+      ],
+      crossedOutItems: []
     }
   },
-
   created() {
       groceryListService.getUserGroceryList(this.$store.state.user.id).then(response => {
         console.log(response.status);
@@ -43,12 +48,28 @@ export default {
       .catch((error) => {
         console.log(error);
       });
-  }
+  } ,
+  methods: {
+    toggleCrossed(item) {
+      if(this.crossedOutItems.includes(item)) {
+        this.crossedOutItems = this.crossedOutItems.filter(
+          (item) => item !== item
+        );   
+      } else {
+        this.crossedOutItems.push(item);
+      }
+    }
+  } 
 
 }
 </script>
 
 <style>
+.crossedOut {
+  text-decoration: line-through;
+  color: magenta;
+}
+
 body {
   background-color: rgba(0,0,0,0.1);
 }
@@ -56,7 +77,7 @@ body {
 /* styling paper */
 #paper {
   width: 600px;
-  height: 700px;
+  height: auto;
   position: relative;
   margin: 20px auto;
   padding-top: 40px;
@@ -93,6 +114,21 @@ body {
   letter-spacing: 1px;
   word-spacing: 5px;
 }
+
+li {
+  border: none!important;
+  cursor: pointer;
+}
+
+.offList {
+  text-decoration: line-through;
+}
+
+/* li:visited,
+li:focus,
+li:active {
+  text-decoration: line-through;
+} */
 
 /* gotta keep adding commits */
 
