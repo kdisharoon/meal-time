@@ -5,6 +5,15 @@ public class OrganizedRecipe {
     private String day;
     private String meal;
     private long[] recipeIds;
+    private String[] recipeNames;
+
+    public String[] getRecipeNames() {
+        return recipeNames;
+    }
+
+    public void setRecipeNames(String[] recipeNames) {
+        this.recipeNames = recipeNames;
+    }
 
     public OrganizedRecipe(){}
 
