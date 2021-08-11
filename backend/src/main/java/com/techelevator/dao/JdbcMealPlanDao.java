@@ -104,22 +104,26 @@ public class JdbcMealPlanDao implements MealPlanDao{
             mealPlan.setMealPlanName(mealPlanName);
 
             // getting all recipes to populate the RecipeList[]
-            String sql2 = "select recipe_id, day, meal " +
+            String sql2 = "select recipe_id, recipes.recipe_name, day, meal " +
                     "from meal_plan_user_recipes " +
+                    "join recipes using (recipe_id) " +
                     "where meal_plan_id=?";
             SqlRowSet recipeIdResults = jdbcTemplate.queryForRowSet(sql2, mealPlanId);
             while (recipeIdResults.next()) {
                 // adding to recipeList[] at the correct index based off of the day and meal
                 String day = recipeIdResults.getString("day");
                 String meal = recipeIdResults.getString("meal");
+                String recipeName = recipeIdResults.getString("recipe_name");
                 int index = mealPlan.findIndex(day, meal);
                 recipeLists[index].addToList(recipeIdResults.getLong("recipe_id"));
+                recipeLists[index].addToList(recipeName);
 
             }
             for (int i = 0; i < 21; i++) {
                 // adding the now complete list at each index of the RecipeList[] to OrganizedRecipe[]
                 // each index in recipeList is mapped to the same index in the organizedRecipe
                 mealPlan.setOrganizedRecipeAtIndex(i, recipeLists[i].getArray());
+                mealPlan.setOrganizedRecipeAtIndex(i, recipeLists[i].getStringArray());
             }
         }
         return mealPlan;
