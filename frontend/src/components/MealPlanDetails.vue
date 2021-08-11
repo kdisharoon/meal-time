@@ -6,7 +6,7 @@
 
 
       
-    <div class="user-meal-plans-list d-flex justify-content-around">
+   
 
       <div class="clearfix" v-if="mealPlan.mealPlanId === 0">
         <button id="btnCreateMealPlan" type="button" class="btn" v-on:click="flipRevealButton">
@@ -36,7 +36,6 @@
       </div>
 
 
-    </div>
 
 
 
@@ -58,11 +57,13 @@
        
       </div>
     </div>
+
+
     <div id="mealPlanButts">
-<div class="rename-meal-plan-wrapper" v-if="mealPlan.mealPlanId > 0">
+      <div class="rename-meal-plan-wrapper" v-if="mealPlan.mealPlanId > 0">
         <button id="btnRenameMealPlan" type="button" class="btn" v-on:click="flipRevealButton">
           Rename Your Meal Plan
-          </button>
+        </button>
       </div>
       
  <div class="rename-meal-plan-wrapper" v-if="mealPlan.mealPlanId > 0">
@@ -70,8 +71,27 @@
           Clear your meal plan
           </button>
       </div>
+    </div>
+
+    <div hidden id="isHiding" class="container">
+        <form v-on:submit.prevent="checkAddMealPlan" id="planForm">
+          <div class="card">
+            <div class="col-25">
+              <label for="fname">Meal Plan Name</label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="mname" name="mealplanname" v-model.lazy="mealPlan.mealPlanName" />
+            </div>
+          </div>
+          <div>
+            <button id="plan-name-submit-button" type="submit" class="btn" v-on:click="flipRevealButton">
+              {{mealPlan.mealPlanId > 0 ? "Rename" : "Create"}} Meal Plan
+            </button>
+          </div>
+        </form>
+      </div>
+
 </div>
-  </div>
 
 </template>
 
@@ -86,7 +106,7 @@ export default {
     return {
       showForm: true,
       showPlanCards: false,
-
+      currentMealName: "OOO",
 
       mealPlan: {
           mealPlanId: 0,

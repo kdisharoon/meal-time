@@ -15,8 +15,13 @@
  
   <form id="allSearch" action="">
      <div class="form-group">
-       <input type="text" placeholder="Search..." v-model="userSearchTerm">
-      <button class ="searchButton" v-on:click.prevent="searchForRecipeName(userSearchTerm)" type="submit"><i class="fa fa-search"></i></button>
+       <input type="text" placeholder="Search By Recipe Name" v-model="userSearchTerm">
+      <button class="searchButton" v-on:click.prevent="searchForRecipeName(userSearchTerm)" type="submit">
+        <i class="fa fa-search"></i>
+      </button>
+      <button class="reset-filter" v-if="showResetButton" v-on:click.prevent="resetFilter">
+        Reset Search
+      </button>
       
     </div>
   </form>
@@ -58,6 +63,9 @@ export default {
   name: 'all-recipes-list',
   data() {
     return {
+      filteredRecipes: [],
+      backupRecipes: [],
+      showResetButton: false,
       userSearchTerm: '',
       isLoading: true,
       recipes: [],
@@ -67,26 +75,31 @@ export default {
 
   methods: {
 
+    resetFilter() {
+      this.recipes = this.backupRecipes;
+      this.backupRecipes = [];
+      this.filteredRecipes = [];
+      this.showResetButton = false;
+    },
+
 
     searchForRecipeName(userSearchTerm) {
       if(typeof userSearchTerm !== 'string' || userSearchTerm.length === 0) {
         return false;
       }
-      recipeService.getAllRecipes().then(response => {
-      this.recipes = response.data; 
-      this.isLoading = false;
-        });
       let lowerCase = userSearchTerm.toLowerCase();
       console.log(userSearchTerm);
       console.log(lowerCase);
       console.log(this.recipes);
-      let filter = this.recipes.filter(recipe => {
+      this.filteredRecipes = this.recipes.filter(recipe => {
         if(recipe.recipeName.toLowerCase().includes(lowerCase)){
           return true;
         }
         return false;
       });
-      this.recipes = filter;
+      this.backupRecipes = this.recipes;
+      this.recipes = this.filteredRecipes;
+      this.showResetButton = true;
     
     },
 
