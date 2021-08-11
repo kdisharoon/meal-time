@@ -8,7 +8,7 @@
   </div>
   
   <div  v-else>
-    <button hidden v-on:click.prevent="getNewRecipesFromAPI" class="addRecipes">Add 10 Recipes to Database from External Source</button>
+    
     
    <!-- Load an icon library -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -46,7 +46,7 @@
           </div>
           
       </div>
-
+<button v-on:click.prevent="getNewRecipesFromAPI" class="addRecipes">Generate 100 More Recipes</button>
     </div>
 
     </div>

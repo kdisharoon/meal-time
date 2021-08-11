@@ -3,10 +3,10 @@
   <h2 id="myRecipe">My Recipes</h2>
   <div class="saved-recipes-list d-flex justify-content-around">
     <div v-for="recipe in recipes" v-bind:key="recipe.recipeId" class="recipe">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
       <div class="card">
         <div id="delButt">
-        <button id="deleteButt" v-on:click.prevent="deleteRecipe(recipe.recipeId)">X</button>
+        <button id="deleteButt" v-on:click.prevent="deleteRecipe(recipe.recipeId)"><i class="fas fa-times"></i></button>
         </div>
         <img v-bind:src="recipe.recipeImg" class="recipe-image" style="width:100%">
           <h4 id="rTwo"><b>{{recipe.recipeName}}</b></h4>
@@ -64,8 +64,10 @@ export default {
 }
 #deleteButt{
   display: flex;
-  height: 5px;
-  width: 5px;
+  height: 3px;
+  width: 3px;
+
+  align-content: center;
   justify-content: center;
   align-items: center;
 }

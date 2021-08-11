@@ -3,7 +3,19 @@
 
     <h2 style="text-align: center">{{mealPlan.mealPlanName}}</h2>
 
-
+  <div id="mealPlanButts">
+      <div class="rename-meal-plan-wrapper" v-if="mealPlan.mealPlanId > 0">
+        <button id="btnRenameMealPlan" type="button" class="btn" v-on:click="flipRevealButton">
+          Rename Your Meal Plan
+        </button>
+      </div>
+      
+ <div class="rename-meal-plan-wrapper" v-if="mealPlan.mealPlanId > 0">
+        <button id="clearMealPlanButt" type="button" class="btn" >
+          Clear your meal plan
+          </button>
+      </div>
+    </div>
 
       
    
@@ -59,19 +71,7 @@
     </div>
 
 
-    <div id="mealPlanButts">
-      <div class="rename-meal-plan-wrapper" v-if="mealPlan.mealPlanId > 0">
-        <button id="btnRenameMealPlan" type="button" class="btn" v-on:click="flipRevealButton">
-          Rename Your Meal Plan
-        </button>
-      </div>
-      
- <div class="rename-meal-plan-wrapper" v-if="mealPlan.mealPlanId > 0">
-        <button id="clearMealPlanButt" type="button" class="btn" >
-          Clear your meal plan
-          </button>
-      </div>
-    </div>
+  
 
     <div hidden id="isHiding" class="container">
         <form v-on:submit.prevent="checkAddMealPlan" id="planForm">
@@ -226,6 +226,7 @@ export default {
   justify-content: space-around;
 }
 .day{
+  position: relative;
   background-color: aliceblue;
   display: flex;
   font-size: 20px;
@@ -237,6 +238,11 @@ export default {
   width: 200px;
   text-decoration: none;
   margin-bottom: 10px;
+  transition: transform 2s ease-in-out;
+}
+.day:hover{
+transform: scale(1.5);
+z-index: 1;
 }
 .mealtime{
   display:grid;
@@ -245,12 +251,15 @@ export default {
   text-align: left;
   max-width: 180px;
 }
-
+.meal-plan-details{
+  display: flex;
+  flex-direction: column;
+}
 #plan-cards-wrapper{
   display: flex;
   justify-content: space-evenly;
   margin: 20px;
-  margin-top: 75px;
+  margin-top: 40px;
   flex-wrap: wrap;
   text-align: left;
 }
