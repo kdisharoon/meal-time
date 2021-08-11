@@ -1,6 +1,10 @@
 <template>
 <!-- Tom see's all -->
   <div id="popular">
+      <div class="loading" v-if="isLoading">
+        <img src="../assets/giphy.gif" />
+      </div>
+
     <div id="day" class="random-recipe">
       <h3>Random Recipe Generator</h3>
       <h4 id="recName">{{chosenRecipe.recipeName}}</h4>
@@ -30,7 +34,7 @@
   <form action="">
      <div class="form-group">
        <input type="text" placeholder="Search..." v-model="userSearchTerm">
-      <button class ="searchButton" v-on:click.passive="searchRecipesFromAPI(userSearchTerm)" type="submit"><i class="fa fa-search"></i></button>
+      <button class ="searchButton" v-on:click.prevent="searchRecipesFromAPI(userSearchTerm)" type="submit"><i class="fa fa-search"></i></button>
     </div>
   </form>
 
@@ -66,13 +70,15 @@ export default {
       recipes: [],
       chosenRecipe: {},
       displayIngredients: '',
-      displayPreparations: ''
+      displayPreparations: '',
+      isLoading: true,
     }
   },
 
   created() {
       recipeService.getAllRecipes().then(response => {
       this.recipes = response.data;
+      this.isLoading = false;
     });
   },
 
@@ -120,7 +126,7 @@ export default {
     saveToDatabase(recipesToAdd) {
       recipeService.addRecipesFromAPIToDatabase(recipesToAdd).then(response => {
         if (response.status === 201) {
-           alert("You found something");
+           alert("You found recipes containing {{userSearchTerm}}");
            this.$router.go();    // make this go to a Search Results page instead!
           }
         })
@@ -312,7 +318,7 @@ a{
   size: 100px;
   text-align: center;
 }
-#recipe .card{
+/* #recipe .card{
   align-items: center;
    background:aliceblue;
     max-width: 300px;
@@ -323,12 +329,11 @@ a{
     border-radius: 5px;
 
 
-}
-.card img{
+} */
+/* .card img{
   align-self: start;
   
-  
-}
+} */
 #cards{
   margin:auto;
 
@@ -343,12 +348,15 @@ a{
 }
 
 
-.image{
-  max-width: 180px;
-  max-height: 180px;
-  object-fit: contain;
+/* .card img{
+  max-width: 300px;
+  max-height: 300px;
+  object-fit: cover;
  
-}
+} */
 
+.loading {
+  flex: 3;
+}
 
 </style>
