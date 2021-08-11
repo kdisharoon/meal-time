@@ -1,7 +1,10 @@
 <template>
   <div class="container rpDetails">
   
- 
+      <div class="loading" v-if="isLoading">
+        <img src="../assets/giphy.gif" />
+      </div>
+
     <div class="row">
       <div class="recipe-details">
         <h1 class="recipe-name">{{ recipe.name }}</h1>
@@ -76,6 +79,7 @@ export default {
       newMealPlanAddition: {
         day: '',
         meal: '',
+        isLoading: true,
       },
       recipe: {
         id: 0,
@@ -147,6 +151,7 @@ export default {
       this.recipe.imageURL = response.data.recipeImg;
       this.recipe.mealType = response.data.type;
       this.recipe.ingredients = response.data.ingredients;
+      this.isLoading = false;
     })
     
 //     mealPlanService.getAllUserMealPlans(this.$route.params.userID).then(response => {
@@ -183,6 +188,7 @@ export default {
 .rpDetails {
   border: solid black 5px;
   background: white;
+  margin-top: 15px;
 }
 
 .recipe-name {
@@ -224,7 +230,7 @@ ol {
 
 li {
   font-size: 20px;
-  border-style: outset;
+  /* border-style: outset; */
 }
 #butt{
   display: flex;
@@ -287,4 +293,8 @@ h5 {
     box-shadow: 0 5px #666;
     transform: translateY(4px);
   }
+
+  .loading {
+  flex: 3;
+}
 </style>

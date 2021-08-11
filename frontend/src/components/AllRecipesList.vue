@@ -1,5 +1,8 @@
 <template>
 <div id="full">
+  <div class="loading" v-if="isLoading">
+        <img src="../assets/giphy.gif" />
+      </div>
   
   <h2 id="allRecipe">All Recipes</h2>
 
@@ -240,6 +243,10 @@ text-align: center;
       justify-content: center; */
   } 
 
+  .card-text {
+    text-align: center;
+  }
+
   button {
     cursor: pointer;
     background-color: orange;
@@ -316,6 +323,12 @@ text-align: center;
     height: 72px;
     opacity: 0;
   }
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
   
 

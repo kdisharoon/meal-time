@@ -1,6 +1,10 @@
 <template>
   <div class="meal-plan-details">
 
+      <div class="loading" v-if="isLoading">
+        <img src="../assets/giphy.gif" />
+      </div>
+
     <h2 style="text-align: center">{{mealPlan.mealPlanName}}</h2>
 
 
@@ -107,6 +111,7 @@ export default {
       showForm: true,
       showPlanCards: false,
       currentMealName: "OOO",
+      isLoading: true,
 
       mealPlan: {
           mealPlanId: 0,
@@ -197,6 +202,7 @@ export default {
       console.log(response.data);
       if (response.data.mealPlanId > 0) {
         this.mealPlan = response.data;
+        this.isLoading = false;
       }
     })
   },
