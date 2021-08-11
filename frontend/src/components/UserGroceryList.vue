@@ -1,5 +1,8 @@
 <template>
   <div>
+      <div class="loading" v-if="isLoading">
+        <img src="../assets/giphy.gif" />
+      </div>
       <h2 style="text-align:center;">My Grocery List</h2>
 <div id="paper">
   <div id="pattern">
@@ -34,14 +37,15 @@ export default {
           measurementUnit: '',
         }
       ],
-      crossedOutItems: []
+      crossedOutItems: [],
+      isLoading: true,
     }
   },
   created() {
       groceryListService.getUserGroceryList(this.$store.state.user.id).then(response => {
         console.log(response.status);
         this.groceryList = response.data;
-        
+        this.isLoading = false;
       })
   },
   methods: {
@@ -131,4 +135,8 @@ li:active {
 /* Are you paying detailed attention to my commits? */
 
 /*Commit commit commit*/
+
+.loading {
+  flex: 3;
+}
 </style>

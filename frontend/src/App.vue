@@ -64,5 +64,12 @@ h1{
   margin-bottom: -65px;
 }
 
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation-delay: 5s;
+  animation-duration: 5s;
+}
 
 </style>

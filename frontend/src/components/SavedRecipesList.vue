@@ -1,5 +1,8 @@
 <template>
 <div>
+      <div class="loading" v-if="isLoading">
+        <img src="../assets/giphy.gif" />
+      </div>
   <h2 id="myRecipe">My Recipes</h2>
   <div class="saved-recipes-list d-flex justify-content-around">
     <div v-for="recipe in recipes" v-bind:key="recipe.recipeId" class="recipe">
@@ -29,7 +32,8 @@ export default {
   name: 'saved-recipes-list',
   data() {
     return {
-      recipes: []
+      recipes: [],
+      isLoading: true,
     }
   },
 
@@ -49,6 +53,7 @@ export default {
   created() {
     recipeService.getAllUserRecipes(this.$route.params.userID).then(response => {
       this.recipes = response.data;
+      this.isLoading = false;
     });
   }
 }
@@ -70,6 +75,10 @@ export default {
   align-content: center;
   justify-content: center;
   align-items: center;
+}
+
+.loading {
+  flex: 3;
 }
 
 </style>

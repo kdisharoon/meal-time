@@ -1,5 +1,8 @@
 <template>
   <div>
+      <div class="loading" v-if="isLoading">
+        <img src="../assets/giphy.gif" />
+      </div>
     <h2 style="text-align: center">My Meal Plan</h2>
 
       
@@ -49,6 +52,7 @@ export default {
   data() {
     return {
       mealPlans: [],
+      isLoading: true,
       newPlan: {
         mealPlanName: "",
         userId: this.$route.params.userID,
@@ -66,6 +70,7 @@ revealButton(){
   created() {
     mealPlanService.getAllUserMealPlans(this.$route.params.userID).then(response => {
       this.mealPlans = response.data;
+      this.isLoading = false;
     });
   },
 }
@@ -128,5 +133,9 @@ input[type=submit]:hover {
     width: 100%;
     margin-top: 0;
   }
+
+  .loading {
+  flex: 3;
+}
 }
 </style>
