@@ -19,7 +19,7 @@
       <button class="searchButton" v-on:click.prevent="searchForRecipeName(userSearchTerm)" type="submit">
         <i class="fa fa-search"></i>
       </button>
-      <button class="reset-filter" v-if="showResetButton" v-on:click.prevent="resetFilter">
+      <button id="resetButt" class="reset-filter" v-if="showResetButton" v-on:click.prevent="resetFilter">
         Reset Search
       </button>
       
@@ -156,7 +156,12 @@ export default {
 </script>
 
 <style>
-
+#resetButt{
+  display: flex;
+  align-items: center;
+  height: 30px;
+  
+}
 /* .all-recipes-list {
     background:white;
     max-width: 300px;

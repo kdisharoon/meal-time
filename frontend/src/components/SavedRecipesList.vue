@@ -1,7 +1,7 @@
 <template>
 <div>
   <h2 id="myRecipe">My Recipes</h2>
-  <div class="saved-recipes-list justify-content-around">
+  <div class="saved-recipes-list d-flex justify-content-around">
     <div v-for="recipe in recipes" v-bind:key="recipe.recipeId" class="recipe">
     
       <div class="card">
