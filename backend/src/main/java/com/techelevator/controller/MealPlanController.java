@@ -9,6 +9,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.nio.file.attribute.UserPrincipal;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -48,7 +50,9 @@ public class MealPlanController {
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(path = "/users/{userId}/mealplans", method = RequestMethod.GET)
-    public MealPlan getMealPlanByUser(@PathVariable long userId){
+    public MealPlan getMealPlanByUser(@PathVariable long userId, Principal principal){
+
+
         return mealPlanDao.getMealPlanByUser(userId);
 
     }

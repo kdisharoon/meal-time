@@ -63,6 +63,9 @@ public class MealPlan {
     public void setOrganizedRecipeAtIndex(int index, long[] ids){
         organizedRecipes[index].setRecipeIds(ids);
     }
+    public void setOrganizedRecipeAtIndex(int index, String[] ids){
+        organizedRecipes[index].setRecipeNames(ids);
+    }
 
     public OrganizedRecipe[] buildOrganizedRecipeArray(){
         OrganizedRecipe[] organizedRecipes1 = new OrganizedRecipe[21];

@@ -8,9 +8,11 @@ public class RecipeList {
     // list is used instead of array to allow for resizing as the amount of recipes per day/meal is unknown
 
     private List<Long> rIds;
+    private List<String> rNames;
 
     public RecipeList(){
         rIds= new ArrayList<>();
+        rNames= new ArrayList<>();
     }
 
     public void addToList(long id){
@@ -27,4 +29,16 @@ public class RecipeList {
         return a;
 
     }
+
+    public void addToList(String name){
+        rNames.add(name);
+    }
+
+    public String[] getStringArray(){
+        String[] s = rNames.toArray(new String[0]);
+        return s;
+
+    }
+
+
 }
