@@ -18,14 +18,14 @@ public abstract class FinalCapstoneDaoTests {
     /* Using this particular implementation of DataSource so that
      * every database interaction is part of the same database
      * session and hence the same database transaction */
-    private static SingleConnectionDataSource dataSource;
+    public static SingleConnectionDataSource dataSource;
 
     /* Before any tests are run, this method initializes the datasource for testing. */
     @BeforeClass
     public static void setupDataSource() {
         dataSource = new SingleConnectionDataSource();
         dataSource.setUrl("jdbc:postgresql://localhost:5432/final_capstone");
-        dataSource.setUsername("final_capstone_appuser");
+        dataSource.setUsername("final_capstone_owner");
         dataSource.setPassword("finalcapstone");
         /* The following line disables autocommit for connections
          * returned by this DataSource. This allows us to rollback
@@ -33,10 +33,10 @@ public abstract class FinalCapstoneDaoTests {
         dataSource.setAutoCommit(false);
     }
 
-//    @Before
-//    public void loadTestData() throws IOException, SQLException {
-//        ScriptUtils.executeSqlScript(dataSource.getConnection(), new ClassPathResource("test-data.sql"));
-//    }
+    @Before
+    public void loadTestData() throws IOException, SQLException {
+        ScriptUtils.executeSqlScript(dataSource.getConnection(), new ClassPathResource("test-data.sql"));
+    }
 
     /* After all tests have finished running, this method will close the DataSource */
     @AfterClass

@@ -17,7 +17,7 @@ public class JdbcRecipeDaoTests extends FinalCapstoneDaoTests{
 
     @Before
     public void setup(){
-        DataSource dataSource = this.getDataSource();
+        //DataSource dataSource = this.getDataSource();
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         sut = new JdbcRecipeDao(jdbcTemplate);
 
