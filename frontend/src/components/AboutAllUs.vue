@@ -1,234 +1,141 @@
-<template>
+<template>            
 
-                        
- <div class="container bootstrap snippets bootdey">
-    <div class="profile person">
-        <div class="profile-body">
-            <div class="profile-bio">
-                <div class="row">
-                    <div class="col-md-5 text-center">
-                        <img class="img-thumbnail md-margin-bottom-10" src="https://bootdey.com/img/Content/user-453533-fdadfd.png" alt="">
-                    </div>
-                    <div class="col-md-7">
-                        <h2>Edward Rooster</h2>
-                        <span><strong>Job:</strong> Web Developer</span>
-                        <span><strong>Position:</strong> Web Designer</span>
-                        <hr>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget massa nec turpis congue bibendum. Integer nulla felis, porta suscipit nulla et, dignissim commodo nunc. Morbi a semper nulla.</p>
-                        <p>Proin mauris odio, pharetra quis ligula non, vulputate vehicula quam. Nunc in libero vitae nunc ultricies tincidunt ut sed leo. Sed luctus dui ut congue consequat. Cras consequat nisl ante, nec malesuada velit pellentesque ac. Pellentesque nec arcu in ipsum iaculis convallis.</p>
-                    </div>
-                </div>    
-            </div>
-    </div>
-    </div>
-</div>                                                            
-
-<div class="container bootstrap snippets bootdey">
-    <div class="profile person">
-        <div class="profile-body">
-            <div class="profile-bio">
-                <div class="row">
-                    <div class="col-md-5 text-center">
-                        <img class="img-thumbnail md-margin-bottom-10" src="https://bootdey.com/img/Content/user-453533-fdadfd.png" alt="">
-                    </div>
-                    <div class="col-md-7">
-                        <h2>Edward Rooster</h2>
-                        <span><strong>Job:</strong> Web Developer</span>
-                        <span><strong>Position:</strong> Web Designer</span>
-                        <hr>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget massa nec turpis congue bibendum. Integer nulla felis, porta suscipit nulla et, dignissim commodo nunc. Morbi a semper nulla.</p>
-                        <p>Proin mauris odio, pharetra quis ligula non, vulputate vehicula quam. Nunc in libero vitae nunc ultricies tincidunt ut sed leo. Sed luctus dui ut congue consequat. Cras consequat nisl ante, nec malesuada velit pellentesque ac. Pellentesque nec arcu in ipsum iaculis convallis.</p>
-                    </div>
-                </div>    
-            </div>
-    </div>
-    </div>
-</div> 
-
-<div class="container bootstrap snippets bootdey">
-    <div class="profile person">
-        <div class="profile-body">
-            <div class="profile-bio">
-                <div class="row">
-                    <div class="col-md-5 text-center">
-                        <img class="img-thumbnail md-margin-bottom-10" src="https://bootdey.com/img/Content/user-453533-fdadfd.png" alt="">
-                    </div>
-                    <div class="col-md-7">
-                        <h2>Edward Rooster</h2>
-                        <span><strong>Job:</strong> Web Developer</span>
-                        <span><strong>Position:</strong> Web Designer</span>
-                        <hr>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget massa nec turpis congue bibendum. Integer nulla felis, porta suscipit nulla et, dignissim commodo nunc. Morbi a semper nulla.</p>
-                        <p>Proin mauris odio, pharetra quis ligula non, vulputate vehicula quam. Nunc in libero vitae nunc ultricies tincidunt ut sed leo. Sed luctus dui ut congue consequat. Cras consequat nisl ante, nec malesuada velit pellentesque ac. Pellentesque nec arcu in ipsum iaculis convallis.</p>
-                    </div>
-                </div>    
-            </div>
-    </div>
-    </div>
-</div> 
-
-<div class="container bootstrap snippets bootdey">
-    <div class="profile person">
-        <div class="profile-body">
-            <div class="profile-bio">
-                <div class="row">
-                    <div class="col-md-5 text-center">
-                        <img class="img-thumbnail md-margin-bottom-10" src="https://bootdey.com/img/Content/user-453533-fdadfd.png" alt="">
-                    </div>
-                    <div class="col-md-7">
-                        <h2>Edward Rooster</h2>
-                        <span><strong>Job:</strong> Web Developer</span>
-                        <span><strong>Position:</strong> Web Designer</span>
-                        <hr>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget massa nec turpis congue bibendum. Integer nulla felis, porta suscipit nulla et, dignissim commodo nunc. Morbi a semper nulla.</p>
-                        <p>Proin mauris odio, pharetra quis ligula non, vulputate vehicula quam. Nunc in libero vitae nunc ultricies tincidunt ut sed leo. Sed luctus dui ut congue consequat. Cras consequat nisl ante, nec malesuada velit pellentesque ac. Pellentesque nec arcu in ipsum iaculis convallis.</p>
-                    </div>
-                </div>    
-            </div>
-    </div>
-    </div>
-</div> 
-
-<div class="container bootstrap snippets bootdey">
-    <div class="profile person">
-        <div class="profile-body">
-            <div class="profile-bio">
-                <div class="row">
-                    <div class="col-md-5 text-center">
-                        <img class="img-thumbnail md-margin-bottom-10" src="https://bootdey.com/img/Content/user-453533-fdadfd.png" alt="">
-                    </div>
-                    <div class="col-md-7">
-                        <h2>Edward Rooster</h2>
-                        <span><strong>Job:</strong> Web Developer</span>
-                        <span><strong>Position:</strong> Web Designer</span>
-                        <hr>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget massa nec turpis congue bibendum. Integer nulla felis, porta suscipit nulla et, dignissim commodo nunc. Morbi a semper nulla.</p>
-                        <p>Proin mauris odio, pharetra quis ligula non, vulputate vehicula quam. Nunc in libero vitae nunc ultricies tincidunt ut sed leo. Sed luctus dui ut congue consequat. Cras consequat nisl ante, nec malesuada velit pellentesque ac. Pellentesque nec arcu in ipsum iaculis convallis.</p>
-                    </div>
-                </div>    
-            </div>
-    </div>
-    </div>
-</div> 
-
-
-
-  <!-- <div class = "about_container">
-    <header id="header" class = "head">
-        <h1>The Developers of </h1>
-        <h1>meal TimE</h1>
+  <div class="about_container">
+    <header id="header" class="head">
+      <h1>The Developers of meal TimE</h1>
     </header>
-    <div class="bio" id="shay">
-      <img src="../assets/shay.jpg" />
+    <div class="container">
+      <div class="row">
+        <div class="col-6 bio card" id="shay">
+          <img class="abtimg" src="../assets/shay.jpg" />
+          <div class="about">
+            <h6>Shay Griffith</h6>
+            <p>Shay is a former Miss Pennsylvania conetestant, who was unfairly disqualified for crosschecking a fellow contestant during her talent showcase.  After her community service was up, Shay entered into a recruitment career where she filled many companies with talented, qualified and extremely tough candidates.  Covid hit Shay hard and she decided a career change was in order, but the NHL still won't allow females to compete, so she joined Tech Elevator.  For this application, Shay designed the database, worked with the API and contributed many designs to the layout and logo.  </p>
+          </div>
+        </div>
+        <div class="col-6 bio card" id="ezra">
+          <img class="abtimg" src="../assets/ezra.jpeg" />
+          <div class="about">
+            <h6>Ezra Saywitz</h6>
+            <p>Ezra "Mad Dawg" Saywitz is a backend legend.  Single handidly owning the backend portion of meal TimE, Ezra was quickly able to solve many issues that popped up through the development.  When he isn't coding, you can find Ezra in the octogan destroying his flyweight competion.</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 bio card" id="aj">
+          <img class="abtimg" src="../assets/aj.jpeg" />
+          <div class="about">
+            <h6>AJ Jadot</h6>
+            <p>After a short but stellar stint in the demolition derby circuit, AJ decided he needed to use his brain for more than just pin-point engine desctruction.  AJ served as equal parts design and front-end functionality for meal TimE.  His touch can be felt on every aspect for user interaction. If you ever pull up to AJ at a stop light, don't nod his way - he'll run you into a lightpost.</p>
+          </div>
+        </div>
+        <div class="col-6 bio card" id="kris">
+          <img class="abtimg" src="../assets/kris.jpeg" />
+          <div class="about">
+            <h6>Kris Disharoon</h6>
+            <p>Originally from Bern, Switzerland, Kris spent over a decade in the Swiss Special Forces.  After retirement, with honors, he relocated to Pittsburgh, because he heard the pierogies were pretty good and enjoys breweries.  Kris is a natural leader - not only has he been involved on every part of the application, he has unknowlingly kept us all in line, organized and calm. His time in the deserts of Africa prepared him for 14 weeks at Tech Elevator.  Without Kris, Ryan might not have contributed anything at all to this application.</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+    <div class="bio col-12 card" id="ryan">
+      <img class="abtimg" src="../assets/ryan.jpg" />
       <div class="about">
-          <h1>Shay Griffith</h1>
-        <p>
-          FILLER
-        </p>
+        <h6>Ryan Godman</h6>
+        <p>After a failed attempt in the entertainment industry, Ryan spent time living in his parents basement...for a long time.  He eventually found someone who settled for him and they moved to the Pittsburgh area a few years ago.  After deciding a career change was in order, he found Tech Elevator, but his fiance decided to go through it first.  So he waited, and then got to go himself.  Ryan was around for every meeting and always has something to say...but no much to do. It's that undying dedication to words that has gotten Ryan this far in life. When you click on something and go, "why is this on here?", that's Ryan.</p>
       </div>
     </div>
-    <div class="bio" id="ezra">
-      <img src="../assets/ezra.jpeg" />
-      <div class="about">
-          <h1>Ezra Saywitz</h1>
-        <p>
-          FILLER
-        </p>
       </div>
     </div>
-    <div class="bio" id="aj">
-      <img src="../assets/aj.jpeg" />
-      <div class="about">
-          <h1>AJ Jadot</h1>
-        <p>
-          FILLER
-        </p>
-      </div>
-    </div>
-    <div class="bio" id="kris">
-      <img src="../assets/kris.jpeg" />
-      <div class="about">
-          <h1>Kris Disharoon</h1>
-        <p>
-          FILLER
-        </p>
-      </div>
-    </div>
-    <div class="bio" id="ryan">
-      <img src="../assets/ryan.jpg" />
-      <div class="about">
-          <h1>Ryan Godman</h1>
-        <p>
-          FILLER
-        </p>
-      </div>
-    </div>
-    <footer id="footer">
-        <img class="" src="">
-    </footer>
 
-  </div> -->
+
+    <footer id="footer">
+      <img class="" src="" />
+    </footer>
+  </div>
 </template>
 
 <script>
 export default {
-name: 'about-all-us'
-}
+  name: "about-all-us",
+};
 </script>
 
 
 <style>
 
-                        
+.card {
+    min-width: 600px; 
+}
 
-.person{
-    -moz-border-radius: 2%;
-    -webkit-border-radius: 2%;
-    border-radius: 2%;
-    box-shadow: 5px 5px 0 rgba(0,0,0,0.08);
+img.abtimg {
+    object-fit: contain;
+    min-height: 400px;
+    margin-top: 50px;
+}
+
+p {
+    font-size: 20px;
+    margin: 40px;
+}
+
+h6{
+    text-align: center;
+    font-size: 50px;
+}
+/* .person {
+  -moz-border-radius: 2%;
+  -webkit-border-radius: 2%;
+  border-radius: 2%;
+  box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.08);
 }
 
 .profile .profile-body {
-    padding: 20px;
-    background: #f7f7f7;
+  padding: 20px;
+  background: #f7f7f7;
 }
 
 .profile .profile-bio {
-    background: #fff;
-    position: relative;
-    padding: 15px 10px 5px 15px;
+  background: #fff;
+  position: relative;
+  padding: 15px 10px 5px 15px;
 }
 
 .profile .profile-bio a {
-    left: 50%;
-    bottom: 20px;
-    margin: -62px;
-    text-align: center;
-    position: absolute;
+  left: 50%;
+  bottom: 20px;
+  margin: -62px;
+  text-align: center;
+  position: absolute;
 }
 
 .profile .profile-bio h2 {
-    margin-top: 0;
-    font-weight: 200;
+  margin-top: 0;
+  font-weight: 200;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    color: #585f69;
-    margin-top: 5px;
-    text-shadow: none;
-    font-weight: normal;
-    font-family: 'Open Sans', sans-serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #585f69;
+  margin-top: 5px;
+  text-shadow: none;
+  font-weight: normal;
+  font-family: "Open Sans", sans-serif;
 }
 h2 {
-    font-size: 24px;
-    line-height: 33px;
+  font-size: 24px;
+  line-height: 33px;
 }
 
-p, li, li a {
-    color: #555;
-}                                                            
-
-
+p,
+li,
+li a {
+  color: #555;
+}
 
 /*html {
     background-color: #7DDFA4;
@@ -308,5 +215,5 @@ h1 {
 }
 p {
     line-height: 24px;
-}*/
+}*/ 
 </style>
