@@ -2,7 +2,7 @@
   <div id="app">
     <header class="header">
     <h1>
-    <img class="mealTimeLogo" src="./assets/MealTime 3.png">
+    <router-link v-bind:to="{name: 'about-us'}"><img class="mealTimeLogo" src="./assets/MealTime 3.png"></router-link>
     </h1>
     <div id="nav" class="fake-btn">
       <router-link class="btn-fix-class" id="home" v-bind:to="{ name: 'home' }">HOME </router-link >

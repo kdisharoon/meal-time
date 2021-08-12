@@ -15,15 +15,10 @@ public class JdbcMealPlanDaoTests extends FinalCapstoneDaoTests{
 
     @Before
     public void setup(){
-        DataSource dataSource = this.getDataSource();
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         sut = new JdbcMealPlanDao(jdbcTemplate);
     }
 
 
-   /* @Test
-    public void get_meal_plan_by_user_id(){
-        MealPlan[] mealPlan = sut.getAllUserMealPlans(1L);
-        Assert.assertEquals(1, mealPlan.length);
-    }*/
+
 }
