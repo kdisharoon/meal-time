@@ -47,7 +47,7 @@
             <div></div><div></div>
           </div>
           <div v-else>
-            <button v-on:click.prevent="getNewRecipesFromAPI" class="addRecipes" v-if="!isGettingFromDatabase">Generate 100 More Recipes</button>
+            <button v-on:click.prevent="getNewRecipesFromAPI" class="addRecipes">Generate 100 More Recipes</button>
           </div>
         
         </div>
