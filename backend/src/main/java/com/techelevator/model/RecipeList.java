@@ -12,6 +12,7 @@ public class RecipeList {
 
     public RecipeList(){
         rIds= new ArrayList<>();
+        rNames= new ArrayList<>();
     }
 
     public void addToList(long id){

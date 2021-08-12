@@ -82,17 +82,10 @@
     <div id="plan-cards-wrapper" v-if="mealPlan.mealPlanId > 0">                  <!-- if a meal plan has been created, mealPlanId will be greater than 0 -->
       <div v-for="dayMeal in mealPlan.recipes" v-bind:key="dayMeal" class="day-meal">    <!-- goes through all 21 day-meal combinations in the mealPlan object -->
           <div class="day">{{ dayMeal.meal.charAt(0).toUpperCase() +dayMeal.meal.slice(1) }}     <!-- prints the day of the week "Wednesday" and meal "breakfast" at top of each card -->
-            <div class="recipe-name-display" v-for="rid in dayMeal.recipeIds" v-bind:key="rid">
-              {{ rid }} {{ getRecipeName(id) }}
-            
+            <div class="recipe-name-display" v-for="rname in dayMeal.recipeNames" v-bind:key="rname">
+              {{ rname }}
             </div>
-              
-            
           </div>
-       
-
-    
-       
       </div>
     </div>
 
@@ -115,9 +108,10 @@
             </button>
           </div>
         </form>
-      </div>
+    </div>
+  </div>
 
-</div>
+
 
 </template>
 
@@ -132,9 +126,9 @@ export default {
     return {
       showForm: true,
       showPlanCards: false,
-      currentMealName: "OOO",
       isLoading: true,
-
+      currentMealName: "OOO",
+      finalMealPlan: {},
       mealPlan: {
           mealPlanId: 0,
           userId: this.$route.params.userID,
@@ -143,7 +137,9 @@ export default {
               {
                 day: "",
                 meal: "",
+                recipeNames: [],
                 recipeIds: []
+
               }
           ]
       },
@@ -169,15 +165,23 @@ export default {
     getRecipeName(id) {
       recipeService.getRecipeById(id).then(response => {
         console.log(response.data.recipeName);
-        this.currentMealName = response.data.recipeName; 
+        return response.data.recipeName;
+ //       this.recipeNames.set(id, response.data.recipeName);
+ //       this.currentMealName = response.data.recipeName; 
       })
       .catch((error) => {
         console.log(error);
       });
+
     },
 
     flipRevealButton(){
-      document.getElementById("btnCreateMealPlan").setAttribute("hidden", "");
+      if (document.getElementById("btnRenameMealPlan").hasAttribute("hidden")) {
+        document.getElementById("btnRenameMealPlan").removeAttribute("hidden");
+      }
+      else {
+        document.getElementById("btnRenameMealPlan").setAttribute("hidden", "");
+      }
 
       if (document.getElementById("isHiding").hasAttribute("hidden")) {
         document.getElementById("isHiding").removeAttribute("hidden");
@@ -223,16 +227,69 @@ export default {
     mealPlanService.getUserMealPlanById(this.$store.state.user.id).then(response => {
       console.log(response.data);
       if (response.data.mealPlanId > 0) {
-        this.mealPlan = response.data;
-        this.isLoading = false;
-      }
-    })
+        
+//         this.mealPlan.mealPlanId = response.data.mealPlanId;
+//         this.mealPlan.userId = response.data.userId;
+//         this.mealPlan.mealPlanName = response.data.mealPlanName;
+        
+//         response.data.recipes.forEach(recipe => {
+          
+//   //        console.log(recipe.day);
+//           let i = response.data.recipes.indexOf(recipe);
+//           this.mealPlan.recipes[i] = {};
+//   //        console.log(i);
+          
+//           this.mealPlan.recipes[i].day = recipe.day;
+          
+//           this.mealPlan.recipes[i].meal = recipe.meal;
+//           this.mealPlan.recipes[i].recipeIds = recipe.recipeIds;
+//           this.mealPlan.recipes[i].recipeNames = [];
+
+//   //        console.log(this.mealPlan.recipes[i]);
+
+//           recipe.recipeIds.forEach(recID => {
+//      //       recipeService.getRecipeById(recID).then(res => {
+//   //          console.log(res.data.recipeName);
+//         //    let j = this.mealPlan.recipes.indexOf(recipe);
+//   //          console.log(i);
+//   //          console.log(this.mealPlan.recipes[i]);
+//             this.mealPlan.recipes[i].recipeNames.push("blah blah" + recID);
+              
+//               //res.data.recipeName);
+            
+
+//      //     })
+
+
+//         });
+
+        
+
+
+         this.mealPlan = response.data;
+
+
+// //        this.mealPlan.recipes.forEach(rec => {
+//  //         rec.recipeIds.forEach(recID => {
+// //            recipeService.getRecipeById(recID).then(response => {
+// //              console.log(response.data.recipeName);
+// //              let i = this.mealPlan.recipes.indexOf(rec);
+// //              console.log(i);
+// //              console.log(this.mealPlan.recipes[i]);
+// //              this.mealPlan.recipes[i].recipeNames = [];
+// //              this.mealPlan.recipes[i].recipeNames.push(response.data.recipeName);
+// //            });
+// //          });
+//         })
+//         console.log(this.mealPlan);
+//         this.finalMealPlan = this.mealPlan;
+//         console.log(this.finalMealPlan);
+       }
+     });
   },
   
-
-
-  
 }
+
 </script>
 
 <style>
