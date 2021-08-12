@@ -49,13 +49,14 @@ export default {
       })
   },
   methods: {
-    toggleCrossed(item) {
-      if(this.crossedOutItems.includes(item)) {
-        this.crossedOutItems = this.crossedOutItems.filter(
-          (item) => item !== item
-        );   
-      } else {
-        this.crossedOutItems.push(item);
+    toggleCrossed(clickedItem) {
+      if(this.crossedOutItems.includes(clickedItem)) {
+        this.crossedOutItems = this.crossedOutItems.filter((thisItem) => {
+          return thisItem !== clickedItem;
+        });   
+      }
+      else {
+        this.crossedOutItems.push(clickedItem);
       }
     }
   } 
