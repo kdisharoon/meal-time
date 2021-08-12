@@ -138,7 +138,7 @@ export default {
     saveToDatabase(recipesToAdd) {
       recipeService.addRecipesFromAPIToDatabase(recipesToAdd).then(response => {
         if (response.status === 201) {
-           alert("You found recipes containing {{userSearchTerm}}");
+           alert("You found some recipes!");
            this.$router.go();    // make this go to a Search Results page instead!
           }
         })
@@ -271,7 +271,7 @@ right:5px;
   text-align: center;
    text-overflow: ellipsis;
    white-space: nowrap;
-   width: 300px;
+   width: 280px;
    overflow: hidden;
    position: relative;
 }
