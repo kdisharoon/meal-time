@@ -61,6 +61,9 @@ public class JdbcMealPlanDao implements MealPlanDao{
             jdbcTemplate.update(sql, mealPlanId, recipeId, organizedRecipe.getDay().toLowerCase(), organizedRecipe.getMeal().toLowerCase());
 
 
+        } else {
+            // if there was no row, no meal plan has been created yet, so an exception is thrown
+            throw new IllegalArgumentException();
         }
 
     }
