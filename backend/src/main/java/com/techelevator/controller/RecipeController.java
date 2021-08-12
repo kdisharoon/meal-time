@@ -8,6 +8,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -25,24 +26,24 @@ public class RecipeController {
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(path = "/users/{userId}/recipes" , method = RequestMethod.GET)
-    public Recipe[] getAllRecipesByUserId(@PathVariable long userId){
+    public Recipe[] getAllRecipesByUserId(@PathVariable long userId, Principal principal){
         return recipeDao.getAllRecipesByUser(userId);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(path = "/recipes", method = RequestMethod.GET)
-    public Recipe[] getAllRecipes(){
+    public Recipe[] getAllRecipes(Principal principal){
         return recipeDao.getAllRecipes();
     }
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(path = "/recipes/{recipeId}", method = RequestMethod.GET)
-    public Recipe getRecipeByRecipeId(@PathVariable long recipeId){
+    public Recipe getRecipeByRecipeId(@PathVariable long recipeId, Principal principal){
         return recipeDao.getRecipeByRecipeId(recipeId);
     }
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/users/{userId}/recipes/{recipeId}", method = RequestMethod.POST)
-    public void AddRecipeToUserLibrary(@PathVariable long userId,@PathVariable long recipeId){
+    public void AddRecipeToUserLibrary(@PathVariable long userId,@PathVariable long recipeId, Principal principal){
         try {
             recipeDao.addRecipeToUserRecipe(userId, recipeId);
         } catch (IllegalArgumentException e) {
@@ -52,7 +53,7 @@ public class RecipeController {
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(path= "/users/{userId}/recipes/{recipeId}", method = RequestMethod.DELETE)
-    public void deleteRecipeFromLibrary(@PathVariable long userId,@PathVariable long recipeId){
+    public void deleteRecipeFromLibrary(@PathVariable long userId,@PathVariable long recipeId, Principal principal){
         recipeDao.deleteRecipeFromUserLibrary(userId, recipeId);
 
         //when delete recipe from meal plan is added, call it here as well
@@ -60,7 +61,7 @@ public class RecipeController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/recipes", method = RequestMethod.POST)
-    public void addRecipeToRecipeLibrary(@RequestBody Recipe[] recipes){
+    public void addRecipeToRecipeLibrary(@RequestBody Recipe[] recipes, Principal principal){
         recipeDao.addRecipeToRecipeLibrary(recipes);
     }
 
