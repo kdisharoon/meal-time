@@ -80,6 +80,11 @@ public class MealPlanController {
 
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @RequestMapping(path= "/users/{userId}/mealplans", method = RequestMethod.DELETE)
+    public void deleteMealPlan(@PathVariable long userId, Principal principal){
+        mealPlanDao.deleteMealPlan(userId);
+    }
 
 
 

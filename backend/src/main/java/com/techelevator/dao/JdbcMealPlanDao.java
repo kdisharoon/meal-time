@@ -55,6 +55,13 @@ public class JdbcMealPlanDao implements MealPlanDao{
         if (result.next()) {
             long mealPlanId = result.getLong("meal_plan_id");
 
+            String sql3 = "select meal_plan_id from meal_plan_user_recipes " +
+                          "where meal_plan_id=? and recipe_id=? and day=? and meal =?";
+            SqlRowSet result2 = jdbcTemplate.queryForRowSet(sql3, mealPlanId, recipeId, organizedRecipe.getDay(), organizedRecipe.getMeal());
+            if (result2.next()){
+                throw new IllegalArgumentException();
+            }
+
             // logging recipe to a meal plan at a specific day and meal
             String sql = "insert into meal_plan_user_recipes (meal_plan_id, recipe_id, day, meal) " +
                     "values (?,?,?,?)";
@@ -151,6 +158,25 @@ public class JdbcMealPlanDao implements MealPlanDao{
         }
 
     }
+
+    public void deleteMealPlan(long userId){
+
+        // getting mealPlan id for function to work
+        String sql2 = "select meal_plan_id from user_meal_plan where user_id =?";
+
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql2,userId);
+
+        if (result.next()) {
+            long mealPlanId = result.getLong("meal_plan_id");
+            String sql = "delete from meal_plan_user_recipes " +
+                    "where meal_plan_id = ?";
+            jdbcTemplate.update(sql,mealPlanId);
+
+        }
+
+    }
+
+
 
     public Ingredient[] groceryList(long userId){
 
