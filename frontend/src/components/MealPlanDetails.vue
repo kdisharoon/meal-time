@@ -14,7 +14,7 @@
         </button>
       </div>
       <div class="rename-meal-plan-wrapper" v-if="mealPlan.mealPlanId > 0">
-        <button id="clearMealPlanButt" type="button" class="btn" >
+        <button id="clearMealPlanButt" type="button" class="btn" v-on:click="clearMealPlan">
           Clear Your Meal Plan
         </button>
       </div>
@@ -124,6 +124,15 @@ export default {
   },
 
   methods: {
+
+    clearMealPlan() {
+      mealPlanService.clearUserMealPlan(this.$store.state.user.id).then(response => {
+        if (response.status === 204) {
+          console.log("Successfully cleared meal plan");
+        }
+        this.$router.go();
+      })
+    },
 
     checkAddMealPlan() {
       if (this.mealPlan.mealPlanId === 0) {
