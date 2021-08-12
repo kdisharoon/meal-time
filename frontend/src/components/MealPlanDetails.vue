@@ -1,9 +1,9 @@
 <template>
   <div class="meal-plan-details">
 
-      <div class="loading" v-if="isLoading">
+      <!-- <div class="loading" v-if="isLoading">
         <img src="../assets/giphy.gif" />
-      </div>
+      </div> -->
 
     <h2 style="text-align: center">{{mealPlan.mealPlanName}}</h2>
 

@@ -12,7 +12,7 @@
             v-bind:key="item.ingredientId" 
             class="shopping-list-item" 
             :class="{ crossedOut: crossedOutItems.includes(item) }"
-            @click="toggleCrossed(item)">
+            @click="toggleCrossed(item)" >
             {{ item.measurementAmount }} {{ item.measurementUnit }} {{ item.ingredientName }}
           </li> 
         </ol>

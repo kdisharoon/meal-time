@@ -46,11 +46,12 @@
           <div class="lds-ripple" v-if="isGettingFromDatabase">
             <div></div><div></div>
           </div>
-          <div v-else>
-            <button v-on:click.prevent="getNewRecipesFromAPI" class="addRecipes" v-if="!isGettingFromDatabase">Generate 100 More Recipes</button>
-          </div>
+          
         
         </div>
+        <div id="addingButts">
+            <button v-on:click.prevent="getNewRecipesFromAPI" class="addRecipes" v-if="!isGettingFromDatabase">Generate 100 More Recipes</button>
+          </div>
       </div>
     </div>
   </div>
@@ -160,6 +161,11 @@ export default {
 </script>
 
 <style>
+#addingButts{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+}
 #resetButt{
   display: flex;
   align-items: center;
