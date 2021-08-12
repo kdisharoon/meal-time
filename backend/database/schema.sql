@@ -108,7 +108,7 @@ CREATE TABLE recipe_ingredients (
 
 INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
 INSERT INTO users (username,password_hash,role) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN');
-INSERT INTO users (username,password_hash,role) VALUES ('kd','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
+--INSERT INTO users (username,password_hash,role) VALUES ('kd','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
 
 --INSERT INTO recipes (preparation, recipe_name, prep_time, cook_time, recipe_type, recipe_img) VALUES ('You will need fresh basil, fresh mozz, and fresh tomato on a plate. Layer the cheese, basil, and tomato. Drizzle balsamic vinegar and Enjoy!', 'Caprese Salad', 10, null, 'Salad', 'https://i2.wp.com/www.downshiftology.com/wp-content/uploads/2019/07/Caprese-Salad-4.jpg');
 --INSERT INTO recipes (preparation, recipe_name, prep_time, cook_time, recipe_type, recipe_img) VALUES ('Prepare the tortilini, drain. Cook the meat, then add the sauce and cream cheese. Put the tortellini into the backing dish and pour the meat/cheese/sauce mixture on top. Sprinkle the parmesan cheese over top. Bake for 20 min.', 'Cheesey Tortellini Pasta Bake', 15, 20, 'Entree', 'https://images-gmi-pmc.edge-generalmills.com/de2a3f47-4a5a-4254-baa2-4e1e8cbc3ada.jpg');
