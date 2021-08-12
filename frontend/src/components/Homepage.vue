@@ -138,7 +138,7 @@ export default {
     saveToDatabase(recipesToAdd) {
       recipeService.addRecipesFromAPIToDatabase(recipesToAdd).then(response => {
         if (response.status === 201) {
-           alert("You found some some recipes!");
+           alert("You found some recipes!");
            this.$router.go();    // make this go to a Search Results page instead!
           }
         })
