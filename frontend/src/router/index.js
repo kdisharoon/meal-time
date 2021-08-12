@@ -11,6 +11,7 @@ import AllRecipes from '../views/AllRecipes.vue'
 //import UserMealPlans from '../views/UserMealPlans.vue'
 import MealPlan from '../views/MealPlan.vue'
 import UserGroceries from '../views/UserGroceries.vue'
+import AboutUs from '../views/AboutUs.vue'
 
 Vue.use(Router)
 
@@ -108,8 +109,15 @@ const router = new Router({
       meta: {
         requiresAuth: true
       }
+    },
+    {
+      path: "/about-us",
+      name: "about-us",
+      component: AboutUs,
+      meta: {
+        requiresAuth: true
+      }
     }
-
   ]
 })
 
