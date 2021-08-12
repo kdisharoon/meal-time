@@ -33,7 +33,7 @@
             <label for="fname">Meal Plan Name</label>
           </div>
           <div class="col-75">
-            <input type="text" id="mname" name="mealplanname" v-model.lazy="mealPlan.mealPlanName" />
+            <input type="text" id="mname" name="mealplanname" v-model="mealPlan.mealPlanName" />
           </div>
         </div>
           
@@ -199,8 +199,8 @@ export default {
       console.log(response.data);
       if (response.data.mealPlanId > 0) {
         this.mealPlan = response.data;
-        this.isLoading = false;
       }
+      this.isLoading = false;
     });
   },
   
