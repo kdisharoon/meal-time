@@ -1,9 +1,9 @@
 <template>
   <div class="container rpDetails">
   
-      <div class="loading" v-if="isLoading">
-        <img src="../assets/giphy.gif" />
-      </div>
+    <div class="loading" v-if="isLoading">
+      <img src="../assets/giphy.gif" />
+    </div>
 
     <div class="row">
       <div class="recipe-details">
@@ -28,7 +28,7 @@
         <div id="butt"> 
           <button class="btn btn-add-recipe-to-user-library" v-on:click.prevent="saveRecipe">Save Recipe To My Library</button>
           <button class="btn btn-add-recipe-to-user-library"  v-on:click.prevent="flipRevealButton">Add Recipe to Meal Plan</button>
-     <!-- <button class="btn btn-add-recipe-to-user-library">Add Ingredients to Grocery List</button> -->
+           <!-- <button class="btn btn-add-recipe-to-user-library">Add Ingredients to Grocery List</button> -->
         </div>
 
         <div hidden id="hidden-form">
@@ -76,10 +76,10 @@ export default {
 
   data() {
     return {
+      isLoading: true,
       newMealPlanAddition: {
         day: '',
         meal: '',
-        isLoading: true,
       },
       recipe: {
         id: 0,
@@ -93,21 +93,14 @@ export default {
       },
     }
   },
-  computed:{
-    options: () => mealPlanService,
-    // options(){
-    //   return Object.keys(this.mealPlan).map(k => {
-    //     let o = this.mealPlan[k]
-    //     return `${o.mealPlanName}`
-    //   })
-    // }
-  },
+  
   methods: {
 
     addToMealPlan() {   
       this.flipRevealButton;
       mealPlanService.addRecipeToUserMealPlan(this.$store.state.user.id, this.recipe.id, this.newMealPlanAddition).then(response => {
         if (response.status === 201) {
+          alert("Recipe successfully added to your meal plan");
           this.$router.push({ name: 'meal-plan', params: { userID: this.$store.state.user.id } });
         }
       }).
@@ -125,20 +118,19 @@ export default {
       }
     },
 
-
     saveRecipe() {
       recipeService.addRecipeToUserLibrary(this.$store.state.user.id, this.recipe.id).then(response => {
         if (response.status === 201) {
           this.$router.push({name: 'saved-recipes', params: { userID: this.$store.state.user.id } });
-          alert("Successfully Added!")
+          alert("Successfully added!")
         }
       })
       .catch((error) => {
         alert("This recipe is already in your library");
         console.log(error);
-        console.log("This recipe is already saved to your recipes!");
       });
     }
+
   },
 
   created() {
@@ -152,12 +144,7 @@ export default {
       this.recipe.mealType = response.data.type;
       this.recipe.ingredients = response.data.ingredients;
       this.isLoading = false;
-    })
-    
-//     mealPlanService.getAllUserMealPlans(this.$route.params.userID).then(response => {
-//      this.mealPlans = response.data;
-//    });
-    
+    })   
   }
 
 }

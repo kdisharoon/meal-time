@@ -91,6 +91,10 @@ export default {
 </script>
 
 <style>
+.form-register{
+  display: flex;
+  flex-direction: column;
+}
 .text-center {
   border-radius: 3px;
   max-width: 380px;

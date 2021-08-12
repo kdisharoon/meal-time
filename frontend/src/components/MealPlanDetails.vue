@@ -1,55 +1,48 @@
 <template>
   <div class="meal-plan-details">
 
-      <div class="loading" v-if="isLoading">
-        <img src="../assets/giphy.gif" />
-      </div>
+    <div class="loading" v-if="isLoading">
+      <img src="../assets/giphy.gif" />
+    </div>
 
-    <h2 style="text-align: center">{{mealPlan.mealPlanName}}</h2>
+    <h2 style="text-align: center">{{ mealPlan.mealPlanName }}</h2>
 
-  <div id="mealPlanButts">
+    <div id="mealPlanButts">
       <div class="rename-meal-plan-wrapper" v-if="mealPlan.mealPlanId > 0">
-        <button id="btnRenameMealPlan" type="button" class="btn" v-on:click="flipRevealButton">
+        <button id="btnRenameMealPlan" type="button" class="btn" v-on:click="flipRevealButton('btnRenameMealPlan'); flipRevealButton('isHiding')">
           Rename Your Meal Plan
         </button>
       </div>
-      
- <div class="rename-meal-plan-wrapper" v-if="mealPlan.mealPlanId > 0">
+      <div class="rename-meal-plan-wrapper" v-if="mealPlan.mealPlanId > 0">
         <button id="clearMealPlanButt" type="button" class="btn" >
-          Clear your meal plan
-          </button>
+          Clear Your Meal Plan
+        </button>
       </div>
     </div>
 
-      
-   
+    <div class="clearfix" v-if="mealPlan.mealPlanId === 0">
+      <button id="btnCreateMealPlan" type="button" class="btn" v-on:click="flipRevealButton('btnCreateMealPlan'); flipRevealButton('isHiding')">
+        Create Your Meal Plan
+      </button>
+    </div>
 
-      <div class="clearfix" v-if="mealPlan.mealPlanId === 0">
-        <button id="btnCreateMealPlan" type="button" class="btn" v-on:click="flipRevealButton">
-          Create Your Meal Plan
-        </button>
-      </div>
-
-      
-     
-
-      <div hidden id="isHiding" class="container mealPlanStyle">
-        <form v-on:submit.prevent="checkAddMealPlan" id="planForm">
-          <div class="card" id="mealCardName">
-            <div class="col-25">
-              <label for="fname">Meal Plan Name</label>
-            </div>
-            <div class="col-75">
-              <input type="text" id="mname" name="mealplanname" v-model.lazy="mealPlan.mealPlanName" />
-            </div>
+    <div hidden id="isHiding" class="container mealPlanStyle">
+      <form v-on:submit.prevent="checkAddMealPlan" id="planForm">
+        <div class="card" id="mealCardName">
+          <div class="col-25">
+            <label for="fname">Meal Plan Name</label>
           </div>
+          <div class="col-75">
+            <input type="text" id="mname" name="mealplanname" v-model.lazy="mealPlan.mealPlanName" />
+          </div>
+        </div>
           
-            <button id="plan-name-submit-button" type="submit" class="btn" v-on:click="flipRevealButton">
-              {{mealPlan.mealPlanId > 0 ? "Rename" : "Create"}} Meal Plan
-            </button>
+        <button id="btnSubmitName" type="submit" class="btn">
+          {{mealPlan.mealPlanId > 0 ? "Rename" : "Create"}} Meal Plan
+        </button>
           
-        </form>
-      </div>
+      </form>
+    </div>
 
 
 
@@ -78,36 +71,21 @@
      <h2 class="dtitle">Saturday</h2>
      </div>
 </div>
-
-    <div id="plan-cards-wrapper" v-if="mealPlan.mealPlanId > 0">                  <!-- if a meal plan has been created, mealPlanId will be greater than 0 -->
-      <div v-for="dayMeal in mealPlan.recipes" v-bind:key="dayMeal" class="day-meal">    <!-- goes through all 21 day-meal combinations in the mealPlan object -->
-          <div class="day">{{ dayMeal.meal.charAt(0).toUpperCase() +dayMeal.meal.slice(1) }}     <!-- prints the day of the week "Wednesday" and meal "breakfast" at top of each card -->
-            <div class="recipe-name-display" v-for="rname in dayMeal.recipeNames" v-bind:key="rname">
-              {{ rname }}
-            </div>
+    <!-- if a meal plan has been created, mealPlanId will be greater than 0 -->
+    <div id="plan-cards-wrapper" v-if="mealPlan.mealPlanId > 0">                  
+      <div v-for="dayMeal in mealPlan.recipes" v-bind:key="dayMeal.day + dayMeal.meal" class="day-meal">
+          <div class="day">{{ dayMeal.meal.charAt(0).toUpperCase() + dayMeal.meal.slice(1) }}
+            <ul>
+              <div class="recipe-name-display" v-for="rname in dayMeal.recipeNames" v-bind:key="rname">
+                <li>
+                  <router-link v-bind:to="{ name: 'recipe', params: { recipeID: dayMeal.recipeIds[dayMeal.recipeNames.indexOf(rname)] } }">
+                    {{ rname }}
+                  </router-link>
+                </li>
+              </div>
+            </ul>
           </div>
       </div>
-    </div>
-
-
-  
-
-    <div hidden id="isHiding" class="container">
-        <form v-on:submit.prevent="checkAddMealPlan" id="planForm">
-          <div class="card">
-            <div class="col-25">
-              <label for="fname">Meal Plan Name</label>
-            </div>
-            <div class="col-75">
-              <input type="text" id="mname" name="mealplanname" v-model.lazy="mealPlan.mealPlanName" />
-            </div>
-          </div>
-          <div>
-            <button id="plan-name-submit-button" type="submit" class="btn" v-on:click="flipRevealButton">
-              {{mealPlan.mealPlanId > 0 ? "Rename" : "Create"}} Meal Plan
-            </button>
-          </div>
-        </form>
     </div>
   </div>
 
@@ -127,8 +105,6 @@ export default {
       showForm: true,
       showPlanCards: false,
       isLoading: true,
-      currentMealName: "OOO",
-      finalMealPlan: {},
       mealPlan: {
           mealPlanId: 0,
           userId: this.$route.params.userID,
@@ -175,19 +151,12 @@ export default {
 
     },
 
-    flipRevealButton(){
-      if (document.getElementById("btnRenameMealPlan").hasAttribute("hidden")) {
-        document.getElementById("btnRenameMealPlan").removeAttribute("hidden");
+    flipRevealButton(id){
+      if (document.getElementById(id).hasAttribute("hidden")) {
+        document.getElementById(id).removeAttribute("hidden");
       }
       else {
-        document.getElementById("btnRenameMealPlan").setAttribute("hidden", "");
-      }
-
-      if (document.getElementById("isHiding").hasAttribute("hidden")) {
-        document.getElementById("isHiding").removeAttribute("hidden");
-      }
-      else {
-        document.getElementById("isHiding").setAttribute("hidden", "");
+        document.getElementById(id).setAttribute("hidden", "");
       }
     },
 
@@ -211,6 +180,8 @@ export default {
       mealPlanService.renameMealPlan(this.$store.state.user.id, newName).then(response => {
         if (response.status === 204) {
           alert ("Successfully renamed your meal plan!");
+          this.flipRevealButton('btnRenameMealPlan');
+          this.flipRevealButton('isHiding');
         }
       })
       .catch((error) => {
@@ -227,65 +198,10 @@ export default {
     mealPlanService.getUserMealPlanById(this.$store.state.user.id).then(response => {
       console.log(response.data);
       if (response.data.mealPlanId > 0) {
-        
-//         this.mealPlan.mealPlanId = response.data.mealPlanId;
-//         this.mealPlan.userId = response.data.userId;
-//         this.mealPlan.mealPlanName = response.data.mealPlanName;
-        
-//         response.data.recipes.forEach(recipe => {
-          
-//   //        console.log(recipe.day);
-//           let i = response.data.recipes.indexOf(recipe);
-//           this.mealPlan.recipes[i] = {};
-//   //        console.log(i);
-          
-//           this.mealPlan.recipes[i].day = recipe.day;
-          
-//           this.mealPlan.recipes[i].meal = recipe.meal;
-//           this.mealPlan.recipes[i].recipeIds = recipe.recipeIds;
-//           this.mealPlan.recipes[i].recipeNames = [];
-
-//   //        console.log(this.mealPlan.recipes[i]);
-
-//           recipe.recipeIds.forEach(recID => {
-//      //       recipeService.getRecipeById(recID).then(res => {
-//   //          console.log(res.data.recipeName);
-//         //    let j = this.mealPlan.recipes.indexOf(recipe);
-//   //          console.log(i);
-//   //          console.log(this.mealPlan.recipes[i]);
-//             this.mealPlan.recipes[i].recipeNames.push("blah blah" + recID);
-              
-//               //res.data.recipeName);
-            
-
-//      //     })
-
-
-//         });
-
-        
-
-
-         this.mealPlan = response.data;
-
-
-// //        this.mealPlan.recipes.forEach(rec => {
-//  //         rec.recipeIds.forEach(recID => {
-// //            recipeService.getRecipeById(recID).then(response => {
-// //              console.log(response.data.recipeName);
-// //              let i = this.mealPlan.recipes.indexOf(rec);
-// //              console.log(i);
-// //              console.log(this.mealPlan.recipes[i]);
-// //              this.mealPlan.recipes[i].recipeNames = [];
-// //              this.mealPlan.recipes[i].recipeNames.push(response.data.recipeName);
-// //            });
-// //          });
-//         })
-//         console.log(this.mealPlan);
-//         this.finalMealPlan = this.mealPlan;
-//         console.log(this.finalMealPlan);
-       }
-     });
+        this.mealPlan = response.data;
+        this.isLoading = false;
+      }
+    });
   },
   
 }
