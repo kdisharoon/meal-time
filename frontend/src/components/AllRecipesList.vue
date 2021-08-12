@@ -253,6 +253,7 @@ text-align: center;
 
   .card-text {
     text-align: center;
+    font-size: 25px;
   }
 
   button {

@@ -64,11 +64,11 @@ export default {
 
 <style>
 
-.card {
+.bio {
     min-width: 600px; 
 }
 
-img.abtimg {
+.abtimg {
     object-fit: contain;
     min-height: 400px;
     margin-top: 50px;
