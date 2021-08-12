@@ -177,7 +177,7 @@ export default {
     },
 
     flipRevealButton(){
-      document.getElementById("btnCreateMealPlan").setAttribute("hidden", "");
+      
 
       if (document.getElementById("isHiding").hasAttribute("hidden")) {
         document.getElementById("isHiding").removeAttribute("hidden");
