@@ -11,9 +11,9 @@
       <img :src="chosenRecipe.recipeImg" class="image" id="randomImg">
     <h5>{{displayIngredients}}</h5>
     
-      <p v-for="ingredient in chosenRecipe.ingredients" v-bind:key="ingredient.ingredientId">{{ingredient.measurementAmount}} {{ingredient.measurementUnit}} {{ingredient.ingredientName}}</p>
+      <p class="rrg" v-for="ingredient in chosenRecipe.ingredients" v-bind:key="ingredient.ingredientId">{{ingredient.measurementAmount}} {{ingredient.measurementUnit}} {{ingredient.ingredientName}}</p>
     <h5>{{displayPreparations}}</h5>
-    <p>{{chosenRecipe.preparation}}</p>
+    <p class="rrg">{{chosenRecipe.preparation}}</p>
     
     <div id="buttons">
       <button @click="randomizer(); requestText(); revealButton()">Get Random Recipe</button>
@@ -182,6 +182,10 @@ export default {
 </script>
 
 <style>
+.rrg{
+  margin: 5px;
+  font-size: 16px;
+}
 .form-group {
  display: -webkit-flex;
  -webkit-flex-wrap: wrap;
