@@ -21,4 +21,6 @@ public interface MealPlanDao {
 
     void updateMealPlanName(long userId, String mealPlanName);
 
+    void deleteMealPlan(long userId);
+
 }

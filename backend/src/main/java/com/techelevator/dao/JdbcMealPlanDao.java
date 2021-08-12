@@ -159,6 +159,25 @@ public class JdbcMealPlanDao implements MealPlanDao{
 
     }
 
+    public void deleteMealPlan(long userId){
+
+        // getting mealPlan id for function to work
+        String sql2 = "select meal_plan_id from user_meal_plan where user_id =?";
+
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql2,userId);
+
+        if (result.next()) {
+            long mealPlanId = result.getLong("meal_plan_id");
+            String sql = "delete from meal_plan_user_recipes " +
+                    "where meal_plan_id = ?";
+            jdbcTemplate.update(sql,mealPlanId);
+
+        }
+
+    }
+
+
+
     public Ingredient[] groceryList(long userId){
 
         // creating lists, ingredients will have everything not ordered by ingredient
