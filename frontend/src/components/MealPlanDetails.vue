@@ -79,7 +79,7 @@
               <div class="recipe-name-display" v-for="rname in dayMeal.recipeNames" v-bind:key="rname">
                 <li>
                   <router-link v-bind:to="{ name: 'recipe', params: { recipeID: dayMeal.recipeIds[dayMeal.recipeNames.indexOf(rname)] } }">
-                    {{ rname }}
+                    <br> {{ rname }} 
                   </router-link>
                 </li>
               </div>
@@ -152,12 +152,14 @@ export default {
     },
 
     flipRevealButton(id){
+    
       if (document.getElementById(id).hasAttribute("hidden")) {
         document.getElementById(id).removeAttribute("hidden");
       }
       else {
         document.getElementById(id).setAttribute("hidden", "");
       }
+
     },
 
     addMealPlan() {
@@ -187,7 +189,9 @@ export default {
       .catch((error) => {
         console.log(error);
       });
-    }
+    },
+
+
 
 
 
@@ -209,6 +213,15 @@ export default {
 </script>
 
 <style>
+ul{
+  list-style-type: none;
+  padding-inline-start: 0px;
+
+}
+.clearfix{
+  display: flex;
+  justify-content: center;
+}
 .dtitle{
   font-size: 28px;
   
