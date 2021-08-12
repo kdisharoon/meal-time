@@ -15,10 +15,10 @@
     <form id="allSearch" action="">
       <div class="form-group">
         <input type="text" onfocus="this.value=''" placeholder="Search By Recipe..." v-model="userSearchTerm">
-        <button class="searchButton" v-on:click.prevent="searchForRecipeName(userSearchTerm)" type="submit">
+        <button class="searchButton" v-show="!showResetButton" v-on:click.prevent="searchForRecipeName(userSearchTerm)" type="submit">
           <i class="fa fa-search"></i>
         </button>
-        <button id="resetButt" class="reset-filter" v-if="showResetButton" v-on:click.prevent="resetFilter">
+        <button id="resetButt" class="reset-filter" v-show="showResetButton" v-on:click.prevent="resetFilter">
           Reset Search
         </button>
       </div>
