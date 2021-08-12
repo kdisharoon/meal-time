@@ -26,7 +26,7 @@ public class MealPlanController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/users/mealplans", method = RequestMethod.POST)
-    public MealPlan addMealPlanToUser(@RequestBody MealPlan mealPlan){
+    public MealPlan addMealPlanToUser(@RequestBody MealPlan mealPlan, Principal principal){
 
         try{
             return mealPlanDao.createMealPlan(mealPlan);
@@ -37,7 +37,7 @@ public class MealPlanController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/users/{userId}/mealplans/recipes/{recipeId}", method = RequestMethod.POST)
-    public void addRecipeToUserMealPlan(@PathVariable long userId, @PathVariable long recipeId, @RequestBody OrganizedRecipe organizedRecipe){
+    public void addRecipeToUserMealPlan(@PathVariable long userId, @PathVariable long recipeId, @RequestBody OrganizedRecipe organizedRecipe, Principal principal){
         mealPlanDao.addRecipeToUserMealPlan(userId, recipeId, organizedRecipe);
 
     }
@@ -59,19 +59,19 @@ public class MealPlanController {
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(path= "/users/{userId}/mealplans/recipes/{recipeId}", method = RequestMethod.DELETE)
-    public void deleteRecipeFromMealPlan(@PathVariable long userId, @PathVariable long recipeId){
+    public void deleteRecipeFromMealPlan(@PathVariable long userId, @PathVariable long recipeId, Principal principal){
         mealPlanDao.deleteRecipeFromMealPlan(userId,recipeId);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(path = "/users/{userId}/grocerylist", method = RequestMethod.GET)
-    public Ingredient[] groceryList(@PathVariable long userId){
+    public Ingredient[] groceryList(@PathVariable long userId, Principal principal){
         return mealPlanDao.groceryList(userId);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(path = "/users/{userId}/mealplans", method = RequestMethod.PUT)
-    public void updateMealPlanName(@PathVariable long userId, @RequestParam String mealPlanName){
+    public void updateMealPlanName(@PathVariable long userId, @RequestParam String mealPlanName, Principal principal){
         mealPlanDao.updateMealPlanName(userId, mealPlanName);
 
     }
