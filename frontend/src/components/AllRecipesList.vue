@@ -14,7 +14,7 @@
     <!-- this is the search bar to filter the recipes on this page by recipe name -->
     <form id="allSearch" action="">
       <div class="form-group">
-        <input type="text" placeholder="Search By Recipe..." v-model="userSearchTerm">
+        <input type="text" onfocus="this.value=''" placeholder="Search By Recipe..." v-model="userSearchTerm">
         <button class="searchButton" v-on:click.prevent="searchForRecipeName(userSearchTerm)" type="submit">
           <i class="fa fa-search"></i>
         </button>
@@ -253,6 +253,7 @@ text-align: center;
 
   .card-text {
     text-align: center;
+    font-size: 25px;
   }
 
   button {
