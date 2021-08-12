@@ -100,6 +100,7 @@ export default {
       this.flipRevealButton;
       mealPlanService.addRecipeToUserMealPlan(this.$store.state.user.id, this.recipe.id, this.newMealPlanAddition).then(response => {
         if (response.status === 201) {
+          alert("Recipe successfully added to your meal plan");
           this.$router.push({ name: 'meal-plan', params: { userID: this.$store.state.user.id } });
         }
       }).
