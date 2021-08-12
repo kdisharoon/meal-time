@@ -1,61 +1,59 @@
 <template>
-<div id="full">
-  <div class="loading" v-if="isLoading">
-        <img src="../assets/giphy.gif" />
-      </div>
-  
-  <h2 id="allRecipe">All Recipes</h2>
+  <div id="full">
 
-  <div class="lds-ripple" v-if="isLoading">
-    <div></div><div></div>
-  </div>
-  
-  <div  v-else>
-    
-    
-   <!-- Load an icon library -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
- 
-  <form id="allSearch" action="">
-     <div class="form-group">
-       <input type="text" placeholder="Search By Recipe..." v-model="userSearchTerm">
-      <button class="searchButton" v-on:click.prevent="searchForRecipeName(userSearchTerm)" type="submit">
-        <i class="fa fa-search"></i>
-      </button>
-      <button id="resetButt" class="reset-filter" v-if="showResetButton" v-on:click.prevent="resetFilter">
-        Reset Search
-      </button>
-      
+    <!-- this section shows a food alarm clock animation while recipes are loading -->
+    <div class="loading" v-if="isLoading">    
+      <img src="../assets/giphy.gif" />
     </div>
-  </form>
+  
+    <h2 id="allRecipe">All Recipes</h2>
+
+    <!-- Load an icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ 
+    <!-- this is the search bar to filter the recipes on this page by recipe name -->
+    <form id="allSearch" action="">
+      <div class="form-group">
+        <input type="text" placeholder="Search By Recipe..." v-model="userSearchTerm">
+        <button class="searchButton" v-on:click.prevent="searchForRecipeName(userSearchTerm)" type="submit">
+          <i class="fa fa-search"></i>
+        </button>
+        <button id="resetButt" class="reset-filter" v-if="showResetButton" v-on:click.prevent="resetFilter">
+          Reset Search
+        </button>
+      </div>
+    </form>
     
-    
+    <!-- this is the container that displays recipe cards -->
     <div class="container card-deck">
       <div class="row">
         <div class="all-recipes-list d-flex justify-content-around flex-wrap">
-    
 
+          <!-- this v-for is looping through every recipe in the recipes array and generating the display -->
           <div v-for="recipe in recipes" v-bind:key="recipe.recipeId" class="recipe thumbnail">
             <div class="card" style="width: 18rem;">
               <img v-bind:src="recipe.recipeImg" class="recipe-image" style="width:100%">
-                <h4 id="rTwo"><b>{{recipe.recipeName}}</b></h4>
-                <p class="card-text">{{ recipe.cookTime }} minutes total time</p>
-                <router-link v-bind:to="{ name: 'recipe', params: { recipeID: recipe.recipeId } }">
-                  <button>Recipe Details</button>
-                </router-link>
-                
+              <h4 id="rTwo"><b>{{recipe.recipeName}}</b></h4>
+              <p class="card-text">{{ recipe.cookTime }} minutes total time</p>
+              <router-link v-bind:to="{ name: 'recipe', params: { recipeID: recipe.recipeId } }">
+                <button>Recipe Details</button>
+              </router-link>
             </div>
-            
           </div>
-          
-      </div>
-<button v-on:click.prevent="getNewRecipesFromAPI" class="addRecipes">Generate 100 More Recipes</button>
-    </div>
 
+          <!-- this shows a small circles loading animation while recipes are being loaded from an external API. -->
+          <!-- while recipes are not loading, it shows the button to click to generate those recipes. -->
+          <div class="lds-ripple" v-if="isGettingFromDatabase">
+            <div></div><div></div>
+          </div>
+          <div v-else>
+            <button v-on:click.prevent="getNewRecipesFromAPI" class="addRecipes" v-if="!isGettingFromDatabase">Generate 100 More Recipes</button>
+          </div>
+        
+        </div>
+      </div>
     </div>
   </div>
-  
-</div>
 </template>
 
 <script>
@@ -71,6 +69,7 @@ export default {
       showResetButton: false,
       userSearchTerm: '',
       isLoading: true,
+      isGettingFromDatabase: false,
       recipes: [],
     }
   },
@@ -111,7 +110,8 @@ export default {
     saveToDatabase(recipesToAdd) {
       recipeService.addRecipesFromAPIToDatabase(recipesToAdd).then(response => {
         if (response.status === 201) {
-          alert("Successfully added recipes to database from API!");
+          this.isGettingFromDatabase = false;
+          alert("Successfully added 100 more recipes to database!");
           this.$router.go();
           }
         })
@@ -121,6 +121,7 @@ export default {
     },
    
     getNewRecipesFromAPI() {
+      this.isGettingFromDatabase = true;
       recipeService.getRandomRecipesFromSpoonacular().then(response => {
         let newRecipes = [];
         for (let i = 0; i < response.data.recipes.length; i++) {
