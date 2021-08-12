@@ -38,7 +38,11 @@ public class MealPlanController {
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/users/{userId}/mealplans/recipes/{recipeId}", method = RequestMethod.POST)
     public void addRecipeToUserMealPlan(@PathVariable long userId, @PathVariable long recipeId, @RequestBody OrganizedRecipe organizedRecipe, Principal principal){
-        mealPlanDao.addRecipeToUserMealPlan(userId, recipeId, organizedRecipe);
+        try {
+            mealPlanDao.addRecipeToUserMealPlan(userId, recipeId, organizedRecipe);
+        } catch (IllegalArgumentException e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
 
     }
 
