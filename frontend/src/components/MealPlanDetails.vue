@@ -14,7 +14,7 @@
         </button>
       </div>
       <div class="rename-meal-plan-wrapper" v-if="mealPlan.mealPlanId > 0">
-        <button id="clearMealPlanButt" type="button" class="btn" >
+        <button id="clearMealPlanButt" type="button" class="btn" v-on:click="clearMealPlan">
           Clear Your Meal Plan
         </button>
       </div>
@@ -33,7 +33,7 @@
             <label for="fname">Meal Plan Name</label>
           </div>
           <div class="col-75">
-            <input type="text" id="mname" name="mealplanname" v-model.lazy="mealPlan.mealPlanName" />
+            <input type="text" id="mname" name="mealplanname" v-model="mealPlan.mealPlanName" />
           </div>
         </div>
           
@@ -125,6 +125,15 @@ export default {
 
   methods: {
 
+    clearMealPlan() {
+      mealPlanService.clearUserMealPlan(this.$store.state.user.id).then(response => {
+        if (response.status === 204) {
+          console.log("Successfully cleared meal plan");
+        }
+        this.$router.go();
+      })
+    },
+
     checkAddMealPlan() {
       if (this.mealPlan.mealPlanId === 0) {
         this.addMealPlan();
@@ -203,8 +212,8 @@ export default {
       console.log(response.data);
       if (response.data.mealPlanId > 0) {
         this.mealPlan = response.data;
-        this.isLoading = false;
       }
+      this.isLoading = false;
     });
   },
   

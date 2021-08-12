@@ -19,6 +19,10 @@ export default {
         return axios.post(`/users/${userID}/mealplans/recipes/${recipeID}`);
     },
 
+    clearUserMealPlan(userID) {
+        return axios.delete(`/users/${userID}/mealplans`);
+    },
+
     renameMealPlan(userID, newName) {
         return axios.put(`/users/${userID}/mealplans?mealPlanName=${newName}`);
     }
