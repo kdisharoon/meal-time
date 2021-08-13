@@ -24,7 +24,7 @@
             <h6>Ezra Saywitz</h6>
             <p>Ezra "Mad Dawg" Saywitz is a backend legend. Single-handedly owning the backend portion of meal TimE, Ezra was
                quickly able to solve many issues that popped up through the development. When he isn't coding, you can find Ezra
-               in the octagon destroying his flyweight competition.</p>
+               in <b>the</b> octagon destroying his flyweight competition.</p>
           </div>
         </div>
       </div>
@@ -46,7 +46,7 @@
             <p>Originally from Bern, Switzerland, Kristofer spent over a decade in the Swiss Special Forces. After retiring with
                honors, he relocated to Pittsburgh because he heard the pierogies were pretty good and enjoys breweries. Kristofer
                is a natural leader - not only has he been involved in every part of the application, he has unknowingly kept us all
-               in line, organized and calm. His time in the deserts of Africa prepared him well for 14 weeks at Tech Elevator.
+               in line, organized and calm. His time blessing the rains down in Africa prepared him well for 14 weeks at Tech Elevator.
                Without Kristofer, Ryan might not have contributed anything at all to this application.</p>
           </div>
         </div>
