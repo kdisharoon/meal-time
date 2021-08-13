@@ -10,14 +10,21 @@
           <img class="abtimg" src="../assets/shay.jpg" />
           <div class="about">
             <h6>Shay Griffith</h6>
-            <p>Shay is a former Miss Pennsylvania conetestant, who was unfairly disqualified for crosschecking a fellow contestant during her talent showcase.  After her community service was up, Shay entered into a recruitment career where she filled many companies with talented, qualified and extremely tough candidates.  Covid hit Shay hard and she decided a career change was in order, but the NHL still won't allow females to compete, so she joined Tech Elevator.  For this application, Shay designed the database, worked with the API and contributed many designs to the layout and logo.  </p>
+            <p>Shay is a former Miss Pennsylvania contestant who was unfairly disqualified for crosschecking a fellow contestant
+              during her talent showcase. After her community service was up, Shay entered into a recruitment career where she
+              filled many companies with talented, qualified and extremely tough candidates. Covid hit Shay hard and she decided
+              a career change was in order, but the NHL still won't allow women to compete, so she joined Tech Elevator. For this
+              application, Shay designed the database, worked with the API and contributed many designs to the layout and logo.
+            </p>
           </div>
         </div>
         <div class="col-6 bio card" id="ezra">
           <img class="abtimg" src="../assets/ezra.jpeg" />
           <div class="about">
             <h6>Ezra Saywitz</h6>
-            <p>Ezra "Mad Dawg" Saywitz is a backend legend.  Single handidly owning the backend portion of meal TimE, Ezra was quickly able to solve many issues that popped up through the development.  When he isn't coding, you can find Ezra in the octogan destroying his flyweight competion.</p>
+            <p>Ezra "Mad Dawg" Saywitz is a backend legend. Single-handedly owning the backend portion of meal TimE, Ezra was
+               quickly able to solve many issues that popped up through the development. When he isn't coding, you can find Ezra
+               in the octagon destroying his flyweight competition.</p>
           </div>
         </div>
       </div>
@@ -26,14 +33,21 @@
           <img class="abtimg" src="../assets/aj.jpeg" />
           <div class="about">
             <h6>AJ Jadot</h6>
-            <p>After a short but stellar stint in the demolition derby circuit, AJ decided he needed to use his brain for more than just pin-point engine desctruction.  AJ served as equal parts design and front-end functionality for meal TimE.  His touch can be felt on every aspect for user interaction. If you ever pull up to AJ at a stop light, don't nod his way - he'll run you into a lightpost.</p>
+            <p>After a short but stellar stint in the demolition derby circuit, AJ decided he needed to use his brain for more than
+               just pin-point engine destruction. AJ served as equal parts design and front-end functionality for meal TimE. His
+               touch can be felt on every aspect of the user interaction. If you ever pull up to AJ at a stop light, don't nod his
+               way - he'll run you into a lightpost.</p>
           </div>
         </div>
         <div class="col-6 bio card" id="kris">
           <img class="abtimg" src="../assets/kris.jpeg" />
           <div class="about">
-            <h6>Kris Disharoon</h6>
-            <p>Originally from Bern, Switzerland, Kris spent over a decade in the Swiss Special Forces.  After retirement, with honors, he relocated to Pittsburgh, because he heard the pierogies were pretty good and enjoys breweries.  Kris is a natural leader - not only has he been involved on every part of the application, he has unknowlingly kept us all in line, organized and calm. His time in the deserts of Africa prepared him for 14 weeks at Tech Elevator.  Without Kris, Ryan might not have contributed anything at all to this application.</p>
+            <h6>Kristofer Disharoon</h6>
+            <p>Originally from Bern, Switzerland, Kristofer spent over a decade in the Swiss Special Forces. After retiring with
+               honors, he relocated to Pittsburgh because he heard the pierogies were pretty good and enjoys breweries. Kristofer
+               is a natural leader - not only has he been involved in every part of the application, he has unknowingly kept us all
+               in line, organized and calm. His time in the deserts of Africa prepared him well for 14 weeks at Tech Elevator.
+               Without Kristofer, Ryan might not have contributed anything at all to this application.</p>
           </div>
         </div>
       </div>
@@ -42,7 +56,12 @@
       <img class="abtimg" src="../assets/ryan.jpg" />
       <div class="about">
         <h6>Ryan Godman</h6>
-        <p>After a failed attempt in the entertainment industry, Ryan spent time living in his parents basement...for a long time.  He eventually found someone who settled for him and they moved to the Pittsburgh area a few years ago.  After deciding a career change was in order, he found Tech Elevator, but his fiance decided to go through it first.  So he waited, and then got to go himself.  Ryan was around for every meeting and always has something to say...but no much to do. It's that undying dedication to words that has gotten Ryan this far in life. When you click on something and go, "why is this on here?", that's Ryan.</p>
+        <p>After a failed attempt at a career in the entertainment industry, Ryan spent time living in his parents basement... for
+           a long time. He eventually found someone who settled for him and they moved to the Pittsburgh area a few years ago.
+           After deciding a career change was in order, he found Tech Elevator, but his fiance decided to go through the program
+           first. So he waited, and then got to go himself. Ryan is around for every meeting and always has something to say... but
+           not much to do. It's that undying dedication to words that has gotten Ryan this far in life. When you click on something
+           and go, "why is this on here?", that's Ryan.</p>
       </div>
     </div>
       </div>

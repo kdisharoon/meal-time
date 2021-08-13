@@ -151,24 +151,19 @@ export default {
       recipeService.getRecipeById(id).then(response => {
         console.log(response.data.recipeName);
         return response.data.recipeName;
- //       this.recipeNames.set(id, response.data.recipeName);
- //       this.currentMealName = response.data.recipeName; 
       })
       .catch((error) => {
         console.log(error);
       });
-
     },
 
     flipRevealButton(id){
-    
       if (document.getElementById(id).hasAttribute("hidden")) {
         document.getElementById(id).removeAttribute("hidden");
       }
       else {
         document.getElementById(id).setAttribute("hidden", "");
       }
-
     },
 
     addMealPlan() {
@@ -184,7 +179,6 @@ export default {
       
       this.showForm = false;
       this.showPlanCards = true;
-
     },
 
     renameMealPlan(newName) {
@@ -199,12 +193,7 @@ export default {
         console.log(error);
       });
     },
-
-
-
-
-
-
+    
   },
 
   created() {                                     
