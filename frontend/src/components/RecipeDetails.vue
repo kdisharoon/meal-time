@@ -102,14 +102,15 @@ export default {
         console.log(response.status);
         if (response.status === 201) {
           alert("Recipe successfully added to your meal plan");
-        }        
+          this.$router.push({ name: 'meal-plan', params: { userID: this.$store.state.user.id } });
+        }
       }).
       catch((error) => {
         alert("This recipe is already in " + this.newMealPlanAddition.day.charAt(0).toUpperCase() +
               this.newMealPlanAddition.day.slice(1) + " " + this.newMealPlanAddition.meal);
         console.log(error);
       });
-      this.$router.push({ name: 'meal-plan', params: { userID: this.$store.state.user.id } });
+      
     },
 
     flipRevealButton(){
