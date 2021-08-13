@@ -7,6 +7,4 @@ export default {
         return axios.get(`/users/${userID}/grocerylist`);
     }
 
-    // maybe incorporate an API for prices?
-
 }
