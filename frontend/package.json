@@ -2,7 +2,7 @@
   "name": "meal-time-pgh",
   "version": "1.0.0",
   "description": "Meal planning app!",
-  "author": "KARES (team at Tech Elevator)",
+  "author": "KARES (team at Tech Elevator)n",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",

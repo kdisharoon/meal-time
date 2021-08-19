@@ -42,6 +42,8 @@ public class MealPlanController {
             mealPlanDao.addRecipeToUserMealPlan(userId, recipeId, organizedRecipe);
         } catch (IllegalArgumentException e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        } catch (IllegalStateException e) {
+            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY);
         }
 
     }

@@ -99,16 +99,22 @@ export default {
     addToMealPlan() {   
       this.flipRevealButton;
       mealPlanService.addRecipeToUserMealPlan(this.$store.state.user.id, this.recipe.id, this.newMealPlanAddition).then(response => {
-        console.log(response.status);
+        console.log(response.status + "is the response status");
         if (response.status === 201) {
           alert("Recipe successfully added to your meal plan");
           this.$router.push({ name: 'meal-plan', params: { userID: this.$store.state.user.id } });
         }
       }).
       catch((error) => {
-        alert("This recipe is already in " + this.newMealPlanAddition.day.charAt(0).toUpperCase() +
+        if (error.response.status === 400) {
+          alert("This recipe is already in " + this.newMealPlanAddition.day.charAt(0).toUpperCase() +
               this.newMealPlanAddition.day.slice(1) + " " + this.newMealPlanAddition.meal);
-        console.log(error);
+        }
+        if (error.response.status === 422) {
+          alert("You must create a meal plan first!");
+          this.$router.push({name: 'meal-plan', params: { userID: this.$store.state.user.id } });
+        }
+        
       });
       
     },

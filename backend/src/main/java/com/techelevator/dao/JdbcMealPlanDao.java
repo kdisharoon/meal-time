@@ -70,7 +70,7 @@ public class JdbcMealPlanDao implements MealPlanDao{
 
         } else {
             // if there was no row, no meal plan has been created yet, so an exception is thrown
-            throw new IllegalArgumentException();
+            throw new IllegalStateException("You need to create a meal plan first!");
         }
 
     }
