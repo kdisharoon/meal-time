@@ -1,7 +1,8 @@
 {
-  "name": "final-vue-capstone-seed",
-  "version": "0.1.0",
-  "private": true,
+  "name": "meal-time-pgh",
+  "version": "1.0.0",
+  "description": "Meal planning app!",
+  "author": "KARES (team at Tech Elevator)",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -29,5 +30,8 @@
     "eslint-plugin-vue": "^7.7.0",
     "vue-loader-v16": "npm:vue-loader@16.1.2",
     "vue-template-compiler": "^2.6.12"
+  },
+  "engines": {
+    "node": "14.x"
   }
 }
